@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# link dotfiles from dotfiles dir to HOME
+# (as seen at remy's github)
+
+# Everything from etc/ links straight to ~
+for arg in $( ls ~/dotfiles/etc/ ); do
+  ln -sfn ~/dotfiles/etc/$arg ~/.$arg
+done
+
+# All files from etc/vim link straight to ~
+#for arg in $( ls ~/dotfiles/etc/vim/ ); do
+#  if [ -f ~/dotfiles/etc/vim/$arg ]; then
+#    ln -sfn ~/dotfiles/etc/vim/$arg ~/.$arg
+#  fi;
+#done
