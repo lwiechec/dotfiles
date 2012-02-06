@@ -42,6 +42,7 @@
   (setq egg-dir "~/.emacs.d/egg")
   (load-file (format "%s/egg.el" egg-dir))
   (require 'egg))
+  (global-set-key (kbd "\C-x v d") 'egg-status)  ;; override the VC setting
 
 ;; From: Ryan McGreary
 ;; Scratch buffer goodness
