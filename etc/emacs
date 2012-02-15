@@ -354,6 +354,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(ack-executable (executable-find "ack-grep"))
  '(bsh-jar "~/work/javautil/beanshell/bsh.jar")
  '(bsh-startup-timeout 2)
  '(bsh-vm-args (quote ("-Djava.net.preferIPv4Stack=true" "-Dhttp.proxyHost=yellow.nc3a.nato.int" "-Dhttp.proxyPort=8088")))
@@ -366,10 +367,29 @@
  '(jde-ant-read-target t)
  '(jde-global-classpath (quote ("./lib" "./lib/jetty" "./build")))
  '(jde-jdk-registry (quote (("1.6.0_24" . "/home/luke/work/jdk/jdk1.6.0_24"))))
- '(org-agenda-files (quote ("~/work/projects/csd-nu/nsili/notes.org"))))
+ '(org-agenda-files (quote ("~/.org-mode/agenda.org"))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
+
+;; workgroups.el - manage window configuration in the frame the eas way
+;; https://github.com/tlh/workgroups.el
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/workgroups.el"))
+(require 'workgroups)
+(setq wg-prefix-key (kbd "C-c w"))
+(workgroups-mode 1)
+(wg-load (expand-file-name "~/.emacs.d/workgroups-saved"))
+
+;; full-ack.el
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/various/full-ack/"))
+(autoload 'ack-same "full-ack" nil t)
+(autoload 'ack "full-ack" nil t)
+(autoload 'ack-find-same-file "full-ack" nil t)
+(autoload 'ack-find-file "full-ack" nil t)
+
+
+;; mode: elisp
