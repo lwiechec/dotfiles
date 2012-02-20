@@ -391,5 +391,8 @@
 (autoload 'ack-find-same-file "full-ack" nil t)
 (autoload 'ack-find-file "full-ack" nil t)
 
+;; WindMove - smarter window switching
+;; switch between windows with 'super'-up/down/left/right
+(windmove-default-keybindings 'super)
 
-;; mode: elisp
+;;; -*-mode: emacs-lisp;-*-
