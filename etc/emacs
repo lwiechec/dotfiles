@@ -344,10 +344,17 @@
 (when (require 'deft nil 'noerror)
    (setq
       deft-extension "org"
-      deft-directory "~/Org/deft/"
+      deft-directory "~/Dropbox/org/deft/"
       deft-text-mode 'org-mode
       deft-auto-save-interval 5.0)
    (global-set-key (kbd "<f9>") 'deft))
+
+;; set up w3m rendering for newsticker
+(autoload 'w3m-region "w3m"
+  "Render region in current buffer and replace with result." t)
+
+(autoload 'w3m-toggle-inline-image "w3m"
+  "Toggle the visibility of an image under point." t)
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
