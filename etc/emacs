@@ -359,6 +359,7 @@
  '(bsh-startup-timeout 2)
  '(bsh-vm-args (quote ("-Djava.net.preferIPv4Stack=true" "-Dhttp.proxyHost=yellow.nc3a.nato.int" "-Dhttp.proxyPort=8088")))
  '(compilation-scroll-output t)
+ '(compilation-skip-threshold 2)
  '(ecb-options-version "2.40")
  '(ecb-source-path (quote ("~/work/projects")))
  '(ecb-tree-indent 2)
