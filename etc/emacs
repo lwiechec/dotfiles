@@ -3,6 +3,7 @@
 (add-to-list 'load-path "~/.emacs.d/various")
 
 ;; add nice 'undo tree feature'
+(add-to-list 'load-path "~/.emacs.d/undo-tree")
 (require 'undo-tree)
 (global-undo-tree-mode)
 
@@ -83,12 +84,14 @@
   nil)
 
 ;; yasnippet - cool gadget for quick coding
-(require 'yasnippet-bundle)
-(setq yas/root-directory "~/.emacs.d/snippets")
+(add-to-list 'load-path "~/.emacs.d/yasnippet")
+(require 'yasnippet)
+(setq yas/root-directory "~/.emacs.d/yasnippet/snippets")
 (yas/load-directory yas/root-directory)
 (yas/global-mode 't)
 
 ;; smart-tab - lets test it
+
 (require 'smart-tab)
 ;;(global-set-key [(tab)] 'smart-tab)
 
@@ -136,8 +139,8 @@
     (djcb-gtags-create-or-update)))
 
 ;; smex - more intelligent M-x
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/various/smex"))
-(setq smex-save-file "~/.emacs.d/various/smex/smex.save")
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/smex"))
+(setq smex-save-file "~/.emacs.d/smex.save")
 (require 'smex)
 (smex-initialize)
 (global-set-key (kbd "M-X") 'smex)
@@ -145,7 +148,7 @@
 ;; iedit package
 ;; allows 'dynamic' replace/edit operation on multiple places in buffer at the same time
 ;; (hard to define, you need to see for yourself! :)
-(setq load-path (cons "~/.emacs.d/various/iedit" load-path))
+(setq load-path (cons "~/.emacs.d/iedit" load-path))
 (require 'iedit)
 (define-key global-map (kbd "C-;") 'iedit-mode)
 
@@ -221,6 +224,9 @@
 (global-set-key [(control x)(meta j)]   'bc-list)           ;; C-x M-j for the bookmark menu list
 
 ;; using custom version of CEDET
+;
+;; TODO: use emacsmirror git repo?
+;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/cedet-1.0.1/common"))
 (load-file "~/.emacs.d/cedet-1.0.1/common/cedet.el")
 ;; enable EDE (Project Management) features
@@ -277,7 +283,6 @@
 (setq twittering-proxy-use t)
 (setq twittering-proxy-server "yellow.nc3a.nato.int")
 (setq twittering-proxy-port 8088)
-
 (require 'twittering-mode)
 
 ;; set default web browser to Google Chrome
@@ -336,11 +341,14 @@
       "DOS and WIndows BAT files" t)
 
 ;; anything.el - quick way to access 'things' in Emacs
-(require 'anything)
-(require 'anything-gtags)
+(add-to-list 'load-path "~/.emacs.d/anything")
 (require 'anything-config)
+;; (require 'anything) [ not needed? ]
+;; (require 'anything-gtags) [ not needed? ]
+
 
 ;; http://jblevins.org/projects/deft/
+(add-to-list 'load-path "~/.emacs.d/deft")
 (when (require 'deft nil 'noerror)
    (setq
       deft-extension "org"
@@ -394,7 +402,7 @@
 (wg-load (expand-file-name "~/.emacs.d/workgroups-saved"))
 
 ;; full-ack.el
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/various/full-ack/"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/full-ack/"))
 (autoload 'ack-same "full-ack" nil t)
 (autoload 'ack "full-ack" nil t)
 (autoload 'ack-find-same-file "full-ack" nil t)
