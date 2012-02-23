@@ -37,3 +37,6 @@
 [submodule "etc/emacs.d/iedit"]
 	path = etc/emacs.d/iedit
 	url = https://github.com/emacsmirror/iedit
+[submodule "etc/emacs.d/tiny-tools"]
+	path = etc/emacs.d/tiny-tools
+	url = https://github.com/emacsmirror/tiny-tools.git
