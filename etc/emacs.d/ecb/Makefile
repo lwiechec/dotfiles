@@ -51,7 +51,7 @@ EMACS=emacs
 # + If you use Emacs < 23.2 or if you want to use the author version of CEDET:
 #   Set this to the full path of your CEDET-installation.
 
-CEDET=~/.emacs.d/cedet-1.0
+CEDET=~/.emacs.d/cedet-1.0.1
 #CEDET=c:/Programme/emacs-23.1/site-lisp/package-development/cedet
 
 # You can set here more load-paths to arbitrary packages if you want. But
@@ -70,7 +70,7 @@ LOADPATH=
 #
 # If there are any warning messages during byte-compilation (normally there
 # are not any) you can savely ignore them!
-q
+
 
 # ------------------------------------------------------------------------
 # Generating different online-help formats
