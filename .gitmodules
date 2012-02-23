@@ -34,3 +34,6 @@
 [submodule "etc/emacs.d/malabar-mode"]
 	path = etc/emacs.d/malabar-mode
 	url = https://github.com/espenhw/malabar-mode.git
+[submodule "etc/emacs.d/iedit"]
+	path = etc/emacs.d/iedit
+	url = https://github.com/emacsmirror/iedit
