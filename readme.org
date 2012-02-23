@@ -1,0 +1,7 @@
+my humble .emacs file. Contains also contents of .emacs.d directory.
+
+I have tried to use git submodules as much as I could for the packages I use; otherwise
+I added whole packages for easier re-deployment on different machines.
+
+Contains also utility script 'setup-dotfiles' that will add links in home directory so
+that the configuration files are ready to use.
