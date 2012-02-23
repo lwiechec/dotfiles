@@ -375,7 +375,8 @@
  '(jde-ant-read-target t)
  '(jde-global-classpath (quote ("./lib" "./lib/jetty" "./build")))
  '(jde-jdk-registry (quote (("1.6.0_24" . "/home/luke/work/jdk/jdk1.6.0_24"))))
- '(org-agenda-files (quote ("~/.org-mode/agenda.org"))))
+ '(org-agenda-files (quote ("~/Dropbox/org" "~/Dropbox/org/deft" "~/.org-mode/"))))
+
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
