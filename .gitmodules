@@ -1,0 +1,3 @@
+[submodule "etc/emacs.d/ack-and-a-half"]
+	path = etc/emacs.d/ack-and-a-half
+	url = https://github.com/emacsmirror/ack-and-a-half.git
