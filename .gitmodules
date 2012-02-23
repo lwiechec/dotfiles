@@ -1,3 +1,36 @@
 [submodule "etc/emacs.d/ack-and-a-half"]
 	path = etc/emacs.d/ack-and-a-half
 	url = https://github.com/emacsmirror/ack-and-a-half.git
+[submodule "etc/emacs.d/yasnippet"]
+	path = etc/emacs.d/yasnippet
+	url = https://github.com/emacsmirror/yasnippet.git
+[submodule "etc/emacs.d/anything"]
+	path = etc/emacs.d/anything
+	url = https://github.com/emacsmirror/anything.git
+[submodule "etc/emacs.d/smex"]
+	path = etc/emacs.d/smex
+	url = https://github.com/emacsmirror/smex.git
+[submodule "etc/emacs.d/nxhtml"]
+	path = etc/emacs.d/nxhtml
+	url = https://github.com/emacsmirror/nxhtml.git
+[submodule "etc/emacs.d/egg"]
+	path = etc/emacs.d/egg
+	url = https://github.com/bogolisk/egg.git
+[submodule "etc/emacs.d/full-ack"]
+	path = etc/emacs.d/full-ack
+	url = https://github.com/nschum/full-ack.git
+[submodule "etc/emacs.d/twittering-mode"]
+	path = etc/emacs.d/twittering-mode
+	url = https://github.com/hayamiz/twittering-mode.git
+[submodule "etc/emacs.d/undo-tree"]
+	path = etc/emacs.d/undo-tree
+	url = http://www.dr-qubit.org/git/undo-tree.git
+[submodule "etc/emacs.d/deft"]
+	path = etc/emacs.d/deft
+	url = https://github.com/emacsmirror/deft.git
+[submodule "etc/emacs.d/workgroups.el"]
+	path = etc/emacs.d/workgroups.el
+	url = https://github.com/tlh/workgroups.el.git
+[submodule "etc/emacs.d/malabar-mode"]
+	path = etc/emacs.d/malabar-mode
+	url = https://github.com/espenhw/malabar-mode.git
