@@ -1,3 +1,4 @@
+;;; -*- mode: emacs-lisp; -*-
 ;; initialization file for emacs editor
 
 (add-to-list 'load-path "~/.emacs.d/various")
@@ -427,4 +428,4 @@
 (require 'epa-file)
 (epa-file-enable)
 
-;;; -*-mode: emacs-lisp;-*-
+
