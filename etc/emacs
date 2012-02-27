@@ -369,7 +369,7 @@
  '(jde-global-classpath (quote ("./lib" "./lib/jetty" "./build")))
  '(jde-jdk-registry (quote (("1.6.0_24" . "/home/luke/work/jdk/jdk1.6.0_24"))))
  '(org-agenda-files (quote ("~/Dropbox/org" "~/Dropbox/org/deft" "~/.org-mode/")))
- '(org-capture-templates (quote (("t" "Todo" entry (file "~/Dropbox/org/agenda.org") (file "~/Dropbox/org/templates/todo.orgtmpl"))))))
+ '(org-capture-templates (quote (("t" "Todo" entry (file+headline "~/Dropbox/org/agenda.org" "Tasks") (file "~/Dropbox/org/templates/todo.orgtmpl"))))))
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
