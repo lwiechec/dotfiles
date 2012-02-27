@@ -37,3 +37,6 @@
 [submodule "etc/emacs.d/iedit"]
 	path = etc/emacs.d/iedit
 	url = https://github.com/emacsmirror/iedit
+[submodule "etc/emacs.d/org"]
+	path = etc/emacs.d/org
+	url = https://github.com/emacsmirror/org.git
