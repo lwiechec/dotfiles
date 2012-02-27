@@ -8,7 +8,18 @@
 (require 'undo-tree)
 (global-undo-tree-mode)
 
+;; custom settings for Org mode
+;; using custom version of Org mode (default one from the Ubuntu distro is too old)
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/org/lisp"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/org/contrib/lisp"))
+(require 'org-install)
+(require 'org-latex)
+(setq org-log-mode 'time)
+(setq org-default-notes-file "~/Dropbox/org/notes.org")
+(define-key global-map "\C-cc" 'org-capture)
+
 ;; load nXHtml
+;; org-mode needs to be loaded before that
 (load "~/.emacs.d/nxhtml/autostart.el")
 
 ;; turn on Interactively Do Things thingie
@@ -266,17 +277,12 @@
 (color-theme-dark-laptop)
 
 
-;; custom settings for Org mode
-(require 'org)
-(require 'org-latex)
-(setq org-log-mode 'time)
-
 ;; global keyboard mapping for Emacs' anything
 (global-set-key (kbd "s-a") 'anything)
 
 (add-hook 'c-mode-common-hook
-               (lambda ()
-                (font-lock-add-keywords nil
+	  (lambda ()
+	    (font-lock-add-keywords nil
                  '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))))
 
 ;; twittering mode
@@ -427,5 +433,4 @@
 ;; use EasyPG to automatically encrypt and decrypt all files that end with *.gpg
 (require 'epa-file)
 (epa-file-enable)
-
 
