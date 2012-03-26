@@ -314,16 +314,8 @@
      "xelatex -interaction nonstopmode %f")) ;; for multiple passes
 
 ;; mode for editing BAT files (sometimes it happens)
-(setq auto-mode-alist
-      (append
-       (list (cons "\\.[bB][aA][tT]$" 'bat-mode))
-       ;; For DOS init files
-       (list (cons "CONFIG\\."   'bat-mode))
-       (list (cons "AUTOEXEC\\." 'bat-mode))
-       auto-mode-alist))
-
-   (autoload 'bat-mode "bat-mode"
-      "DOS and WIndows BAT files" t)
+(autoload 'bat-mode "bat-mode" "DOS and WIndows BAT files" t)
+(add-to-list 'auto-mode-alist '("[.]bat$" . bat-mode))
 
 ;; anything.el - quick way to access 'things' in Emacs
 (add-to-list 'load-path "~/.emacs.d/anything")
