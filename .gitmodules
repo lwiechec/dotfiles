@@ -43,3 +43,9 @@
 [submodule "etc/emacs.d/tiny-tools"]
 	path = etc/emacs.d/tiny-tools
 	url = https://github.com/emacsmirror/tiny-tools.git
+[submodule "etc/emacs.d/js2-mode"]
+	path = etc/emacs.d/js2-mode
+	url = https://github.com/emacsmirror/js2-mode.git
+[submodule "etc/emacs.d/dired-single"]
+	path = etc/emacs.d/dired-single
+	url = https://github.com/emacsmirror/dired-single.git
