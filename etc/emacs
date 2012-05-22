@@ -76,8 +76,8 @@
 ;; yasnippet - cool gadget for quick coding
 (add-to-list 'load-path "~/.emacs.d/yasnippet")
 (require 'yasnippet)
-(setq yas/root-directory "~/.emacs.d/yasnippet/snippets")
-(yas/load-directory yas/root-directory)
+(setq yas/root-directory '("~/.emacs.d/my-yasnippets" "~/.emacs.d/yasnippet/snippets"))
+(mapc 'yas/load-directory yas/root-directory)
 (yas/global-mode 't)
 
 ;; smart-tab - lets test it

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: prompt for System.out.println()
+# key: sout
+# --
+System.out.println("${1:stdout message...}");
