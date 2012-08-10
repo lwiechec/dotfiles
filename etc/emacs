@@ -427,3 +427,11 @@
     (my-dired-init)
   ;; it's not loaded yet, so add our bindings to the load-hook
   (add-hook 'dired-load-hook 'my-dired-init))
+
+;; use gist.el
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/gist.el"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/tabulated-list.el"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/gh"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/pcache"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/logito"))
+(require 'gist)

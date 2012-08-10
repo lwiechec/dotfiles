@@ -49,3 +49,18 @@
 [submodule "etc/emacs.d/dired-single"]
 	path = etc/emacs.d/dired-single
 	url = https://github.com/emacsmirror/dired-single.git
+[submodule "etc/emacs.d/gist.el"]
+	path = etc/emacs.d/gist.el
+	url = https://github.com/defunkt/gist.el.git
+[submodule "etc/emacs.d/tabulated-list.el"]
+	path = etc/emacs.d/tabulated-list.el
+	url = https://github.com/sigma/tabulated-list.el
+[submodule "etc/emacs.d/gh"]
+	path = etc/emacs.d/gh
+	url = https://github.com/sigma/gh.el.git
+[submodule "etc/emacs.d/pcache"]
+	path = etc/emacs.d/pcache
+	url = https://github.com/sigma/pcache.git
+[submodule "etc/emacs.d/logito"]
+	path = etc/emacs.d/logito
+	url = https://github.com/sigma/logito.git
