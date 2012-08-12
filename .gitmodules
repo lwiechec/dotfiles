@@ -4,9 +4,6 @@
 [submodule "etc/emacs.d/yasnippet"]
 	path = etc/emacs.d/yasnippet
 	url = https://github.com/emacsmirror/yasnippet.git
-[submodule "etc/emacs.d/anything"]
-	path = etc/emacs.d/anything
-	url = https://github.com/emacsmirror/anything.git
 [submodule "etc/emacs.d/smex"]
 	path = etc/emacs.d/smex
 	url = https://github.com/emacsmirror/smex.git
@@ -34,9 +31,6 @@
 [submodule "etc/emacs.d/malabar-mode"]
 	path = etc/emacs.d/malabar-mode
 	url = https://github.com/espenhw/malabar-mode.git
-[submodule "etc/emacs.d/iedit"]
-	path = etc/emacs.d/iedit
-	url = https://github.com/emacsmirror/iedit
 [submodule "etc/emacs.d/org"]
 	path = etc/emacs.d/org
 	url = https://github.com/emacsmirror/org.git
@@ -49,3 +43,12 @@
 [submodule "etc/emacs.d/dired-single"]
 	path = etc/emacs.d/dired-single
 	url = https://github.com/emacsmirror/dired-single.git
+[submodule "etc/emacs.d/iedit"]
+	path = etc/emacs.d/iedit
+	url = https://github.com/tsdh/iedit.git
+[submodule "anything"]
+	path = etc/emacs.d/anything
+	url = https://github.com/haxney/anything.git
+[submodule "etc/emacs.d/anything"]
+	path = etc/emacs.d/anything
+	url = https://github.com/haxney/anything.git
