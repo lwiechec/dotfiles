@@ -8,9 +8,8 @@ for arg in $( ls ~/dotfiles/etc/ ); do
   ln -sfn ~/dotfiles/etc/$arg ~/.$arg
 done
 
-# All files from etc/vim link straight to ~
-#for arg in $( ls ~/dotfiles/etc/vim/ ); do
-#  if [ -f ~/dotfiles/etc/vim/$arg ]; then
-#    ln -sfn ~/dotfiles/etc/vim/$arg ~/.$arg
-#  fi;
-#done
+echo
+echo   Initializing Git submodules, this may take a while...
+echo 
+git submodule init
+git submodule update
