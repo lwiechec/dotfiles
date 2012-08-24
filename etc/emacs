@@ -230,11 +230,11 @@
 
 ;; Malabar mode - better Java mode for Emacs
 ;; (check the source at https://github.com/espenhw/malabar-mode)
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/malabar-1.4.0/lisp"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/malabar-1.4.1-SNAPSHOT/lisp"))
 (require 'cedet)
 (semantic-load-enable-minimum-features) ;; or enable more if you wish
 (require 'malabar-mode)
-(setq malabar-groovy-lib-dir (expand-file-name "~/.emacs.d/malabar-1.4.0/lib"))
+(setq malabar-groovy-lib-dir (expand-file-name "~/.emacs.d/malabar-1.4.1-SNAPSHOT/lib"))
 (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
 
 ; optional: simulate constant compile-after-save (as in Eclipse)
