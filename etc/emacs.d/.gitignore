@@ -1,8 +1,11 @@
 smex.save
 workgroups-saved
 malabar-1.4.0
+malabar-1.4.1-SNAPSHOT
 backups
 auto-save-list
+ac-comphist.dat
+cedet
 *.elc
 *-compile-script
 *-make-script
