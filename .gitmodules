@@ -67,3 +67,9 @@
 [submodule "etc/emacs.d/anything"]
 	path = etc/emacs.d/anything
 	url = https://github.com/haxney/anything.git
+[submodule "etc/emacs.d/auto-complete-mode"]
+	path = etc/emacs.d/auto-complete-mode
+	url = https://github.com/m2ym/auto-complete.git
+[submodule "etc/emacs.d/popup"]
+	path = etc/emacs.d/popup
+	url = https://github.com/m2ym/popup-el.git
