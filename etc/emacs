@@ -465,3 +465,11 @@
                      (lambda (output)
                        (replace-regexp-in-string ".*1G\.\.\..*5G" "..."
 						 (replace-regexp-in-string ".*1G.*3G" "> " output))))))
+
+;; add folding minor mode to JavaScript mode
+(add-hook 'js2-mode-hook
+          (lambda ()
+            ;; Scan the file for nested code blocks
+            (imenu-add-menubar-index)
+            ;; Activate the folding mode
+            (hs-minor-mode t)))
