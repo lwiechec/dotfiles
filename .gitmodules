@@ -76,3 +76,6 @@
 [submodule "etc/emacs.d/js-comint"]
 	path = etc/emacs.d/js-comint
 	url = git@github.com:lwiechec/js-comint.git
+[submodule "etc/bash.d/z"]
+	path = etc/bash.d/z
+	url = https://github.com/rupa/z.git
