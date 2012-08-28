@@ -249,12 +249,6 @@
 ;;(require 'jde)
 
 
-;; set the color scheme
-(require 'color-theme)
-;;(color-theme-initialize)
-(color-theme-dark-laptop)
-
-
 ;; global keyboard mapping for Emacs' anything
 (global-set-key (kbd "s-a") 'anything)
 
@@ -473,3 +467,15 @@
             (imenu-add-menubar-index)
             ;; Activate the folding mode
             (hs-minor-mode t)))
+
+;; set the color scheme
+(require 'color-theme)
+(color-theme-dark-laptop)
+
+;; try solarized color theme
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/emacs-color-theme-solarized"))
+(require 'color-theme-solarized)
+;;(color-theme-solarized-dark)
+
+
+
