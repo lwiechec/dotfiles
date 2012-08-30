@@ -79,3 +79,6 @@
 [submodule "etc/bash.d/z"]
 	path = etc/bash.d/z
 	url = https://github.com/rupa/z.git
+[submodule "etc/emacs.d/emacs-color-theme-solarized"]
+	path = etc/emacs.d/emacs-color-theme-solarized
+	url = https://github.com/sellout/emacs-color-theme-solarized.git
