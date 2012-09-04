@@ -82,3 +82,6 @@
 [submodule "etc/emacs.d/emacs-color-theme-solarized"]
 	path = etc/emacs.d/emacs-color-theme-solarized
 	url = https://github.com/sellout/emacs-color-theme-solarized.git
+[submodule "etc/emacs.d/multi-web-mode"]
+	path = etc/emacs.d/multi-web-mode
+	url = https://github.com/fgallina/multi-web-mode.git
