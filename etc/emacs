@@ -271,7 +271,7 @@
 
 ;; set default web browser to Google Chrome
 (setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "google-chrome")
+      browse-url-generic-program "chromium-browser")
 
 ;; show nice window of recently killed lines in the kill ring
 (global-set-key "\C-cy" '(lambda ()
