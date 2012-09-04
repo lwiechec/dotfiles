@@ -243,6 +243,11 @@
 ;       (add-hook 'after-save-hook 'malabar-compile-file-silently
 ;                  nil t)))
 
+(add-hook 'malabar-mode-hook  (lambda()
+    (local-set-key [(f11)] 'javadoc-lookup)
+    (local-set-key [(shift f11)] 'javadoc-help)))
+
+
 ;; JDEE - temporarily turned off
 ;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/jdee-2.4.0.1/lisp"))
 ;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/elib-1.0"))
@@ -610,3 +615,6 @@
 (setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
 (multi-web-global-mode 1)
 
+;; javadoc-help - easier way to get javadocs in emacs
+(add-to-list 'load-path "~/.emacs.d/javadoc-help")
+(require 'javadoc-help)

@@ -85,3 +85,6 @@
 [submodule "etc/emacs.d/multi-web-mode"]
 	path = etc/emacs.d/multi-web-mode
 	url = https://github.com/fgallina/multi-web-mode.git
+[submodule "etc/emacs.d/javadoc-help"]
+	path = etc/emacs.d/javadoc-help
+	url = https://github.com/emacsmirror/javadoc-help.git
