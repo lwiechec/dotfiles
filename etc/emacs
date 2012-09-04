@@ -205,7 +205,7 @@
 (require 'breadcrumb)
 
 ;;  Examples below assign a set of keys to the breadcrumb bookmark functions.
-(global-set-key [(shift space)]         'bc-set)            ;; Shift-SPACE for set bookmark
+(global-set-key (kbd "s-.")             'bc-set)            ;; Windows key-. for set bookmark
 (global-set-key [(meta j)]              'bc-previous)       ;; M-j for jump to previous
 (global-set-key [(shift meta j)]        'bc-next)           ;; Shift-M-j for jump to next
 (global-set-key [(meta up)]             'bc-local-previous) ;; M-up-arrow for local previous
