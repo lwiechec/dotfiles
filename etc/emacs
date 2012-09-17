@@ -618,3 +618,36 @@
 ;; javadoc-help - easier way to get javadocs in emacs
 (add-to-list 'load-path "~/.emacs.d/javadoc-help")
 (require 'javadoc-help)
+
+;; set up SOCKS proxy tunnel when starting ERC (from work)
+(defvar connect-proxy "/usr/bin/connect-proxy"
+  "location of SOCKS connect-proxy utility that will be used to create the SOCKS proxy tunnel")
+
+(defvar socks-proxy "yellow.nc3a.nato.int:1080"
+  "definition of SOCKS proxy, in 'host:port' format")
+
+(defun setup-socks-proxy-connection (irc-server-ip-address irc-server-port local-port)
+  "start external 'connect-proxy' process setting up tunnel to proxy server. After that it will be possible to
+  connect to IRC via 'erc-ssl' call that points to the localhost:local-port.
+  'irc-server-ip-address' should be the IP address of the IRC server that supports SSL,
+  'irc-server-port' should be the (remote) port where IRC server runs on,
+  'local-port' port on local machine."
+  (start-process "socks-proxy-tunnel" "socks-proxy-tunnel"
+		 connect-proxy "-d" "-S" socks-proxy "-P" (number-to-string local-port)
+		 irc-server-ip-address (number-to-string irc-server-port))
+  (message (concat "SOCKS tunnel to " irc-server-ip-address ":" (number-to-string irc-server-port)
+		   " on local port " (number-to-string local-port) " started."))
+  )
+
+; start proxy tunnel before ERC connects
+(add-hook 'erc-before-connect
+	(lambda (one two three) (setup-socks-proxy-connection "213.92.8.4" 7000 7000)))
+
+(defun start-irc ()
+   "Connect to IRC server."
+   (interactive)
+   ; or should it be 'erc-tls ?...
+   (autoload 'erc-ssl "erc")
+   (erc-ssl :server "localhost" :port 7000
+        :nick "lwiechec" :full-name "Lukasz Wiechec")
+   (setq erc-autojoin-channels-alist '(("localhost" "#emacs" "#screen"))))
