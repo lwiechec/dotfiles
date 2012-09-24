@@ -683,3 +683,7 @@
 (eval-after-load "ace-jump-mode"
   '(ace-jump-mode-enable-mark-sync))
 (define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
+
+;; iy-go-to-char - quick jump to the next character in the line
+(require 'iy-go-to-char)
+(global-set-key (kbd "M-m") 'iy-go-to-char)
