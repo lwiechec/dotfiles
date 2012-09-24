@@ -88,3 +88,9 @@
 [submodule "etc/emacs.d/javadoc-help"]
 	path = etc/emacs.d/javadoc-help
 	url = https://github.com/emacsmirror/javadoc-help.git
+[submodule "etc/emacs.d/multiple-cursors.el"]
+	path = etc/emacs.d/multiple-cursors.el
+	url = https://github.com/magnars/multiple-cursors.el.git
+[submodule "etc/emacs.d/ace-jump-mode"]
+	path = etc/emacs.d/ace-jump-mode
+	url = https://github.com/winterTTr/ace-jump-mode.git
