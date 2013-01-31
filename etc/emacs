@@ -567,6 +567,7 @@
 
 ;; set the color scheme
 (require 'color-theme)
+(color-theme-initialize)
 (color-theme-dark-laptop)
 
 ;; try solarized color theme
