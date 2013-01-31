@@ -91,3 +91,6 @@
 [submodule "etc/emacs.d/ace-jump-mode"]
 	path = etc/emacs.d/ace-jump-mode
 	url = https://github.com/winterTTr/ace-jump-mode.git
+[submodule "etc/emacs.d/ajc-java-complete"]
+	path = etc/emacs.d/ajc-java-complete
+	url = https://github.com/lwiechec/ajc-java-complete
