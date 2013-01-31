@@ -61,18 +61,15 @@
 [submodule "etc/emacs.d/iedit"]
 	path = etc/emacs.d/iedit
 	url = https://github.com/tsdh/iedit.git
-[submodule "anything"]
-	path = etc/emacs.d/anything
-	url = https://github.com/haxney/anything.git
 [submodule "etc/emacs.d/anything"]
 	path = etc/emacs.d/anything
 	url = https://github.com/haxney/anything.git
 [submodule "etc/emacs.d/auto-complete-mode"]
 	path = etc/emacs.d/auto-complete-mode
-	url = https://github.com/m2ym/auto-complete.git
+	url = https://github.com/auto-complete/auto-complete.git
 [submodule "etc/emacs.d/popup"]
 	path = etc/emacs.d/popup
-	url = https://github.com/m2ym/popup-el.git
+	url = https://github.com/lwiechec/popup-el.git
 [submodule "etc/emacs.d/js-comint"]
 	path = etc/emacs.d/js-comint
 	url = git@github.com:lwiechec/js-comint.git
