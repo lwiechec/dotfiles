@@ -449,6 +449,27 @@
 ; case sensitivity is important when finding matches
 (setq ac-ignore-case nil)
 
+;; auto complete for Java
+; is using a generated Tag file to get the 'signatures' of all methods and imports etc
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/ajc-java-complete"))
+(require 'ajc-java-complete-config)
+(add-hook 'java-mode-hook 'ajc-java-complete-mode)
+(add-hook 'malabar-mode-hook 'ajc-java-complete-mode)
+(add-hook 'find-file-hook 'ajc-4-jsp-find-file-hook)
+
+; add source to auto complete from Semantic -- NOTE it slows down
+;(add-hook 'java-mode-hook (lambda () (add-to-list 'ac-sources 'ac-source-semantic)))
+
+
+;; auto complete from gtags
+;; take #1
+;(require 'auto-complete-gtags)
+;(add-to-list 'ac-sources 'ac-source-gtags)
+;; take #2
+(require 'auto-complete-ya-gtags)
+(add-to-list 'ac-sources 'ac-source-ya-gtags)
+
+
 ; js-comint.el - execute JavaScript from emacs
 ; check 'M-x run-js, js-send-* etc'
 (add-to-list 'load-path "~/.emacs.d/js-comint")
