@@ -3,6 +3,17 @@
 
 (add-to-list 'load-path "~/.emacs.d/various")
 
+;; using custom version of CEDET
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/cedet-1.1/common"))
+(load-file "~/.emacs.d/cedet-1.1/common/cedet.el")
+;; enable EDE (Project Management) features
+(global-ede-mode 1)
+;; * This enables the database and idle reparse engines
+(semantic-load-enable-minimum-features)
+;(semantic-load-enable-code-helpers)
+; this will display all posibilities for completion for us to choose
+(global-semantic-idle-completions-mode)
+
 ;; add nice 'undo tree feature'
 (add-to-list 'load-path "~/.emacs.d/undo-tree")
 (require 'undo-tree)
@@ -213,16 +224,6 @@
 (global-set-key [(control c)(j)]        'bc-goto-current)   ;; C-c j for jump to current bookmark
 (global-set-key [(control x)(meta j)]   'bc-list)           ;; C-x M-j for the bookmark menu list
 
-;; using custom version of CEDET
-;
-;; TODO: use emacsmirror git repo?
-;
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/cedet-1.0.1/common"))
-(load-file "~/.emacs.d/cedet-1.0.1/common/cedet.el")
-;; enable EDE (Project Management) features
-(global-ede-mode 1)
-;; * This enables the database and idle reparse engines
-(semantic-load-enable-minimum-features)
 
 ;; fixing the ECB - we will use the CVS version, not packaged by Debian
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/ecb"))
