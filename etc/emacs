@@ -457,15 +457,11 @@
 (add-hook 'malabar-mode-hook 'ajc-java-complete-mode)
 (add-hook 'find-file-hook 'ajc-4-jsp-find-file-hook)
 
-; add source to auto complete from Semantic -- NOTE it slows down
+; add source to auto complete from Semantic
+;; NOTE: commenting it out as it slows down emacs!!
 ;(add-hook 'java-mode-hook (lambda () (add-to-list 'ac-sources 'ac-source-semantic)))
 
-
 ;; auto complete from gtags
-;; take #1
-;(require 'auto-complete-gtags)
-;(add-to-list 'ac-sources 'ac-source-gtags)
-;; take #2
 (require 'auto-complete-ya-gtags)
 (add-to-list 'ac-sources 'ac-source-ya-gtags)
 
