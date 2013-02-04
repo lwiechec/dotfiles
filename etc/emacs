@@ -66,13 +66,11 @@
 )
 
 
-;; my various code
+;; my various elisp code
 (add-to-list 'load-path "~/.emacs.d/various")
-
 
 ;; custom settings for Org mode
 ;; using custom version of Org mode (default one from the Ubuntu distro is too old)
-(require 'org-install)
 (require 'org-latex)
 (setq org-log-mode 'time)
 (setq org-default-notes-file "~/Dropbox/org/notes.org")
