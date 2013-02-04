@@ -1,93 +1,12 @@
-[submodule "etc/emacs.d/ack-and-a-half"]
-	path = etc/emacs.d/ack-and-a-half
-	url = https://github.com/emacsmirror/ack-and-a-half.git
-[submodule "etc/emacs.d/yasnippet"]
-	path = etc/emacs.d/yasnippet
-	url = https://github.com/emacsmirror/yasnippet.git
-[submodule "etc/emacs.d/smex"]
-	path = etc/emacs.d/smex
-	url = https://github.com/emacsmirror/smex.git
-[submodule "etc/emacs.d/nxhtml"]
-	path = etc/emacs.d/nxhtml
-	url = https://github.com/emacsmirror/nxhtml.git
-[submodule "etc/emacs.d/egg"]
-	path = etc/emacs.d/egg
-	url = https://github.com/bogolisk/egg.git
-[submodule "etc/emacs.d/full-ack"]
-	path = etc/emacs.d/full-ack
-	url = https://github.com/nschum/full-ack.git
-[submodule "etc/emacs.d/twittering-mode"]
-	path = etc/emacs.d/twittering-mode
-	url = https://github.com/hayamiz/twittering-mode.git
-[submodule "etc/emacs.d/deft"]
-	path = etc/emacs.d/deft
-	url = https://github.com/emacsmirror/deft.git
-[submodule "etc/emacs.d/workgroups.el"]
-	path = etc/emacs.d/workgroups.el
-	url = https://github.com/tlh/workgroups.el.git
-[submodule "etc/emacs.d/org"]
-	path = etc/emacs.d/org
-	url = https://github.com/emacsmirror/org.git
 [submodule "etc/emacs.d/tiny-tools"]
 	path = etc/emacs.d/tiny-tools
 	url = https://github.com/emacsmirror/tiny-tools.git
-[submodule "etc/emacs.d/js2-mode"]
-	path = etc/emacs.d/js2-mode
-	url = https://github.com/emacsmirror/js2-mode.git
-[submodule "etc/emacs.d/dired-single"]
-	path = etc/emacs.d/dired-single
-	url = https://github.com/emacsmirror/dired-single.git
-[submodule "etc/emacs.d/gist.el"]
-	path = etc/emacs.d/gist.el
-	url = https://github.com/defunkt/gist.el.git
-[submodule "etc/emacs.d/tabulated-list.el"]
-	path = etc/emacs.d/tabulated-list.el
-	url = https://github.com/sigma/tabulated-list.el
-[submodule "etc/emacs.d/gh"]
-	path = etc/emacs.d/gh
-	url = https://github.com/sigma/gh.el.git
-[submodule "etc/emacs.d/pcache"]
-	path = etc/emacs.d/pcache
-	url = https://github.com/sigma/pcache.git
-[submodule "etc/emacs.d/logito"]
-	path = etc/emacs.d/logito
-	url = https://github.com/sigma/logito.git
 [submodule "etc/emacs.d/malabar-mode"]
 	path = etc/emacs.d/malabar-mode
 	url = https://github.com/lwiechec/malabar-mode.git
-[submodule "etc/emacs.d/iedit"]
-	path = etc/emacs.d/iedit
-	url = https://github.com/tsdh/iedit.git
-[submodule "etc/emacs.d/anything"]
-	path = etc/emacs.d/anything
-	url = https://github.com/haxney/anything.git
-[submodule "etc/emacs.d/auto-complete-mode"]
-	path = etc/emacs.d/auto-complete-mode
-	url = https://github.com/auto-complete/auto-complete.git
-[submodule "etc/emacs.d/popup"]
-	path = etc/emacs.d/popup
-	url = https://github.com/lwiechec/popup-el.git
-[submodule "etc/emacs.d/js-comint"]
-	path = etc/emacs.d/js-comint
-	url = git@github.com:lwiechec/js-comint.git
 [submodule "etc/bash.d/z"]
 	path = etc/bash.d/z
 	url = https://github.com/rupa/z.git
-[submodule "etc/emacs.d/emacs-color-theme-solarized"]
-	path = etc/emacs.d/emacs-color-theme-solarized
-	url = https://github.com/sellout/emacs-color-theme-solarized.git
-[submodule "etc/emacs.d/multi-web-mode"]
-	path = etc/emacs.d/multi-web-mode
-	url = https://github.com/fgallina/multi-web-mode.git
-[submodule "etc/emacs.d/javadoc-help"]
-	path = etc/emacs.d/javadoc-help
-	url = https://github.com/emacsmirror/javadoc-help.git
-[submodule "etc/emacs.d/multiple-cursors.el"]
-	path = etc/emacs.d/multiple-cursors.el
-	url = https://github.com/magnars/multiple-cursors.el.git
-[submodule "etc/emacs.d/ace-jump-mode"]
-	path = etc/emacs.d/ace-jump-mode
-	url = https://github.com/winterTTr/ace-jump-mode.git
 [submodule "etc/emacs.d/ajc-java-complete"]
 	path = etc/emacs.d/ajc-java-complete
 	url = https://github.com/lwiechec/ajc-java-complete
