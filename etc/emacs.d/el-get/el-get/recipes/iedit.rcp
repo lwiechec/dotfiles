@@ -1,0 +1,5 @@
+(:name iedit
+       :website "https://github.com/tsdh/iedit"
+       :description "Edit multiple regions with the same content simultaneously."
+       :type github
+       :pkgname "tsdh/iedit")
