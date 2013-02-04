@@ -1,6 +1,38 @@
 ;;; -*- mode: emacs-lisp; -*-
 ;; initialization file for emacs editor
 
+; at first we have custom variables, as other code in .emacs may depend on it (HTTP proxy setting etc)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ack-executable (executable-find "ack-grep"))
+ '(ajc-tag-file "/home/luke/.java_base.tag")
+ '(ajc-tag-files (quote ("~/.java_base.tag" "~/.NEW_java_base.tag")))
+ '(bsh-jar "~/work/javautil/beanshell/bsh.jar")
+ '(bsh-startup-timeout 2)
+ '(bsh-vm-args (quote ("-Djava.net.preferIPv4Stack=true" "-Dhttp.proxyHost=yellow.nc3a.nato.int" "-Dhttp.proxyPort=8088")))
+ '(compilation-scroll-output t)
+ '(compilation-skip-threshold 2)
+ '(ecb-options-version "2.40")
+ '(ecb-source-path (quote ("~/work/projects")))
+ '(ecb-tree-indent 2)
+ '(gtags-path-style (quote relative))
+ '(jde-ant-home "/usr/share/ant")
+ '(jde-ant-read-target t)
+ '(jde-global-classpath (quote ("./lib" "./lib/jetty" "./build")))
+ '(jde-jdk-registry (quote (("1.6.0_24" . "/home/luke/work/jdk/jdk1.6.0_24"))))
+ '(org-agenda-files (quote ("~/Dropbox/org" "~/Dropbox/org/deft" "~/.org-mode/")))
+ '(org-agenda-include-diary t)
+ '(org-capture-templates (quote (("t" "Todo" entry (file+headline "~/Dropbox/org/agenda.org" "Tasks") (file "~/Dropbox/org/templates/todo.orgtmpl")))))
+ '(safe-local-variable-values (quote ((eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook" (add-hook (quote write-contents-functions) (lambda nil (delete-trailing-whitespace) nil)) (require (quote whitespace)) "Sometimes the mode needs to be toggled off and on." (whitespace-mode 0) (whitespace-mode 1)) (whitespace-line-column . 80) (whitespace-style face trailing lines-tail) (require-final-newline . t))))
+ '(tail-max-size 20)
+ '(tail-volatile nil)
+ '(url-proxy-services (quote (("no_proxy" . "localhost") ("http" . "yellow.nc3a.nato.int:8088") ("https" . "yellow.nc3a.nato.int:8088"))))
+ '(url-using-proxy "http://yellow.nc3a.nato.int:8088" t))
+
 ;; using el-get for package management
 (add-to-list 'load-path "~/.emacs.d/el-get")
 
@@ -12,12 +44,19 @@
     (eval-print-last-sexp)))
 (el-get 'sync)
 
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+)
+
+
 ;; my various code
 (add-to-list 'load-path "~/.emacs.d/various")
 
 ;; using custom version of CEDET
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/cedet-1.1/common"))
-(load-file "~/.emacs.d/cedet-1.1/common/cedet.el")
 ;; enable EDE (Project Management) features
 (global-ede-mode 1)
 ;; * This enables the database and idle reparse engines
@@ -26,24 +65,13 @@
 ; this will display all posibilities for completion for us to choose
 (global-semantic-idle-completions-mode)
 
-;; add nice 'undo tree feature'
-(add-to-list 'load-path "~/.emacs.d/undo-tree")
-(require 'undo-tree)
-(global-undo-tree-mode)
-
 ;; custom settings for Org mode
 ;; using custom version of Org mode (default one from the Ubuntu distro is too old)
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/org/lisp"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/org/contrib/lisp"))
 (require 'org-install)
 (require 'org-latex)
 (setq org-log-mode 'time)
 (setq org-default-notes-file "~/Dropbox/org/notes.org")
 (define-key global-map "\C-cc" 'org-capture)
-
-;; load nXHtml
-;; org-mode needs to be loaded before that
-(load "~/.emacs.d/nxhtml/autostart.el")
 
 ;; turn on Interactively Do Things thingie
 (require 'ido)
@@ -54,8 +82,6 @@
 ;; Egg - Emacs got Git
 ;; Git
 (progn
-  (setq egg-dir "~/.emacs.d/egg")
-  (load-file (format "%s/egg.el" egg-dir))
   (require 'egg)
   ;; override the VC settingmore sexy handling of buffer list
   (global-set-key (kbd "\C-x v d") 'egg-status)
@@ -97,9 +123,8 @@
   nil)
 
 ;; yasnippet - cool gadget for quick coding
-(add-to-list 'load-path "~/.emacs.d/yasnippet")
 (require 'yasnippet)
-(setq yas/root-directory '("~/.emacs.d/my-yasnippets" "~/.emacs.d/yasnippet/snippets"))
+(setq yas/root-directory '("~/.emacs.d/my-yasnippets"))
 (mapc 'yas/load-directory yas/root-directory)
 (yas/global-mode 't)
 
@@ -152,7 +177,6 @@
     (djcb-gtags-create-or-update)))
 
 ;; smex - more intelligent M-x
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/smex"))
 (setq smex-save-file "~/.emacs.d/smex.save")
 (require 'smex)
 (smex-initialize)
@@ -161,7 +185,6 @@
 ;; iedit package
 ;; allows 'dynamic' replace/edit operation on multiple places in buffer at the same time
 ;; (hard to define, you need to see for yourself! :)
-(setq load-path (cons "~/.emacs.d/iedit" load-path))
 (require 'iedit)
 (define-key global-map (kbd "C-;") 'iedit-mode)
 
@@ -225,7 +248,7 @@
 (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
 
 ;; breadcrumb - intelligent bookmark saving
-(require 'breadcrumb)
+;(require 'breadcrumb)
 
 ;;  Examples below assign a set of keys to the breadcrumb bookmark functions.
 (global-set-key (kbd "s-.")             'bc-set)            ;; Windows key-. for set bookmark
@@ -238,14 +261,10 @@
 
 
 ;; fixing the ECB - we will use the CVS version, not packaged by Debian
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/ecb"))
-(require 'ecb)
 
 ;; Malabar mode - better Java mode for Emacs
 ;; (check the source at https://github.com/espenhw/malabar-mode)
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/malabar-1.4.0/lisp"))
-(require 'cedet)
-(semantic-load-enable-minimum-features) ;; or enable more if you wish
 (require 'malabar-mode)
 (setq malabar-groovy-lib-dir (expand-file-name "~/.emacs.d/malabar-1.4.0/lib"))
 (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
@@ -261,12 +280,6 @@
     (local-set-key [(shift f11)] 'javadoc-help)))
 
 
-;; JDEE - temporarily turned off
-;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/jdee-2.4.0.1/lisp"))
-;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/elib-1.0"))
-;;(require 'jde)
-
-
 ;; global keyboard mapping for Emacs' anything
 (global-set-key (kbd "s-a") 'anything)
 
@@ -276,11 +289,9 @@
                  '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))))
 
 ;; twittering mode
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/twittering-mode"))
 (setq twittering-proxy-use t)
 (setq twittering-proxy-server "yellow.nc3a.nato.int")
 (setq twittering-proxy-port 8088)
-(require 'twittering-mode)
 
 ;; set default web browser to Google Chrome
 (setq browse-url-browser-function 'browse-url-generic
@@ -329,15 +340,8 @@
 (autoload 'bat-mode "bat-mode" "DOS and WIndows BAT files" t)
 (add-to-list 'auto-mode-alist '("[.]bat$" . bat-mode))
 
-;; anything.el - quick way to access 'things' in Emacs
-(add-to-list 'load-path "~/.emacs.d/anything")
-(require 'anything-config)
-;; (require 'anything) [ not needed? ]
-;; (require 'anything-gtags) [ not needed? ]
-
 
 ;; http://jblevins.org/projects/deft/
-(add-to-list 'load-path "~/.emacs.d/deft")
 (when (require 'deft nil 'noerror)
    (setq
       deft-extension "org"
@@ -353,47 +357,22 @@
 (autoload 'w3m-toggle-inline-image "w3m"
   "Toggle the visibility of an image under point." t)
 
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(ack-executable (executable-find "ack-grep"))
- '(bsh-jar "~/work/javautil/beanshell/bsh.jar")
- '(bsh-startup-timeout 2)
- '(bsh-vm-args (quote ("-Djava.net.preferIPv4Stack=true" "-Dhttp.proxyHost=yellow.nc3a.nato.int" "-Dhttp.proxyPort=8088")))
- '(compilation-scroll-output t)
- '(compilation-skip-threshold 2)
- '(ecb-options-version "2.40")
- '(ecb-source-path (quote ("~/work/projects")))
- '(ecb-tree-indent 2)
- '(gtags-path-style (quote relative))
- '(jde-ant-home "/usr/share/ant")
- '(jde-ant-read-target t)
- '(jde-global-classpath (quote ("./lib" "./lib/jetty" "./build")))
- '(jde-jdk-registry (quote (("1.6.0_24" . "/home/luke/work/jdk/jdk1.6.0_24"))))
- '(org-agenda-files (quote ("~/Dropbox/org" "~/Dropbox/org/deft" "~/.org-mode/")))
- '(org-agenda-include-diary t)
- '(org-capture-templates (quote (("t" "Todo" entry (file+headline "~/Dropbox/org/agenda.org" "Tasks") (file "~/Dropbox/org/templates/todo.orgtmpl"))))))
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
 
 ;; workgroups.el - manage window configuration in the frame the eas way
 ;; https://github.com/tlh/workgroups.el
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/workgroups.el"))
-(require 'workgroups)
 (setq wg-prefix-key (kbd "C-c w"))
 (workgroups-mode 1)
 (wg-load (expand-file-name "~/.emacs.d/workgroups-saved"))
 
 ;; full-ack.el
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/full-ack/"))
 (autoload 'ack-same "full-ack" nil t)
 (autoload 'ack "full-ack" nil t)
 (autoload 'ack-find-same-file "full-ack" nil t)
@@ -419,13 +398,9 @@
 (epa-file-enable)
 
 ;; use js2-mode for editing JavaScript
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/js2-mode"))
 (add-to-list 'auto-mode-alist '("[.]js$" . js2-mode))
-(require 'js2-mode)
 
 ;; use single buffer for dired to avoid too many of them
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/dired-single"))
-(require 'dired-single)
 (defun my-dired-init ()
   (define-key dired-mode-map [return] 'joc-dired-single-buffer)
   (define-key dired-mode-map [mouse-1] 'joc-dired-single-buffer-mouse)
@@ -440,17 +415,7 @@
   ;; it's not loaded yet, so add our bindings to the load-hook
   (add-hook 'dired-load-hook 'my-dired-init))
 
-;; use gist.el
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/gist.el"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/tabulated-list.el"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/gh"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/pcache"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/logito"))
-(require 'gist)
-
 ;; auto-complete-mode
-; popup.el is a dependency for auto-complete-mode
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/popup"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/auto-complete-mode"))
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete-mode/dict")
@@ -480,8 +445,6 @@
 
 ; js-comint.el - execute JavaScript from emacs
 ; check 'M-x run-js, js-send-* etc'
-(add-to-list 'load-path "~/.emacs.d/js-comint")
-(require 'js-comint)
 ;; Use node as our repl
 (setq inferior-js-program-command "node")
 
@@ -600,11 +563,6 @@
 (color-theme-initialize)
 (color-theme-dark-laptop)
 
-;; try solarized color theme
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/emacs-color-theme-solarized"))
-(require 'color-theme-solarized)
-;;(color-theme-solarized-dark)
-
 
 ;; generate UUID identifiers from Emacs
 ;; as seen as at http://nullprogram.com/blog/2010/05/11/
@@ -637,7 +595,6 @@
 ;(global-set-key "\C-x!" 'uuid-insert)
 
 ;;multi-web-mode
-(add-to-list 'load-path "~/.emacs.d/multi-web-mode")
 (require 'multi-web-mode)
 (setq mweb-default-major-mode 'html-mode)
 (setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
@@ -645,10 +602,6 @@
 		  (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
 (setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
 (multi-web-global-mode 1)
-
-;; javadoc-help - easier way to get javadocs in emacs
-(add-to-list 'load-path "~/.emacs.d/javadoc-help")
-(require 'javadoc-help)
 
 ;; set up SOCKS proxy tunnel when starting ERC (from work)
 (defvar connect-proxy "/usr/bin/connect-proxy"
@@ -680,13 +633,10 @@
    ; or should it be 'erc-tls ?...
    (autoload 'erc-ssl "erc")
    (erc-ssl :server "localhost" :port 7000
-        :nick "lwiechec" :full-name "Lukasz Wiechec")
+        :nick "lwiechec" :password "OldFox123" :full-name "Lukasz Wiechec")
    (setq erc-autojoin-channels-alist '(("localhost" "#emacs" "#screen"))))
 
 ;; multiple cursors - edit multiple lines at once
-(add-to-list 'load-path "~/.emacs.d/multiple-cursors.el")
-(require 'multiple-cursors)
-
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 (global-set-key (kbd "C-S-c C-e") 'mc/edit-ends-of-lines)
 (global-set-key (kbd "C-S-c C-a") 'mc/edit-beginnings-of-lines)
@@ -696,7 +646,6 @@
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 ;; ace-jump-mode for cool jumping
-(add-to-list 'load-path "~/.emacs.d/ace-jump-mode/")
 (autoload
   'ace-jump-mode
   "ace-jump-mode"

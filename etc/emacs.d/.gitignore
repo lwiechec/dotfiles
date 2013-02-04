@@ -5,7 +5,9 @@ malabar-1.4.1-SNAPSHOT
 backups
 auto-save-list
 ac-comphist.dat
-cedet
 *.elc
 *-compile-script
 *-make-script
+/*.elc
+ede-projects.el
+.mc-lists.el
