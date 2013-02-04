@@ -11,3 +11,4 @@ ac-comphist.dat
 /*.elc
 ede-projects.el
 .mc-lists.el
+tramp
