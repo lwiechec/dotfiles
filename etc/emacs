@@ -19,6 +19,7 @@
  '(ecb-options-version "2.40")
  '(ecb-source-path (quote ("~/work/projects")))
  '(ecb-tree-indent 2)
+ '(el-get-user-package-directory "~/.emacs.d/el-get-init-files")
  '(gtags-path-style (quote relative))
  '(jde-ant-home "/usr/share/ant")
  '(jde-ant-read-target t)
@@ -44,6 +45,7 @@
     (eval-print-last-sexp)))
 (el-get 'sync)
 
+;; setup ELPA
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
@@ -56,14 +58,6 @@
 ;; my various code
 (add-to-list 'load-path "~/.emacs.d/various")
 
-;; using custom version of CEDET
-;; enable EDE (Project Management) features
-(global-ede-mode 1)
-;; * This enables the database and idle reparse engines
-(semantic-load-enable-minimum-features)
-;(semantic-load-enable-code-helpers)
-; this will display all posibilities for completion for us to choose
-(global-semantic-idle-completions-mode)
 
 ;; custom settings for Org mode
 ;; using custom version of Org mode (default one from the Ubuntu distro is too old)
@@ -78,24 +72,6 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t) ; fuzzy matching is a must have
 (setq ido-enable-last-directory-history nil) ; forget latest selected directory names
-
-;; Egg - Emacs got Git
-;; Git
-(progn
-  (require 'egg)
-  ;; override the VC settingmore sexy handling of buffer list
-  (global-set-key (kbd "\C-x v d") 'egg-status)
-  (global-set-key (kbd "\C-x v c") 'egg-commit-log-edit)
-  (global-set-key (kbd "\C-x v i") 'egg-file-stage-current-file)
-  (global-set-key (kbd "\C-x v l") 'egg-log)
-  (global-set-key (kbd "\C-x v o") 'egg-file-checkout-other-version)
-  (global-set-key (kbd "\C-x v u") 'egg-file-cancel-modifications)
-  (global-set-key (kbd "\C-x v v") 'egg-next-action)
-  (global-set-key (kbd "\C-x v =") 'egg-file-diff)
-  (global-set-key (kbd "\C-x v ~") 'egg-file-version-other-window)
-  (global-set-key (kbd "\C-x v b") 'egg-start-new-branch)
-  (global-set-key (kbd "\C-x v a") 'egg-file-toggle-blame-mode)
-)
 
 
 ;; From: Ryan McGreary
@@ -121,12 +97,6 @@
   (add-hook 'kill-buffer-query-functions 'kill-scratch-buffer)
   ;; Since we killed it, don't let caller do that.
   nil)
-
-;; yasnippet - cool gadget for quick coding
-(require 'yasnippet)
-(setq yas/root-directory '("~/.emacs.d/my-yasnippets"))
-(mapc 'yas/load-directory yas/root-directory)
-(yas/global-mode 't)
 
 ;; smart-tab - lets test it
 
@@ -176,11 +146,6 @@
     (gtags-mode t)
     (djcb-gtags-create-or-update)))
 
-;; smex - more intelligent M-x
-(setq smex-save-file "~/.emacs.d/smex.save")
-(require 'smex)
-(smex-initialize)
-(global-set-key (kbd "M-X") 'smex)
 
 ;; iedit package
 ;; allows 'dynamic' replace/edit operation on multiple places in buffer at the same time
@@ -247,18 +212,6 @@
 (add-to-list 'auto-mode-alist '("\.story$" . groovy-mode)) ;;; easyb stories
 (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
 
-;; breadcrumb - intelligent bookmark saving
-;(require 'breadcrumb)
-
-;;  Examples below assign a set of keys to the breadcrumb bookmark functions.
-(global-set-key (kbd "s-.")             'bc-set)            ;; Windows key-. for set bookmark
-(global-set-key [(meta j)]              'bc-previous)       ;; M-j for jump to previous
-(global-set-key [(shift meta j)]        'bc-next)           ;; Shift-M-j for jump to next
-(global-set-key [(meta up)]             'bc-local-previous) ;; M-up-arrow for local previous
-(global-set-key [(meta down)]           'bc-local-next)     ;; M-down-arrow for local next
-(global-set-key [(control c)(j)]        'bc-goto-current)   ;; C-c j for jump to current bookmark
-(global-set-key [(control x)(meta j)]   'bc-list)           ;; C-x M-j for the bookmark menu list
-
 
 ;; fixing the ECB - we will use the CVS version, not packaged by Debian
 
@@ -279,19 +232,10 @@
     (local-set-key [(f11)] 'javadoc-lookup)
     (local-set-key [(shift f11)] 'javadoc-help)))
 
-
-;; global keyboard mapping for Emacs' anything
-(global-set-key (kbd "s-a") 'anything)
-
 (add-hook 'c-mode-common-hook
 	  (lambda ()
 	    (font-lock-add-keywords nil
                  '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))))
-
-;; twittering mode
-(setq twittering-proxy-use t)
-(setq twittering-proxy-server "yellow.nc3a.nato.int")
-(setq twittering-proxy-port 8088)
 
 ;; set default web browser to Google Chrome
 (setq browse-url-browser-function 'browse-url-generic
@@ -340,43 +284,12 @@
 (autoload 'bat-mode "bat-mode" "DOS and WIndows BAT files" t)
 (add-to-list 'auto-mode-alist '("[.]bat$" . bat-mode))
 
-
-;; http://jblevins.org/projects/deft/
-(when (require 'deft nil 'noerror)
-   (setq
-      deft-extension "org"
-      deft-directory "~/Dropbox/org/deft/"
-      deft-text-mode 'org-mode
-      deft-auto-save-interval 5.0)
-   (global-set-key (kbd "<f9>") 'deft))
-
 ;; set up w3m rendering for newsticker
 (autoload 'w3m-region "w3m"
   "Render region in current buffer and replace with result." t)
 
 (autoload 'w3m-toggle-inline-image "w3m"
   "Toggle the visibility of an image under point." t)
-
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-;; workgroups.el - manage window configuration in the frame the eas way
-;; https://github.com/tlh/workgroups.el
-
-(setq wg-prefix-key (kbd "C-c w"))
-(workgroups-mode 1)
-(wg-load (expand-file-name "~/.emacs.d/workgroups-saved"))
-
-;; full-ack.el
-(autoload 'ack-same "full-ack" nil t)
-(autoload 'ack "full-ack" nil t)
-(autoload 'ack-find-same-file "full-ack" nil t)
-(autoload 'ack-find-file "full-ack" nil t)
 
 ;; WindMove - smarter window switching
 ;; switch between windows with 'super'-up/down/left/right
@@ -594,14 +507,6 @@
 ; optional
 ;(global-set-key "\C-x!" 'uuid-insert)
 
-;;multi-web-mode
-(require 'multi-web-mode)
-(setq mweb-default-major-mode 'html-mode)
-(setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
-		  (js2-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
-		  (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
-(setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
-(multi-web-global-mode 1)
 
 ;; set up SOCKS proxy tunnel when starting ERC (from work)
 (defvar connect-proxy "/usr/bin/connect-proxy"
@@ -635,34 +540,6 @@
    (erc-ssl :server "localhost" :port 7000
         :nick "lwiechec" :password "OldFox123" :full-name "Lukasz Wiechec")
    (setq erc-autojoin-channels-alist '(("localhost" "#emacs" "#screen"))))
-
-;; multiple cursors - edit multiple lines at once
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C-S-c C-e") 'mc/edit-ends-of-lines)
-(global-set-key (kbd "C-S-c C-a") 'mc/edit-beginnings-of-lines)
-
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-
-;; ace-jump-mode for cool jumping
-(autoload
-  'ace-jump-mode
-  "ace-jump-mode"
-  "Emacs quick move minor mode"
-  t)
-;; you can select the key you prefer to
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-
-;; enable a more powerful jump back function from ace jump mode
-(autoload
-  'ace-jump-mode-pop-mark
-  "ace-jump-mode"
-  "Ace jump back:-)"
-  t)
-(eval-after-load "ace-jump-mode"
-  '(ace-jump-mode-enable-mark-sync))
-(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
 
 ;; iy-go-to-char - quick jump to the next character in the line
 (require 'iy-go-to-char)
