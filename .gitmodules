@@ -19,9 +19,6 @@
 [submodule "etc/emacs.d/twittering-mode"]
 	path = etc/emacs.d/twittering-mode
 	url = https://github.com/hayamiz/twittering-mode.git
-[submodule "etc/emacs.d/undo-tree"]
-	path = etc/emacs.d/undo-tree
-	url = http://www.dr-qubit.org/git/undo-tree.git
 [submodule "etc/emacs.d/deft"]
 	path = etc/emacs.d/deft
 	url = https://github.com/emacsmirror/deft.git
