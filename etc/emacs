@@ -35,15 +35,26 @@
  '(url-using-proxy "http://yellow.nc3a.nato.int:8088" t))
 
 ;; using el-get for package management
-(add-to-list 'load-path "~/.emacs.d/el-get")
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
       (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+       "https://raw.github.com/lwiechec/el-get/master/el-get-install.el")
     (goto-char (point-max))
     (eval-print-last-sexp)))
-(el-get 'sync)
+
+(setq my:el-get-packages
+  '(auto-complete ace-jump-mode ack-menu anything anything-find-project-resourses
+	   anything-project auto-complete auto-complete-css auto-complete-emacs-lisp
+	   auto-complete-latex auto-complete-yasnippet breadcrumb cedet chumpy-windows
+	   deft dired-single ecb egg full-ack fuzzy iedit javadoc-help js2-mode
+	   js-comint logito multiple-cursors multi-web-mode
+	   nxhtml pcache popup smart-tab smex twittering-mode
+	   undo-tree workgroups yasnippet
+  ))
+
+(el-get 'sync my:el-get-packages)
 
 ;; setup ELPA
 (when (>= emacs-major-version 24)
