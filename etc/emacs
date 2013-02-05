@@ -47,11 +47,11 @@
 (setq my:el-get-packages
   '(auto-complete ace-jump-mode ack-menu anything anything-find-project-resourses
 	   anything-project auto-complete auto-complete-css auto-complete-emacs-lisp
-	   auto-complete-latex auto-complete-yasnippet breadcrumb cedet chumpy-windows
+	   auto-complete-latex auto-complete-yasnippet breadcrumb chumpy-windows
 	   deft dired-single ecb egg full-ack fuzzy iedit javadoc-help js2-mode
 	   js-comint logito multiple-cursors multi-web-mode
 	   nxhtml pcache popup smart-tab smex twittering-mode
-	   undo-tree workgroups yasnippet
+	   undo-tree workgroups yasnippet cedet
   ))
 
 (el-get 'sync my:el-get-packages)
