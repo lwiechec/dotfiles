@@ -7,6 +7,6 @@
                  "mv target/unpacked/* target/unpacked/malabar")
         :load-path ("./target/unpacked/malabar/lisp")
         :features malabar-mode
-        :after (lambda ()
+        :after (progn
                  (setq malabar-groovy-lib-dir
                    "~/.emacs.d/el-get/malabar-mode/target/unpacked/malabar/lib")))
