@@ -1,5 +1,0 @@
-(:name popup
-       :website "https://github.com/lwiechec/popup-el"
-       :description "Visual Popup Interface Library for Emacs"
-       :type github
-       :pkgname "lwiechec/popup-el")
