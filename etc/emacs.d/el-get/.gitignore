@@ -1,0 +1,6 @@
+#
+# in this dir, ignore _everything_ except el-get directory
+# (I need to have 'el-get' there because standard installation
+#  ie. via 'url-retrieve' does not work in my work environment)
+*
+!el-get
