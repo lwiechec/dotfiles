@@ -222,25 +222,6 @@
 (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
 
 
-;; fixing the ECB - we will use the CVS version, not packaged by Debian
-
-;; Malabar mode - better Java mode for Emacs
-;; (check the source at https://github.com/espenhw/malabar-mode)
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/malabar-1.4.0/lisp"))
-(require 'malabar-mode)
-(setq malabar-groovy-lib-dir (expand-file-name "~/.emacs.d/malabar-1.4.0/lib"))
-(add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
-
-; optional: simulate constant compile-after-save (as in Eclipse)
-;(add-hook 'malabar-mode-hook
-;     (lambda ()
-;       (add-hook 'after-save-hook 'malabar-compile-file-silently
-;                  nil t)))
-
-(add-hook 'malabar-mode-hook  (lambda()
-    (local-set-key [(f11)] 'javadoc-lookup)
-    (local-set-key [(shift f11)] 'javadoc-help)))
-
 (add-hook 'c-mode-common-hook
 	  (lambda ()
 	    (font-lock-add-keywords nil
