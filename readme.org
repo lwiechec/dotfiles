@@ -1,6 +1,10 @@
 my humble .emacs file. Contains also contents of .emacs.d directory.
 
-I have tried to use git submodules as much as I could for the packages I use; otherwise
-I added whole packages for easier re-deployment on different machines.
+Recent changes include using el-get for handling the packages. This
+works quite nice; it's definitely much better than git submodules.
 
-After cloning, run 'setup-dotfiles' script and enjoy.
+* Setup
+
+After cloning, run 'setup-dotfiles' script and enjoy. It may also take
+a while when running emacs for the first time as getting all packages
+takes some time.
