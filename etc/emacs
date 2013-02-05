@@ -51,7 +51,7 @@
 	   deft dired-single ecb egg full-ack fuzzy iedit javadoc-help js2-mode
 	   js-comint logito multiple-cursors multi-web-mode
 	   nxhtml pcache popup smart-tab smex twittering-mode
-	   undo-tree workgroups yasnippet cedet
+	   undo-tree workgroups yasnippet cedet malabar-mode
   ))
 
 (el-get 'sync my:el-get-packages)
