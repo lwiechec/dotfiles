@@ -1,9 +1,6 @@
 [submodule "etc/emacs.d/tiny-tools"]
 	path = etc/emacs.d/tiny-tools
 	url = https://github.com/emacsmirror/tiny-tools.git
-[submodule "etc/emacs.d/malabar-mode"]
-	path = etc/emacs.d/malabar-mode
-	url = https://github.com/lwiechec/malabar-mode.git
 [submodule "etc/bash.d/z"]
 	path = etc/bash.d/z
 	url = https://github.com/rupa/z.git
