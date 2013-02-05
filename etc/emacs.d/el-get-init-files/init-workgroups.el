@@ -3,4 +3,6 @@
 
 (setq wg-prefix-key (kbd "C-c w"))
 (workgroups-mode 1)
-(wg-load (expand-file-name "~/.emacs.d/workgroups-saved"))
+(if (file-exists-p "~/.emacs.d/workgroups-saved")
+    (wg-load (expand-file-name "~/.emacs.d/workgroups-saved"))
+)
