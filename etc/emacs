@@ -52,6 +52,7 @@
 	   js-comint logito multiple-cursors multi-web-mode
 	   nxhtml pcache popup smart-tab smex twittering-mode
 	   undo-tree workgroups yasnippet cedet malabar-mode restclient ajc-java-complete
+	   flymake-shell
   ))
 
 (el-get 'sync my:el-get-packages)
