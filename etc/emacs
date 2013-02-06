@@ -528,4 +528,5 @@
 (global-set-key (kbd "M-m") 'iy-go-to-char)
 
 ;; start Emacs server
+(require 'server)
 (unless (server-running-p) (server-start))
