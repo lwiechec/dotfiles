@@ -13,3 +13,4 @@ ede-projects.el
 .mc-lists.el
 tramp
 url
+eshell
