@@ -2,7 +2,9 @@
 ;; https://github.com/tlh/workgroups.el
 
 (setq wg-prefix-key (kbd "C-c w"))
+(setq wg-file "~/.emacs.d/workgroups-saved")
 (workgroups-mode 1)
-(if (file-exists-p "~/.emacs.d/workgroups-saved")
-    (wg-load (expand-file-name "~/.emacs.d/workgroups-saved"))
+
+(if (file-exists-p wg-file)
+    (wg-load (expand-file-name wg-file))
 )
