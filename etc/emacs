@@ -51,7 +51,7 @@
 	   deft dired-single ecb egg full-ack fuzzy iedit javadoc-help js2-mode
 	   js-comint logito multiple-cursors multi-web-mode
 	   nxhtml pcache popup smart-tab smex twittering-mode
-	   undo-tree workgroups yasnippet cedet malabar-mode
+	   undo-tree workgroups yasnippet cedet malabar-mode restclient ajc-java-complete
   ))
 
 (el-get 'sync my:el-get-packages)
@@ -328,14 +328,6 @@
 (setq ac-auto-start 2)
 ; case sensitivity is important when finding matches
 (setq ac-ignore-case nil)
-
-;; auto complete for Java
-; is using a generated Tag file to get the 'signatures' of all methods and imports etc
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/ajc-java-complete"))
-(require 'ajc-java-complete-config)
-(add-hook 'java-mode-hook 'ajc-java-complete-mode)
-(add-hook 'malabar-mode-hook 'ajc-java-complete-mode)
-(add-hook 'find-file-hook 'ajc-4-jsp-find-file-hook)
 
 ; add source to auto complete from Semantic
 ;; NOTE: commenting it out as it slows down emacs!!

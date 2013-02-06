@@ -4,6 +4,3 @@
 [submodule "etc/bash.d/z"]
 	path = etc/bash.d/z
 	url = https://github.com/rupa/z.git
-[submodule "etc/emacs.d/ajc-java-complete"]
-	path = etc/emacs.d/ajc-java-complete
-	url = https://github.com/lwiechec/ajc-java-complete
