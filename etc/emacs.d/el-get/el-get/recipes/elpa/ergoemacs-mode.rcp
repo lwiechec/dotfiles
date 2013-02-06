@@ -1,0 +1,4 @@
+(:name ergoemacs-mode
+:auto-generated t
+:type elpa
+:description "A minor mode, a keybinding set based on ergonomics. [source: git]")

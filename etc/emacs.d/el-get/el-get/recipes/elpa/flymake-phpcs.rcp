@@ -1,0 +1,4 @@
+(:name flymake-phpcs
+:auto-generated t
+:type elpa
+:description "Flymake handler for PHP to invoke PHP-CodeSniffer")

@@ -1,0 +1,4 @@
+(:name pretty-symbols-mode
+:auto-generated t
+:type elpa
+:description "Draw tokens as Unicode glyphs. [source: github]")

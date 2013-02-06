@@ -1,0 +1,4 @@
+(:name flycheck
+:auto-generated t
+:type elpa
+:description "Flymake done right [source: github]")

@@ -1,0 +1,4 @@
+(:name prelude-js
+:auto-generated t
+:type elpa
+:description "Emacs Prelude: js-mode configuration. [source: github]")

@@ -1,0 +1,4 @@
+(:name ampc
+:auto-generated t
+:type elpa
+:description "Asynchronous Music Player Controller")

@@ -1,0 +1,4 @@
+(:name csv-mode
+:auto-generated t
+:type elpa
+:description "major mode for editing comma-separated value files [source: github]")

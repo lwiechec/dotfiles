@@ -1,0 +1,4 @@
+(:name prelude-perl
+:auto-generated t
+:type elpa
+:description "Emacs Prelude: decent Perl coding settings. [source: github]")

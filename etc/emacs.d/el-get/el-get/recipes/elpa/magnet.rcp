@@ -1,0 +1,4 @@
+(:name magnet
+:auto-generated t
+:type elpa
+:description "one config and one data directory for Emacs [source: github]")

@@ -1,0 +1,4 @@
+(:name shen-mode
+:auto-generated t
+:type elpa
+:description "Utilities for working with Shen code.")

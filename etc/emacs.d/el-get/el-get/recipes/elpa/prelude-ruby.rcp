@@ -1,0 +1,4 @@
+(:name prelude-ruby
+:auto-generated t
+:type elpa
+:description "Emacs Prelude: A nice setup for Ruby (and Rails) devs. [source: github]")

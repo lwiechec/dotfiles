@@ -1,0 +1,4 @@
+(:name langtool
+:auto-generated t
+:type elpa
+:description "Grammer check utility using LanguageTool")

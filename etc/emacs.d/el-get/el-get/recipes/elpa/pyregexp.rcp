@@ -1,0 +1,4 @@
+(:name pyregexp
+:auto-generated t
+:type elpa
+:description "A Python regexp/replace command for Emacs with interactive visual feedback [source: github]")

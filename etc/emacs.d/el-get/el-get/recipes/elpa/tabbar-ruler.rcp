@@ -1,0 +1,4 @@
+(:name tabbar-ruler
+:auto-generated t
+:type elpa
+:description "Setup tabbar to look pretty... [source: github]")

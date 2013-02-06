@@ -1,0 +1,4 @@
+(:name prelude-coffee
+:auto-generated t
+:type elpa
+:description "Emacs Prelude: CoffeeScript programming support. [source: github]")

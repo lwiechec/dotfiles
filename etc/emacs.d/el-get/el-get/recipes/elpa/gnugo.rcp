@@ -1,0 +1,4 @@
+(:name gnugo
+:auto-generated t
+:type elpa
+:description "Play a game of Go against gnugo")

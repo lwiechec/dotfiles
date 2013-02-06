@@ -1,0 +1,4 @@
+(:name prelude-scala
+:auto-generated t
+:type elpa
+:description "Emacs Prelude: scala-mode configuration. [source: github]")

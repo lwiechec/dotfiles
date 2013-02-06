@@ -1,0 +1,4 @@
+(:name google-weather
+:auto-generated t
+:type elpa
+:description "Fetch Google Weather forecasts. [source: git]")

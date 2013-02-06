@@ -1,0 +1,4 @@
+(:name prelude-common-lisp
+:auto-generated t
+:type elpa
+:description "Emacs Prelude: lisp-mode and SLIME config. [source: github]")

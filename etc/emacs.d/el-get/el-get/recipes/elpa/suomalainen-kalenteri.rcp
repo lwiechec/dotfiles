@@ -1,0 +1,4 @@
+(:name suomalainen-kalenteri
+:auto-generated t
+:type elpa
+:description "Finnish holidays for Emacs calendar.")

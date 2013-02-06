@@ -1,0 +1,4 @@
+(:name prelude-scheme
+:auto-generated t
+:type elpa
+:description "Emacs Prelude: Some defaults for Scheme. [source: github]")

@@ -1,0 +1,4 @@
+(:name jedi
+:auto-generated t
+:type elpa
+:description "a Python auto-completion for Emacs [source: github]")

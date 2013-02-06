@@ -1,0 +1,4 @@
+(:name prelude-erlang
+:auto-generated t
+:type elpa
+:description "Emacs Prelude: Erlang programming support. [source: github]")

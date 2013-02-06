@@ -1,0 +1,4 @@
+(:name ruby-electric
+:auto-generated t
+:type elpa
+:description "Minor mode with electric editing commands for Ruby files [source: github]")

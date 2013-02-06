@@ -1,0 +1,4 @@
+(:name melpa
+:auto-generated t
+:type elpa
+:description "special handling for the MELPA repository [source: github]")

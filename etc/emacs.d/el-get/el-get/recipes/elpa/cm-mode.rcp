@@ -1,0 +1,4 @@
+(:name cm-mode
+:auto-generated t
+:type elpa
+:description "Wrapper for CodeMirror-style Emacs modes [source: github]")

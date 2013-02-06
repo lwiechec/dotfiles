@@ -1,0 +1,4 @@
+(:name sokoban
+:auto-generated t
+:type elpa
+:description "Play the Sokoban game in emacs")

@@ -1,0 +1,4 @@
+(:name carton
+:auto-generated t
+:type elpa
+:description "Emacs dependency management made easy [source: github]")

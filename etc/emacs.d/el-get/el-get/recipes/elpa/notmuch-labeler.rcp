@@ -1,0 +1,4 @@
+(:name notmuch-labeler
+:auto-generated t
+:type elpa
+:description "Improves notmuch way of displaying labels through fonts, pictures, and hyperlinks.")

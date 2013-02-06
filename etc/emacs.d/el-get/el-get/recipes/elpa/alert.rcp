@@ -1,0 +1,4 @@
+(:name alert
+:auto-generated t
+:type elpa
+:description "Alternatives to `message' [source: github]")

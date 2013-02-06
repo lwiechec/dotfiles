@@ -1,0 +1,4 @@
+(:name zlc
+:auto-generated t
+:type elpa
+:description "Provides zsh like completion for minibuffer [source: github]")

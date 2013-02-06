@@ -1,0 +1,4 @@
+(:name prelude-css
+:auto-generated t
+:type elpa
+:description "Emacs Prelude: css support [source: github]")

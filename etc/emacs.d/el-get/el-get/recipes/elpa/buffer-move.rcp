@@ -1,0 +1,4 @@
+(:name buffer-move
+:auto-generated t
+:type elpa
+:description "Swap buffers without typing C-x b on each window [source: wiki]")

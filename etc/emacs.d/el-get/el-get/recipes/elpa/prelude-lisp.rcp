@@ -1,0 +1,4 @@
+(:name prelude-lisp
+:auto-generated t
+:type elpa
+:description "Emacs Prelude: Configuration common to all lisp modes. [source: github]")

@@ -1,0 +1,4 @@
+(:name prelude-emacs-lisp
+:auto-generated t
+:type elpa
+:description "Emacs Prelude: Nice config for Elisp programming. [source: github]")

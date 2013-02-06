@@ -1,0 +1,4 @@
+(:name smartparens
+:auto-generated t
+:type elpa
+:description "Smart insertion and wrapping with parens/user defined pairs/tags [source: github]")

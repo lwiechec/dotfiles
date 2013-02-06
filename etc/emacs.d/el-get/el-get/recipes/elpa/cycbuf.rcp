@@ -1,0 +1,4 @@
+(:name cycbuf
+:auto-generated t
+:type elpa
+:description "Cycle buffers code by Martin Pohlack, inspired by")
