@@ -2,7 +2,6 @@
        :description "Screen Manager for Emacsen"
        :type github
        :pkgname "shosti/elscreen"
-       :features "elscreen"
-       :post-init
-       (progn
+       :features elscreen
+       :post-init (progn
          (elscreen-start))
