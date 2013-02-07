@@ -50,7 +50,7 @@
 	   js-comint logito multiple-cursors multi-web-mode
 	   nxhtml pcache popup smart-tab smex twittering-mode
 	   undo-tree workgroups yasnippet cedet malabar-mode restclient ajc-java-complete
-	   flymake-shell
+	   flymake-shell auto-complete-ya-gtags
   ))
 
 (el-get 'sync my:el-get-packages)
@@ -302,39 +302,10 @@
 ;; use js2-mode for editing JavaScript
 (add-to-list 'auto-mode-alist '("[.]js$" . js2-mode))
 
-;; use single buffer for dired to avoid too many of them
-(defun my-dired-init ()
-  (define-key dired-mode-map [return] 'joc-dired-single-buffer)
-  (define-key dired-mode-map [mouse-1] 'joc-dired-single-buffer-mouse)
-  (define-key dired-mode-map "^"
-    (function
-     (lambda nil (interactive) (joc-dired-single-buffer "..")))))
-
-;; if dired's already loaded, then the keymap will be bound
-(if (boundp 'dired-mode-map)
-    ;; we're good to go; just add our bindings
-    (my-dired-init)
-  ;; it's not loaded yet, so add our bindings to the load-hook
-  (add-hook 'dired-load-hook 'my-dired-init))
-
-;; auto-complete-mode
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/auto-complete-mode"))
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete-mode/dict")
-(setq-default ac-sources (add-to-list 'ac-sources 'ac-source-dictionary))
-(global-auto-complete-mode t)
-; Start auto-completion after 2 characters of a word
-(setq ac-auto-start 2)
-; case sensitivity is important when finding matches
-(setq ac-ignore-case nil)
 
 ; add source to auto complete from Semantic
 ;; NOTE: commenting it out as it slows down emacs!!
 ;(add-hook 'java-mode-hook (lambda () (add-to-list 'ac-sources 'ac-source-semantic)))
-
-;; auto complete from gtags
-(require 'auto-complete-ya-gtags)
-(add-to-list 'ac-sources 'ac-source-ya-gtags)
 
 
 ; js-comint.el - execute JavaScript from emacs
