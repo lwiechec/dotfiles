@@ -529,3 +529,7 @@
 ;; start Emacs server
 (require 'server)
 (unless (server-running-p) (server-start))
+
+;; by default C-z suspends emacs: I don't like it
+(global-unset-key [(control z)])
+(global-unset-key [(control x)(control z)])
