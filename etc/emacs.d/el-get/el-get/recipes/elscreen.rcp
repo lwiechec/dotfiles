@@ -4,4 +4,4 @@
        :pkgname "shosti/elscreen"
        :features elscreen
        :post-init (progn
-         (elscreen-start))
+         (elscreen-start)))
