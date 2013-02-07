@@ -9,8 +9,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ack-executable (executable-find "ack-grep"))
- '(ajc-tag-file "/home/luke/.java_base.tag")
- '(ajc-tag-files (quote ("~/.java_base.tag" "~/.NEW_java_base.tag")))
  '(bsh-jar "~/work/javautil/beanshell/bsh.jar")
  '(bsh-startup-timeout 2)
  '(bsh-vm-args (quote ("-Djava.net.preferIPv4Stack=true" "-Dhttp.proxyHost=yellow.nc3a.nato.int" "-Dhttp.proxyPort=8088")))
