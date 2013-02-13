@@ -128,7 +128,7 @@
       (shell-command "gtags -q && echo 'created tagfile'")
       (cd olddir)) ; restore
     ;;  tagfile already exists; update it
-    (shell-command "global -uq 2>&1 && echo 'updated tagfile'")))
+    (shell-command "global -uq &>/dev/null && echo 'updated tagfile'")))
 
 (add-hook 'gtags-mode-hook  (lambda()
     (local-set-key (kbd "M-.") 'gtags-find-tag)   ; find a tag, also M-.
