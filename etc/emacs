@@ -150,6 +150,12 @@
     (gtags-mode t)
     (djcb-gtags-create-or-update)))
 
+(add-hook 'malabar-mode-hook
+  (lambda()
+    (require 'gtags)
+    (gtags-mode t)
+    (djcb-gtags-create-or-update)))
+
 
 ;; iedit package
 ;; allows 'dynamic' replace/edit operation on multiple places in buffer at the same time
