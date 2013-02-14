@@ -1,4 +1,5 @@
 ;; breadcrumb - intelligent bookmark saving
+(require 'breadcrumb)
 
 ;;  Examples below assign a set of keys to the breadcrumb bookmark functions.
 (global-set-key (kbd "s-.")             'bc-set)            ;; Windows key-. for set bookmark
