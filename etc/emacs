@@ -46,8 +46,8 @@
 	   js-comint logito multiple-cursors multi-web-mode
 	   nxhtml pcache popup smart-tab smex twittering-mode
 	   undo-tree workgroups yasnippet cedet malabar-mode restclient ajc-java-complete
-	   flymake-shell auto-complete-ya-gtags clojure-mode nrepl-mode paredit-mode
-	   rainbow-delimiters-mode
+	   flymake-shell auto-complete-ya-gtags clojure-mode nrepl paredit
+	   rainbow-delimiters shell-pop
   ))
 
 (el-get 'sync my:el-get-packages)
@@ -540,7 +540,7 @@
 (unless (server-running-p) (server-start))
 
 ;; by default C-z suspends emacs: I don't like it
-(global-unset-key [(control z)])
+(global-unset-key [(control z)])(setq tramp-default-method "ssh")
 (global-unset-key [(control x)(control z)])
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -551,3 +551,10 @@
 
 ;; automatic nxml-mode for XML schema files
 (setq auto-mode-alist (cons '("\\.xsd$" . nxml-mode) auto-mode-alist))
+
+
+(require 'tramp)
+(setq tramp-default-method "ssh")
+;(set-default 'tramp-default-proxies-alist (quote ((".*" "\\`root\\'" "/ssh:%h:"))))
+;(set-default 'tramp-default-proxies-alist nil)
+(put 'narrow-to-region 'disabled nil)
