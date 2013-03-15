@@ -1,4 +1,5 @@
 ; my simple extensions to the popwin
+(require 'popwin)
 
 (setq display-buffer-function 'popwin:display-buffer)
 
@@ -33,3 +34,9 @@
 
 (add-hook 'popwin:after-popup-hook 'popwin-bkr:update-window-reference)
 (push "*Kill Ring*" popwin:special-display-config)
+
+; add ack window as well
+(push "*ack*" popwin:special-display-config)
+
+; popup window from nrepl.el
+(push '("*nrepl-result*" :noselect t) popwin:special-display-config)
