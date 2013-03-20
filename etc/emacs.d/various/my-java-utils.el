@@ -2,6 +2,7 @@
 
 ; utility functions: generate getters and setters for Java fields
 ; to be used as: (generate-class-getter-setter 'public 'private)
+; (taken from http://www.jspwiki.org/wiki/InsertingGettersAndSettersInEmacs)
 (defun make-class-getter-setter (type var)
   (format
    (concat "public %s get%s() { return %s; }\n"
