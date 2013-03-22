@@ -17,7 +17,7 @@
    (or (get-buffer "*shell*")
        (save-window-excursion
          (call-interactively 'shell)))
-   :default-config-keywords '(:position :top)))
+   :default-config-keywords '(:position :top :stick t)))
 
 ; add a handy key shortcut
 (define-key popwin:keymap "`" 'popwin-shell:shell)
