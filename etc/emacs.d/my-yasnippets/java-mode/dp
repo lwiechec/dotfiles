@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: TestNG - generate DataProvider class
+# key: dp
+# --
+@DataProvider(name = "$1")
+public Object[][] ${1:dataProvider}() {
+    return new Object[][] {
+        { $0 },
+    };
+}

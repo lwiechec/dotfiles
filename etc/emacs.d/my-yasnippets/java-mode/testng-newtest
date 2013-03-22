@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: insert new test for TestNG
+# name: TestNG - insert new test for TestNG
 # key: testng-newtest
 # --
 @Test(description = "$2")
