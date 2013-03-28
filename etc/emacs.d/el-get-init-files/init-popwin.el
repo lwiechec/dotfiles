@@ -26,7 +26,9 @@
 
 ; add other buffers to the list of ones managed by popwin. This includes
 ; for example Malabar compilation etc
-(push '("*Malabar Compilation*" :height 20)  popwin:special-display-config)
+(push '("*Malabar Compilation*" :height 20 :position :bottom)  popwin:special-display-config)
+
+(push '(compilation-mode :noselect t :height 20) popwin:special-display-config)
 
 ; adding also code to make browsing the kill ring work with popup.el
 (defun popwin-bkr:update-window-reference ()
