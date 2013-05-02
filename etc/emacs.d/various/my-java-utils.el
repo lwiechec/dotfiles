@@ -44,11 +44,11 @@
   (let ((oldpoint (point))
         (capfield (concat (capitalize (substring field 0 1)) (substring field 1)))
         )
-    (insert (concat "public " type " get" capfield "()\n"
+    (insert (concat "public " type " get" capfield "()"
                     "{\n"
                     "    return this." field ";\n"
                     "}\n\n"
-                    "public void set" capfield "(" type " " field ")\n"
+                    "public void set" capfield "(" type " " field ")"
                     "{\n"
                     "    this." field " = " field ";\n"
                     "}\n"
