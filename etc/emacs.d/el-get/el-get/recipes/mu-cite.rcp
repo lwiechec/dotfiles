@@ -1,0 +1,5 @@
+(:name mu-cite
+       :description "Mail citing package"
+       :type github
+       :pkgname "lwiechec/MU-CITE"
+       :features "mu-cite")
