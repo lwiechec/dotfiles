@@ -18,6 +18,15 @@
 (setq smtpmail-smtp-service 1025)
 (setq message-send-mail-function 'smtpmail-send-it)
 
+;; something about ourselves
+(setq
+ user-mail-address "Lukasz.Wiechec@ncia.nato.int"
+ user-full-name "Łukasz Wiecheć"
+ message-signature
+ (concat
+  "Łukasz Wiechec\n"
+  "NCIA\n"))
+
 ; where to save the attachments
 (setq mu4e-attachment-dir "~/Downloads")
 
