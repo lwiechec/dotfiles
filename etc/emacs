@@ -321,6 +321,13 @@
 (autoload 'w3m-toggle-inline-image "w3m"
   "Toggle the visibility of an image under point." t)
 
+; display images in w3m
+(autoload 'w3m-default-display-inline-images "w3m"
+  "By default display images in w3m" t)
+
+;; newsticker
+(add-hook 'newsticker-mode-hook 'imenu-add-menubar-index)
+
 ;; WindMove - smarter window switching
 ;; switch between windows with 'super'-up/down/left/right
 (windmove-default-keybindings 'super)
