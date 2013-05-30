@@ -47,7 +47,7 @@
 	   nxhtml pcache popup smart-tab smex twittering-mode
 	   undo-tree workgroups yasnippet cedet malabar-mode restclient
 	   flymake-shell auto-complete-ya-gtags clojure-mode nrepl ac-nrepl paredit
-	   rainbow-delimiters shell-pop popwin emms
+	   rainbow-delimiters shell-pop popwin emms mu4e mu-cite
   ))
 
 (el-get 'sync my:el-get-packages)
