@@ -587,3 +587,11 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'scroll-left 'disabled nil)
 (put 'erase-buffer 'disabled nil)
+
+; easier way to join lines
+; taken from http://emacsredux.com/blog/2013/05/30/joining-lines
+(defun top-join-line ()
+   "Join the current line with the line beneath it."
+   (interactive)
+   (delete-indentation 1))
+(global-set-key (kbd "M-^") 'top-join-line)
