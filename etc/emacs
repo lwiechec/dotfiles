@@ -56,7 +56,7 @@
     (eval-print-last-sexp)))
 
 (setq my:el-get-packages
-  '(auto-complete ace-jump-mode ack-menu anything anything-find-project-resourses
+  '(auto-complete ace-jump-mode ack-menu ack-and-a-half anything anything-find-project-resourses
 	   anything-project auto-complete auto-complete-css auto-complete-emacs-lisp
 	   auto-complete-latex auto-complete-yasnippet breadcrumb chumpy-windows
 	   deft dired-single ecb egg full-ack fuzzy iedit javadoc-help javadoc-lookup
