@@ -8,4 +8,5 @@
 
 (add-hook 'malabar-mode-hook  (lambda()
     (local-set-key [(f11)] 'javadoc-lookup)
-    (local-set-key [(shift f11)] 'javadoc-help)))
+    (local-set-key [(shift f11)] 'javadoc-help)
+    (local-set-key (kbd "C-c C-v C-n") 'malabar-visit-corresponding-test)))
