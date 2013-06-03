@@ -3,7 +3,4 @@
        :type github
        :pkgname "lliles/dark-laptop"
        :features "dark-laptop-theme"
-       :after (progn
-                (add-to-list 'custom-theme-load-path
-			     "~/.emacs.d/el-get/dark-laptop-theme")
-                (load-theme 'dark-laptop t)))
+       :prepare (add-to-list 'custom-theme-load-path default-directory))
