@@ -1,0 +1,9 @@
+(:name dark-laptop-theme
+       :description "A port of the original dark-laptop color theme for Emacs 24"
+       :type github
+       :pkgname "lliles/dark-laptop"
+       :features "dark-laptop-theme"
+       :after (progn
+                (add-to-list 'custom-theme-load-path
+			     "~/.emacs.d/el-get/dark-laptop-theme")
+                (load-theme 'dark-laptop t)))
