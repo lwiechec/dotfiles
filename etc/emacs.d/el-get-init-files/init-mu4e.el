@@ -24,7 +24,7 @@
  user-full-name "Łukasz Wiecheć"
  message-signature
  (concat
-  "Łukasz Wiechec\n"
+  "Łukasz Wiecheć\n"
   "NCIA\n"))
 
 ; where to save the attachments
