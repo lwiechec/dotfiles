@@ -1,5 +1,7 @@
 ; initialization for mu4e mail client
 
+(require 'mu4e)
+
 ; mailboxes for NU account
 (setq mu4e-maildir        "~/Mail-NU"
       mu4e-sent-folder    "/Sent"
