@@ -1,0 +1,167 @@
+;; this is my take on creating a quick template for TestNG test files.
+;; it's essentially a copy of original 'java.srt' with import statements
+;; for TestNG.
+
+set mode "java-mode"
+set escape_start "{{"
+set escape_end "}}"
+
+context file
+
+set comment_start  "/**"
+set comment_end    " */"
+set comment_prefix " *"
+
+template empty-test-class :file :user :time :java :indent
+"Fill out an empty test class file (using TestNG)."
+sectiondictionary "CLASSSECTION"
+set NAME macro "FILENAME_AS_CLASS"
+----
+{{>:ncia-filecomment}}
+
+import org.testng.annotations.*;
+import static org.testng.Assert.*;
+
+package {{FILENAME_AS_PACKAGE}};
+
+{{>CLASSSECTION:declaration:class}}
+
+----
+bind "e"
+
+context declaration
+
+template import :blank :indent
+"Template to import a package."
+----
+{{>:declaration:include}}
+----
+bind "i"
+
+template class :blank :indent
+"Template to declare a variable."
+sectiondictionary "DOCSECTION"
+set NAME macro "NAME"
+----
+{{>DOCSECTION:declaration:javadoc-class}}
+public class {{?NAME}} {
+
+   {{^}}
+
+} // {{NAME}}
+----
+bind "c"
+
+;;; Semantic Tag support
+;;
+template class-tag :indent :blank
+"Insert a Java class with the expectation of it being used by a tag inserter.
+Override this to affect applications, or the outer class structure for
+the user-facing template."
+----
+{{>:declaration:javadoc-class}}
+public Class {{?NAME}} {{#PARENTS}}{{#FIRST}}extends {{/FIRST}}{{#NOTFIRST}}implements {{/NOTFIRST}}{{NAME}}{{/PARENTS}}
+{
+   {{^}}
+};
+----
+
+template include :blank
+"An include statement."
+----
+import {{?NAME}};
+----
+
+context misc
+
+template arglist
+"Insert an argument list for a function.
+@todo - Support smart CR in a buffer for not too long lines."
+----
+({{#ARGS}}{{TYPE}} {{NAME}}{{#NOTLAST}},{{/NOTLAST}}{{/ARGS}})
+----
+
+context classdecl
+
+template function :indent :blank
+----
+public {{?TYPE}} {{?NAME}}{{>:misc:arglist}} {
+{{^}}
+}
+----
+bind "m"
+
+template variable :indent :blank
+"Insert a variable declaration."
+----
+{{?TYPE}} {{?NAME}}{{#HAVEDEFAULT}} = {{DEFAULT}}{{/HAVEDEFAULT}};
+----
+bind "v"
+
+;;; Java Doc Comments
+;;
+context classdecl
+
+prompt GROUPNAME "Name of declaration group: "
+
+template javadoc-function-group-start :indent :blank
+----
+/**
+ * {{?GROUPNAME}}
+ * @{
+ */
+
+----
+
+template javadoc-function-group-end :indent :blank
+----
+/**
+ * @}
+ */
+
+----
+
+context declaration
+
+template javadoc-class :indent :blank :time :user :tag
+----
+/**
+ * {{DOC}}{{^}}
+ *
+ * Created: {{DATE}}
+ *
+ * @author {{AUTHOR}}
+ * @version
+ * @since
+ */
+----
+
+template javadoc-function :indent :blank :tag
+----
+/**
+ * {{DOC}}{{^}}
+ * {{#ARGS}}
+ * @param {{?NAME}} - {{DOC}}{{/ARGS}}
+ * @return {{TYPE}}{{#THROWS}}
+ * @exception {{NAME}} - {{EXDOC}}{{/THROWS}}
+ */
+----
+
+template javadoc-variable-same-line
+----
+/**< {{DOC}}{{^}} */
+----
+
+template javadoc-section-comment :blank :indent
+"Insert a comment that separates sections of an Emacs Lisp file."
+----
+
+/** {{?TITLE}}
+ *
+ * {{^}}
+ */
+
+----
+
+
+;; end
