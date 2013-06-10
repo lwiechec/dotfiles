@@ -19,10 +19,10 @@ set NAME macro "FILENAME_AS_CLASS"
 ----
 {{>:ncia-filecomment}}
 
+package {{FILENAME_AS_PACKAGE}};
+
 import org.testng.annotations.*;
 import static org.testng.Assert.*;
-
-package {{FILENAME_AS_PACKAGE}};
 
 {{>CLASSSECTION:declaration:class}}
 
