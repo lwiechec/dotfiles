@@ -19,7 +19,7 @@
  '(el-get-user-package-directory "~/.emacs.d/el-get-init-files")
  '(emms-cache-file "~/.emacs.d/.emms-cache")
  '(emms-info-asynchronously nil)
- '(emms-info-functions (quote (emms-info-mpd my-emms-info-fromname)))
+ '(emms-info-functions (quote (emms-info-ogginfo emms-info-mpd)))
  '(emms-player-list (quote (emms-player-mpd)))
  '(emms-player-mpd-music-directory "/stuff/music")
  '(emms-playlist-buffer-name "*EMMS Playlist*")
@@ -27,18 +27,18 @@
  '(emms-playlist-mode-open-playlists t)
  '(emms-show-format "NP: %s")
  '(emms-stream-default-action "play")
- '(emms-track-description-function (quote my-emms-info-track-description))
- '(emms-track-info-filters (quote (my-emms-info-filter-titles)))
  '(emms-track-initialize-functions (quote (emms-info-initialize-track)))
  '(emms-volume-change-amount 3)
  '(emms-volume-change-function (quote emms-volume-mpd-change))
  '(gtags-path-style (quote relative))
  '(newsticker-html-renderer (quote w3m-region))
- '(newsticker-url-list (quote (("Publico.pt - Geral" "http://feeds.feedburner.com/PublicoRSS" nil nil nil) ("Xkcd comics" "http://www.xkcd.com/rss.xml" nil nil nil) ("Gazeta Opole" "http://rss.feedsportal.com/c/32739/f/530369/index.rss" nil nil nil) ("Economist.com - Eastern Approaches" "http://www.economist.com/blogs/eastern-approaches/index.xml" nil nil nil) ("NTO Opole" "http://pl.nto.feedsportal.com/c/33556/fe.ed/www.nto.pl/apps/pbcs.dll/section?Category=RSS&mime=xml" nil nil nil) ("Diario de Noticias" "http://feeds.feedburner.com/PublicoRSS" nil nil nil))))
  '(org-agenda-files (quote ("~/Dropbox/org" "~/Dropbox/org/deft" "~/.org-mode/")))
  '(org-agenda-include-diary t)
  '(org-capture-templates (quote (("t" "Todo" entry (file+headline "~/Dropbox/org/agenda.org" "Tasks") (file "~/Dropbox/org/templates/todo.orgtmpl")))))
  '(safe-local-variable-values (quote ((eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook" (add-hook (quote write-contents-functions) (lambda nil (delete-trailing-whitespace) nil)) (require (quote whitespace)) "Sometimes the mode needs to be toggled off and on." (whitespace-mode 0) (whitespace-mode 1)) (whitespace-line-column . 80) (whitespace-style face trailing lines-tail) (require-final-newline . t))))
+ '(send-mail-function (quote smtpmail-send-it))
+ '(smtpmail-smtp-server "localhost")
+ '(smtpmail-smtp-service 1025)
  '(tail-max-size 20)
  '(tail-volatile nil)
  '(tramp-syntax (quote url))
@@ -282,10 +282,9 @@
 	    (font-lock-add-keywords nil
                  '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))))
 
-;; set default web browser to Google Chrome
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "chromium-browser")
-
+;; set default web browser to W3M
+(setq browse-url-browser-function 'w3m-browse-url)
+(autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show an URL." t)
 (global-set-key (kbd "C-c x") 'browse-url)
 
 ;; show nice window of recently killed lines in the kill ring
