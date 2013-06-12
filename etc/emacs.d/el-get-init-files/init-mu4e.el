@@ -47,6 +47,11 @@
 
 ; add bookmark to Nagios messages
 (add-to-list 'mu4e-bookmarks '("to:lukasz.wiechec+nagios" "NAGIOS notifications" ?n))
+(add-to-list 'mu4e-bookmarks '("from:allianzworldwidecare.com" "Allianz claims" ?a))
+
+; different date format
+(setq mu4e-date-format-long "%D")
+(setq mu4e-time-format "%T") ; not sure about that one
 
 ; use mu-cite
 (require 'mu-cite)
