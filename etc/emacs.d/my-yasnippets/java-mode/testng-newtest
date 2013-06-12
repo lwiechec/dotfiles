@@ -4,6 +4,5 @@
 # --
 @Test(description = "$2")
 public void $1() throws Exception {
-    throw new org.testng.SkipException("Test '$1' not yet implemented");
+    $0throw new org.testng.SkipException("Test '$1' not yet implemented");
 }
-$0
