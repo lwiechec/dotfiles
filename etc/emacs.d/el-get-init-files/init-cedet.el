@@ -6,3 +6,10 @@
 ;(semantic-load-enable-code-helpers)
 ; this will display all posibilities for completion for us to choose
 (global-semantic-idle-completions-mode)
+
+; highlight current function
+(global-semantic-highlight-func-mode)
+
+; set some handy key bindings
+(add-hook 'semantic-idle-completions-mode (lambda ()
+  (local-set-key (kbd "C-c s \t") 'senator-completion-menu-popup)))
