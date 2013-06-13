@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: TestNG - @Before* setup
+# key: testng-test-setup
+# binding: direct-keybinding
+# --
+@Before${1:$$(yas/choose-value '("Test" "Class" "Groups" "Method" "Suite"))}
+public void setup_$1() throws Exception {
+       // your code to setup
+       $0
+}
+
+@After$1
+public void cleanup_$1() throws Exception {
+       // your code to cleanup comes here
+}
