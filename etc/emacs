@@ -554,7 +554,7 @@
    (autoload 'erc-ssl "erc")
    (erc-ssl :server "localhost" :port 7000
         :nick "lwiechec" :password "OldFox123" :full-name "Lukasz Wiechec")
-   (setq erc-autojoin-channels-alist '(("localhost" "#emacs" "#screen"))))
+   (setq erc-autojoin-channels-alist '(("localhost" . "#emacs"))))
 
 ;; iy-go-to-char - quick jump to the next character in the line
 (require 'iy-go-to-char)
