@@ -11,5 +11,5 @@
 (global-semantic-highlight-func-mode)
 
 ; set some handy key bindings
-(add-hook 'semantic-idle-completions-mode (lambda ()
+(add-hook 'semantic-idle-completions-mode-hook (lambda ()
   (local-set-key (kbd "C-c s \t") 'senator-completion-menu-popup)))
