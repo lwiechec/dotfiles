@@ -8,14 +8,23 @@
 
 ; close compilation window if everything went well
 ; inspired by this discussion: http://www.emacswiki.org/emacs/ModeCompile
+;
+; UPDATE: I am not 100% happy with that solution. The command closes the window, even if I switch to other buffer
+;         in that window. Better solution would be to check if the window contain the original (compilation) buffer
+;         before closing. That's why my-delete-window-if-buffer-still-there comes in
+(defun my-delete-window-if-buffer-still-there (window buffer)
+  "delete WINDOW only if BUFFER is in there"
+  (if (eq (get-buffer-window buffer) window) (delete-window window)))
+
 (defun compile-autoclose (buffer string)
+  "BUFFER is compilation buffer; STRING describes how compilation finished"
   (with-selected-window (get-buffer-window buffer)
     (goto-char (point-max)))
   (cond ((string-match "finished" string)
-	 (message "Build probably successful: closing window in 5 secs...")
+	 (message "Build (probably) successful: closing window in 5 secs...")
 	 (run-with-timer 5 nil
-			 'delete-window
-			 (get-buffer-window buffer t)))
+			 'my-delete-window-if-buffer-still-there
+			 (get-buffer-window buffer t) buffer))
 	(t
 	 (message "Compilation exited abnormally: %s" string))))
 (setq compilation-finish-functions 'compile-autoclose)
