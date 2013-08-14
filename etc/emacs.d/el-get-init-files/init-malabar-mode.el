@@ -35,8 +35,27 @@
   "runs Maven test for current buffer. Does not perform check if the test is actually a test."
   (malabar-run-maven-command (concat "-Dtest=" (car (split-string (buffer-name (current-buffer)) ".java")) " test")))
 
+(defun my-malabar-debug (main-class)
+  (interactive "sMain class:")
+  "Run (main) class in debug mode"
+  (malabar-run-maven-command
+   (format "exec:exec -Dexec.executable='java' -Dexec.args='-classpath %%classpath -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=1044' %s" main-class)))
+
 (add-hook 'malabar-mode-hook  (lambda()
     (local-set-key [(f11)] 'javadoc-lookup)
     (local-set-key [(shift f11)] 'javadoc-help)
     (local-set-key (kbd "C-c C-v C-n") 'malabar-visit-corresponding-test)
     (local-set-key (kbd "C-c C-v T") 'my-malabar-run-test)))
+
+;; some hints from http://ivvprivate.blog.com/emacs/emacs-java/
+;; better regexp for compilation buffers - stock Malabar regexps are not working as they include
+;; a space in front of the filename
+(add-to-list 'compilation-error-regexp-alist
+	     ;; works for Maven 3.x
+	     '("^\\(\\[ERROR\\] \\)?\\(/[^:]+\\):\\[\\([0-9]+\\),\\([0-9]+\\)\\]" 2 3 4))
+(add-to-list 'compilation-error-regexp-alist
+	     ;; works for maven jde javac server
+	     '("^\\(/[^:]+\\):\\([0-9]+\\):" 1 2))
+(add-to-list 'compilation-error-regexp-alist
+	     ;; surefire
+	     '("^\\sw+(\\(\\sw+\\.\\)+\\(\\sw+\\)).+<<< \\(FAILURE\\|ERROR\\)!$"2))
