@@ -84,6 +84,7 @@
 (add-to-list 'load-path "~/.emacs.d/various")
 
 ;; custom settings for Org mode
+
 ;; using custom version of Org mode (default one from the Ubuntu distro is too old)
 (require 'org-latex)
 (setq org-log-mode 'time)
@@ -628,3 +629,10 @@
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+
+; add smart function that creates shell buffer, asking for a name
+(defun create-shell ()
+  "creates a shell with a given name"
+  (interactive);; "Prompt\n shell name:")
+  (let ((shell-name (read-string "shell name: " nil)))
+    (shell (concat "*" shell-name "*"))))
