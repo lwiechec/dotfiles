@@ -165,7 +165,6 @@
 
 ;; my settings & bindings
 (setq compilation-window-height 15)
-(global-set-key (kbd "\C-x \C-b") 'electric-buffer-list)  ;; more sexy handling of buffer list
 
 ;; turns on visible regions (if it's not done yet)
 (unless (transient-mark-mode t)
