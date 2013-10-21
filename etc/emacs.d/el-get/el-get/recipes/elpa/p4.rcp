@@ -1,4 +1,0 @@
-(:name p4
-:auto-generated t
-:type elpa
-:description "Perforce-Emacs Integration Library")

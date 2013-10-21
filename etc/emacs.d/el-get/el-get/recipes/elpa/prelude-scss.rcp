@@ -1,4 +1,0 @@
-(:name prelude-scss
-:auto-generated t
-:type elpa
-:description "Emacs Prelude: scss support [source: github]")

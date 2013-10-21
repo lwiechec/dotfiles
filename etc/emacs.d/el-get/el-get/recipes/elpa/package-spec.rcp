@@ -1,4 +1,0 @@
-(:name package-spec
-:auto-generated t
-:type elpa
-:description "Specify package.el packages to use in a package spec [source: github]")

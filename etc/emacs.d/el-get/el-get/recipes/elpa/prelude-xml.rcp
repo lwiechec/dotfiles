@@ -1,4 +1,0 @@
-(:name prelude-xml
-:auto-generated t
-:type elpa
-:description "Emacs Prelude: XML editing configuration. [source: github]")

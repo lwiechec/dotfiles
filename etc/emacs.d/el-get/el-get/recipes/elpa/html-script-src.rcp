@@ -1,4 +1,0 @@
-(:name html-script-src
-:auto-generated t
-:type elpa
-:description "Insert <script ...> tags for popular JavaScript libraries [source: github]")

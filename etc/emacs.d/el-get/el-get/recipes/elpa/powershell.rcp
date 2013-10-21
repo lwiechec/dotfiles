@@ -1,4 +1,0 @@
-(:name powershell
-:auto-generated t
-:type elpa
-:description "run powershell as an inferior shell in emacs [source: wiki]")

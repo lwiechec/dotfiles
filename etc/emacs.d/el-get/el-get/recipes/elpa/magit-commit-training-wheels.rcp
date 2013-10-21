@@ -1,4 +1,0 @@
-(:name magit-commit-training-wheels
-:auto-generated t
-:type elpa
-:description "Advice for magit-log-edit-commit [source: github]")

@@ -1,4 +1,0 @@
-(:name caml
-:auto-generated t
-:type elpa
-:description "OCaml code editing commands for Emacs [source: svn]")

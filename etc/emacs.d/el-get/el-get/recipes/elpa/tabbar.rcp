@@ -1,4 +1,0 @@
-(:name tabbar
-:auto-generated t
-:type elpa
-:description "Display a tab bar in the header line [source: github]")

@@ -1,9 +1,0 @@
-(:name auto-complete-ya-gtags
-       :description "A source by global for auto-complete."
-       :type github
-       :pkgname "whitypig/auto-complete-ya-gtags"
-       :website "https://github.com/whitypig/auto-complete-ya-gtags"
-       :features auto-complete-ya-gtags
-       :depends auto-complete
-       :post-init (progn
-                    (add-to-list 'ac-sources 'ac-source-ya-gtags)))

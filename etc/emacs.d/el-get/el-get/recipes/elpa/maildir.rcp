@@ -1,4 +1,0 @@
-(:name maildir
-:auto-generated t
-:type elpa
-:description "a full maildir handling tool")

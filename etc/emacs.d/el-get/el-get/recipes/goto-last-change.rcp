@@ -1,6 +1,0 @@
-; recipe fixed to type "github" as type "emacswiki" does not work for me
-(:name goto-last-change
-       :description "Move point through buffer-undo-list positions"
-       :type github
-       :pkgname "emacsmirror/goto-last-change"
-       :load "goto-last-change.el")

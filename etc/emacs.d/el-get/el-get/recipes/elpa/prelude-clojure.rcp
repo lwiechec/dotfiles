@@ -1,4 +1,0 @@
-(:name prelude-clojure
-:auto-generated t
-:type elpa
-:description "Emacs Prelude: Clojure programming configuration. [source: github]")

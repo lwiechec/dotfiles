@@ -1,4 +1,0 @@
-(:name prelude-haskell
-:auto-generated t
-:type elpa
-:description "Emacs Prelude: Nice config for Haskell programming. [source: github]")

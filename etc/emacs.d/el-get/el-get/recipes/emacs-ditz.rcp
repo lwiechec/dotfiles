@@ -1,5 +1,0 @@
-(:name emacs-ditz
-       :website "https://github.com/kentaro/emacs-ditz"
-       :description "Emacs support for lightweight distributed bug issue system Ditz (http://ditz.rubyforge.org/"
-       :type github
-       :pkgname "kentaro/emacs-ditz")

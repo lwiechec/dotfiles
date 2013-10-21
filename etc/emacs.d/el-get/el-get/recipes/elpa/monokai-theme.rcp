@@ -1,4 +1,0 @@
-(:name monokai-theme
-:auto-generated t
-:type elpa
-:description "REQUIRES EMACS 24: Monokai Color Theme for Emacs.")

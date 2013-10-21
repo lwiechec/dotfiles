@@ -1,7 +1,0 @@
-(:name restclient
-       :description "Tool to manually explore and test HTTP REST webservices."
-       :type github
-       :pkgname "pashky/restclient.el"
-       :features restclient
-       :post-init (progn
-                    (require 'restclient)))

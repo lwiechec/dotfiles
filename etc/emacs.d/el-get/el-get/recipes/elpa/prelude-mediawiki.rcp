@@ -1,4 +1,0 @@
-(:name prelude-mediawiki
-:auto-generated t
-:type elpa
-:description "Emacs Prelude: mediawiki editing config [source: github]")

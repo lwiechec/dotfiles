@@ -1,4 +1,0 @@
-(:name geben
-:auto-generated t
-:type elpa
-:description "A remote debugging environment for Emacs.")

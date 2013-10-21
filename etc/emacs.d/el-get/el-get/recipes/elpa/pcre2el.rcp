@@ -1,4 +1,0 @@
-(:name pcre2el
-:auto-generated t
-:type elpa
-:description "PCRE/Elisp/rx/SRE regexp syntax converter and utilities [source: github]")

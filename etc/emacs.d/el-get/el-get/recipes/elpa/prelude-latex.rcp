@@ -1,4 +1,0 @@
-(:name prelude-latex
-:auto-generated t
-:type elpa
-:description "Emacs Prelude: Sane setup for LaTeX writers. [source: github]")
