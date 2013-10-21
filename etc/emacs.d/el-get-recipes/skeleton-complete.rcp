@@ -1,0 +1,5 @@
+(:name skeleton-complete
+       :website "https://github.com/baohaojun/skeleton-complete"
+       :description "text matching based completion pushed to extremes"
+       :type github
+       :pkgname "baohaojun/skeleton-complete")

@@ -1,0 +1,5 @@
+(:name browse-kill-ring-new
+       :description "For when 'C-y M-y M-y M-y' gets you down"
+       :type github
+       :pkgname "T-J-Teru/browse-kill-ring"
+       :features browse-kill-ring)

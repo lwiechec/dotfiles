@@ -1,0 +1,8 @@
+(:name anything-gtags
+       :description "GNU Global (gtags) anything interface"
+       :type http
+       :url "http://www.emacswiki.org/emacs/download/anything-gtags.el"
+       :website "http://www.emacswiki.org/emacs-en/anything-gtags.el"
+       :prepare (autoload 'anything-gtags-select "anything-gtags"
+                  "Use anything when searching results from GNU Global." t)
+       :depends anything)

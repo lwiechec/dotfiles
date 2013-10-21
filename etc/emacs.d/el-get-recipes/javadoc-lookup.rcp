@@ -1,0 +1,5 @@
+(:name javadoc-lookup
+       :description "Quickly lookup Java docs."
+       :website "https://github.com/skeeto/javadoc-lookup"
+       :type github
+       :pkgname "skeeto/javadoc-lookup")

@@ -1,0 +1,12 @@
+(:name malabar-mode
+        :type git
+        :description "Better mode for Java (when using maven, that is)"
+        :url "https://github.com/buzztaiki/malabar-mode.git"
+        :build `("mvn package -DskipTests"
+                 "unzip target/*.zip -d target/unpacked"
+                 "mv target/unpacked/* target/unpacked/malabar")
+        :load-path ("./target/unpacked/malabar/lisp")
+        :features malabar-mode
+        :after (progn
+                 (setq malabar-groovy-lib-dir
+                   "~/.emacs.d/el-get/malabar-mode/target/unpacked/malabar/lib")))
