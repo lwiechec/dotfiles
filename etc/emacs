@@ -45,29 +45,46 @@
  '(url-proxy-services (quote (("no_proxy" . "localhost") ("http" . "yellow.nc3a.nato.int:8088") ("https" . "yellow.nc3a.nato.int:8088"))))
  '(url-using-proxy "http://yellow.nc3a.nato.int:8088" t))
 
-;; using el-get for package management
+;; el-get setup
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
+;; install el-get if necessary. Downloading directly from Github link
+;; (as described in https://github.com/dimitri/el-get/tree/4.stable#basic-setup
+;; does not work with proxy that I have to use at work
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/lwiechec/el-get/master/el-get-install.el")
+      (load-file "~/.emacs.d/el-get-install.el")
+    ; note that this install latest 'stable' release.
+    ; for how to use 'master' branch, see the el-get wiki
     (goto-char (point-max))
     (eval-print-last-sexp)))
 
+; list of el-get packages to use
 (setq my:el-get-packages
-  '(auto-complete ace-jump-mode ack-menu ack-and-a-half anything anything-find-project-resourses
-	   anything-project auto-complete auto-complete-css auto-complete-emacs-lisp
+  '(auto-complete ace-jump-mode ack anything
+	   auto-complete auto-complete-css auto-complete-emacs-lisp
 	   auto-complete-latex auto-complete-yasnippet breadcrumb chumpy-windows
-	   deft dired-single ecb egg full-ack fuzzy iedit javadoc-help javadoc-lookup
-	   js2-mode js-comint logito multiple-cursors multi-web-mode
+	   deft dired-single ecb egg
+	   full-ack fuzzy iedit javadoc-help javadoc-lookup
+	   js2-mode js-comint logito multiple-cursors
+	   ;multi-web-mode
 	   nxhtml pcache popup smart-tab smex twittering-mode
 	   undo-tree workgroups yasnippet cedet malabar-mode restclient
-	   flymake-shell auto-complete-ya-gtags clojure-mode nrepl ac-nrepl paredit
-	   rainbow-delimiters shell-pop popwin emms mu-cite mu4e dark-laptop-theme solarized-theme
-	   goto-last-change projectile helm ahg company eclim emacs-ditz
-  ))
+	   flymake-shell auto-complete-ya-gtags
+	   ;clojure-mode
+	   ;nrepl ac-nrepl
+	   paredit
+	   rainbow-delimiters
+	   ;shell-pop
+	   popwin emms
+	   ;mu4e mu-cite
+	   dark-laptop-theme solarized-theme
+	   goto-last-change projectile helm ahg company eclim emacs-ditz slime
+	   browse-kill-ring-new skeleton-complete))
 
+; my version of el-get recipes
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
+; sync!
 (el-get 'sync my:el-get-packages)
 
 ;; setup ELPA
@@ -78,7 +95,6 @@
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
   (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 )
-
 
 ;; my various elisp code
 (add-to-list 'load-path "~/.emacs.d/various")
@@ -283,7 +299,7 @@
 	    (font-lock-add-keywords nil
                  '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))))
 
-;; set default web browser to W3M
+; set default web browser to W3M
 (setq browse-url-browser-function 'w3m-browse-url)
 (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show an URL." t)
 (global-set-key (kbd "C-c x") 'browse-url)

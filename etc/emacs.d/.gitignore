@@ -16,3 +16,7 @@ url
 eshell
 newsticker
 elpa
+el-get
+projectile-bookmarks.eld
+.emms-cache
+srecode-map.el
