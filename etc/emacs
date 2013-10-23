@@ -552,12 +552,15 @@
   'irc-server-ip-address' should be the IP address of the IRC server that supports SSL,
   'irc-server-port' should be the (remote) port where IRC server runs on,
   'local-port' port on local machine."
-  (start-process "socks-proxy-tunnel" "socks-proxy-tunnel"
-		 connect-proxy "-d" "-S" socks-proxy "-P" (number-to-string local-port)
-		 irc-server-ip-address (number-to-string irc-server-port))
-  (message (concat "SOCKS tunnel to " irc-server-ip-address ":" (number-to-string irc-server-port)
-		   " on local port " (number-to-string local-port) " started."))
+  (let ((name  (format "%s@%s:%s->%s:%s" "socks-proxy-tunnel" "localhost" local-port irc-server-ip-address irc-server-port)))
+    (start-process name name
+		   connect-proxy "-d" "-S" socks-proxy "-P" (number-to-string local-port)
+		   irc-server-ip-address (number-to-string irc-server-port))
+	(message (concat "SOCKS tunnel to " irc-server-ip-address ":" (number-to-string irc-server-port)
+			 " on local port " (number-to-string local-port) " started."))
+	)
   )
+
 
 ; start proxy tunnel before ERC connects
 (add-hook 'erc-before-connect
