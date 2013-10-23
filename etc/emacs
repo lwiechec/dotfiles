@@ -76,9 +76,7 @@
 	   paredit
 	   rainbow-delimiters
 	   ;shell-pop
-	   popwin emms
-	   ;mu4e mu-cite
-	   dark-laptop-theme solarized-theme
+	   popwin emms mu-cite dark-laptop-theme solarized-theme
 	   goto-last-change projectile helm ahg company eclim emacs-ditz slime
 	   browse-kill-ring-new skeleton-complete))
 
