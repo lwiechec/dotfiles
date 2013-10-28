@@ -54,8 +54,8 @@
 (setq mu4e-time-format "%T") ; not sure about that one
 
 ; use mu-cite
-(require 'mu-cite)
-(setq message-cite-function 'mu-cite-original)
-(setq mu-cite-top-format
+;(require 'mu-cite)
+;(setq message-cite-function 'mu-cite-original)
+;(setq mu-cite-top-format
       '("On " date ", " from " wrote:\n\n"))
-(setq mu-cite-prefix-format '(" > "))
+;(setq mu-cite-prefix-format '(" > "))
