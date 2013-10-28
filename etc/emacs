@@ -45,6 +45,15 @@
  '(url-proxy-services (quote (("no_proxy" . "localhost") ("http" . "yellow.nc3a.nato.int:8088") ("https" . "yellow.nc3a.nato.int:8088"))))
  '(url-using-proxy "http://yellow.nc3a.nato.int:8088" t))
 
+;; setup ELPA
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+)
+
 ;; el-get setup
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
@@ -84,15 +93,6 @@
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
 ; sync!
 (el-get 'sync my:el-get-packages)
-
-;; setup ELPA
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-)
 
 ;; my various elisp code
 (add-to-list 'load-path "~/.emacs.d/various")
