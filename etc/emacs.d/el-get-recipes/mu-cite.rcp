@@ -2,4 +2,5 @@
        :description "Mail citing package"
        :type github
        :pkgname "lwiechec/MU-CITE"
-       :features "mu-cite")
+       :features "mu-cite"
+       :depends apel)
