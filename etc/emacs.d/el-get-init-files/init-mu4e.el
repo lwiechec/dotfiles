@@ -11,7 +11,7 @@
 
 ; how to get mail
 (setq mu4e-get-mail-command "offlineimap"
-      mu4e-update-interval  300)  ; every w minutes
+      mu4e-update-interval  600)  ; every 10 minutes
 
 ; how to send email
 ; we are using native emacs' SMTP mail handling
@@ -57,5 +57,5 @@
 ;(require 'mu-cite)
 ;(setq message-cite-function 'mu-cite-original)
 ;(setq mu-cite-top-format
-      '("On " date ", " from " wrote:\n\n"))
+;      '("On " date ", " from " wrote:\n\n"))
 ;(setq mu-cite-prefix-format '(" > "))
