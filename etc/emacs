@@ -712,3 +712,6 @@
   ; we like auto-newline, but not hungry-delete
   (c-toggle-auto-newline 1))
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+; skeleton expansion took over M-g so goto-line got un-bound from M-g so...
+(global-set-key (kbd "C-M-g") 'goto-line)
