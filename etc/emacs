@@ -88,7 +88,7 @@
 	   popwin emms dark-laptop-theme solarized-theme
 	   goto-last-change projectile helm ahg company eclim emacs-ditz slime
 	   browse-kill-ring-new skeleton-complete
-	   anzu-mode))
+	   anzu-mode google-maps))
 
 ; my version of el-get recipes
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
@@ -715,3 +715,9 @@
 
 ; skeleton expansion took over M-g so goto-line got un-bound from M-g so...
 (global-set-key (kbd "C-M-g") 'goto-line)
+
+; I tend to compile a lot from shell mode so I would like to enable compilation-minor-mode
+; to be able to quickly jump to errors
+(defun my-shell-mode-hook ()
+  (compilation-shell-minor-mode))
+(add-hook 'shell-mode-hook 'my-shell-mode-hook)

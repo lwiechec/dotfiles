@@ -53,9 +53,9 @@
 (add-to-list 'compilation-error-regexp-alist
 	     ;; works for Maven 3.x
 	     '("^\\(\\[ERROR\\] \\)?\\(/[^:]+\\):\\[\\([0-9]+\\),\\([0-9]+\\)\\]" 2 3 4))
-(add-to-list 'compilation-error-regexp-alist
-	     ;; works for maven jde javac server
-	     '("^\\(/[^:]+\\):\\([0-9]+\\):" 1 2))
+;(add-to-list 'compilation-error-regexp-alist
+;	     ;; works for maven jde javac server
+;	     '("^\\(/[^:]+\\):\\([0-9]+\\):" 1 2))
 (add-to-list 'compilation-error-regexp-alist
 	     ;; surefire
 	     '("^\\sw+(\\(\\sw+\\.\\)+\\(\\sw+\\)).+<<< \\(FAILURE\\|ERROR\\)!$"2))
