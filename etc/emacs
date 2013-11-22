@@ -721,3 +721,6 @@
 (defun my-shell-mode-hook ()
   (compilation-shell-minor-mode))
 (add-hook 'shell-mode-hook 'my-shell-mode-hook)
+
+;; enable tramp
+(require 'tramp)
