@@ -140,6 +140,10 @@
 ; of setting this -- see the docstring for details
 (setq org-confirm-babel-evaluate nil)
 
+; save clocking across emacs sessions
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+
 
 ;; turn on Interactively Do Things thingie
 (require 'ido)
