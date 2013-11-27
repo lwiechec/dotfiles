@@ -41,7 +41,7 @@
  '(smtpmail-smtp-service 1025)
  '(tail-max-size 20)
  '(tail-volatile nil)
- '(tramp-syntax (quote url))
+ '(tramp-syntax (quote ftp))
  '(url-proxy-services (quote (("no_proxy" . "localhost") ("http" . "yellow.nc3a.nato.int:8088") ("https" . "yellow.nc3a.nato.int:8088"))))
  '(url-using-proxy "http://yellow.nc3a.nato.int:8088" t))
 
