@@ -587,7 +587,7 @@
 (unless (server-running-p) (server-start))
 
 ;; by default C-z suspends emacs: I don't like it
-(global-unset-key [(control z)])(setq tramp-default-method "ssh")
+(global-unset-key [(control z)])
 (global-unset-key [(control x)(control z)])
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -599,11 +599,13 @@
 ;; automatic nxml-mode for XML schema files
 (setq auto-mode-alist (cons '("\\.xsd$" . nxml-mode) auto-mode-alist))
 
-
+;; TRAMP config
 (require 'tramp)
 (setq tramp-default-method "ssh")
 ;(set-default 'tramp-default-proxies-alist (quote ((".*" "\\`root\\'" "/ssh:%h:"))))
 ;(set-default 'tramp-default-proxies-alist nil)
+
+
 (put 'narrow-to-region 'disabled nil)
 (put 'scroll-left 'disabled nil)
 (put 'erase-buffer 'disabled nil)
@@ -653,7 +655,7 @@
 
 ; add smart function that creates shell buffer, asking for a name
 (defun create-shell ()
-  "creates a shell with a given name"
+  "creates a shell with a given name. The name will contains surrounding asterisks '*' so you don't need to provide them."
   (interactive);; "Prompt\n shell name:")
   (let ((shell-name (read-string "shell name: " nil)))
     (shell (concat "*" shell-name "*"))))
@@ -725,6 +727,3 @@
 (defun my-shell-mode-hook ()
   (compilation-shell-minor-mode))
 (add-hook 'shell-mode-hook 'my-shell-mode-hook)
-
-;; enable tramp
-(require 'tramp)
