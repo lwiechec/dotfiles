@@ -18,16 +18,18 @@
 
 (defun compile-autoclose (buffer string)
   "BUFFER is compilation buffer; STRING describes how compilation finished"
-  (with-selected-window (get-buffer-window buffer)
-    (goto-char (point-max)))
-  (cond ((string-match "finished" string)
-	 (message "Build (probably) successful: closing window in 5 secs...")
-	 (run-with-timer 5 nil
-			 'my-delete-window-if-buffer-still-there
-			 (get-buffer-window buffer t) buffer))
-	(t
-	 (message "Compilation exited abnormally: %s" string))))
-(setq compilation-finish-functions 'compile-autoclose)
+  ; skip the *grep* buffer(s)
+  (unless (string= (buffer-name (current-buffer)) "*grep*")
+    (with-selected-window (get-buffer-window buffer)
+      (goto-char (point-max)))
+    (cond ((string-match "finished" string)
+	   (message "Build (probably) successful: closing window in 5 secs...")
+	   (run-with-timer 5 nil
+			   'my-delete-window-if-buffer-still-there
+			   (get-buffer-window buffer t) buffer))
+	  (t
+	   (message "Compilation exited abnormally: %s" string))))
+  (setq compilation-finish-functions 'compile-autoclose))
 
 ; as the stock 'Run test via maven from malabar' does not work for me, here's a workaround
 (defun my-malabar-run-test ()
