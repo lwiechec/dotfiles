@@ -5,7 +5,7 @@
 (semantic-load-enable-minimum-features)
 ;(semantic-load-enable-code-helpers)
 ; this will display all posibilities for completion for us to choose
-(global-semantic-idle-completions-mode)
+;(global-semantic-idle-completions-mode)
 
 ; highlight current function
 (global-semantic-highlight-func-mode)

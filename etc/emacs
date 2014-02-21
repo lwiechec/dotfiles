@@ -81,14 +81,18 @@
 	   undo-tree workgroups yasnippet cedet malabar-mode restclient
 	   flymake-shell auto-complete-ya-gtags
 	   ;clojure-mode
-	   ;nrepl ac-nrepl
+	   nrepl ac-nrepl
 	   paredit
 	   rainbow-delimiters
 	   ;shell-pop
+	   mu4e
 	   popwin emms dark-laptop-theme solarized-theme
-	   goto-last-change projectile helm ahg company eclim emacs-ditz slime
+	   goto-last-change projectile helm ahg company
+	   ;eclim
+	   emacs-ditz slime
 	   browse-kill-ring-new skeleton-complete
-	   anzu-mode google-maps))
+	   anzu-mode google-maps markdown-mode-github
+	   coffee-mode))
 
 ; my version of el-get recipes
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
@@ -506,6 +510,14 @@
   (message "My JS2 hook"))
 
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
+; key bindings
+(add-hook 'js2-mode-hook '(lambda ()
+			    (local-set-key "\C-x\C-e" 'js-send-last-sexp)
+			    (local-set-key "\C-\M-x" 'js-send-last-sexp-and-go)
+			    (local-set-key "\C-cb" 'js-send-buffer)
+			    (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
+			    (local-set-key "\C-cl" 'js-load-file-and-go)
+			    ))
 
 ;; set the color scheme - emacs 24 way!
 (load-theme 'dark-laptop t)
@@ -727,3 +739,20 @@
 (defun my-shell-mode-hook ()
   (compilation-shell-minor-mode))
 (add-hook 'shell-mode-hook 'my-shell-mode-hook)
+
+; disable auto-complete mode as it interfers with company-mode
+(global-auto-complete-mode -1)
+
+; Load el4r, which loads Xiki
+(add-to-list 'load-path "/var/lib/gems/1.9.1/gems/trogdoro-el4r-1.0.10/data/emacs/site-lisp/")
+(require 'el4r)
+(el4r-boot)
+(el4r-troubleshooting-keys)
+
+;; Beginning of the el4r block:
+;; RCtool generated this block automatically. DO NOT MODIFY this block!
+(add-to-list 'load-path "/usr/share/emacs/site-lisp")
+(require 'el4r)
+(el4r-boot)
+;; End of the el4r block.
+;; User-setting area is below this line.
