@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: NodeUnit - new test
+# key: newtest
+# binding: C-c C-c t
+# contributor: Lukasz Wiechec <lwiechec@o2.pl>
+# --
+var nodeunit = require('nodeunit');
+
+exports['${1:testcase1}'] = nodeunit.testCase({
+
+    setUp: function(callback) {
+        // put set up here...
+        callback();
+    },
+
+    tearDown: function(callback) {
+        // put teardown here...
+        callback();
+    },
+
+    '${2:testname}': function(test) {
+        $0 // type your first test here
+        test.done();
+    }
+});
