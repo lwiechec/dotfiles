@@ -102,6 +102,21 @@
 ;; my various elisp code
 (add-to-list 'load-path "~/.emacs.d/various")
 
+;; Beginning of the el4r block:
+;; RCtool generated this block automatically. DO NOT MODIFY this block!
+;;(add-to-list 'load-path "/usr/share/emacs/site-lisp")
+;;(require 'el4r)
+;;(el4r-boot)
+;; End of the el4r block.
+
+; Load el4r, which loads Xiki
+;(add-to-list 'load-path "/var/lib/gems/1.9.1/gems/trogdoro-el4r-1.0.10/data/emacs/site-lisp/")
+;(require 'el4r)
+;(el4r-boot)
+;(el4r-troubleshooting-keys)
+
+;; User-setting area is below this line.
+
 ;; custom settings for Org mode
 
 ;; using custom version of Org mode (default one from the Ubuntu distro is too old)
@@ -742,17 +757,3 @@
 
 ; disable auto-complete mode as it interfers with company-mode
 (global-auto-complete-mode -1)
-
-; Load el4r, which loads Xiki
-(add-to-list 'load-path "/var/lib/gems/1.9.1/gems/trogdoro-el4r-1.0.10/data/emacs/site-lisp/")
-(require 'el4r)
-(el4r-boot)
-(el4r-troubleshooting-keys)
-
-;; Beginning of the el4r block:
-;; RCtool generated this block automatically. DO NOT MODIFY this block!
-(add-to-list 'load-path "/usr/share/emacs/site-lisp")
-(require 'el4r)
-(el4r-boot)
-;; End of the el4r block.
-;; User-setting area is below this line.
