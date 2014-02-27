@@ -1,0 +1,6 @@
+(:name helm-swoop
+       :type github
+       :pkgname "ShingoFukuyama/helm-swoop"
+       :description "Efficiently hopping squeezed lines powered by Emacs helm interface"
+       :website "https://github.com/ShingoFukuyama/helm-swoop.git"
+       :depends helm)
