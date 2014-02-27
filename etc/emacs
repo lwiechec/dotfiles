@@ -92,7 +92,7 @@
 	   emacs-ditz slime
 	   browse-kill-ring-new skeleton-complete
 	   anzu-mode google-maps markdown-mode-github
-	   coffee-mode))
+	   coffee-mode flycheck))
 
 ; my version of el-get recipes
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
