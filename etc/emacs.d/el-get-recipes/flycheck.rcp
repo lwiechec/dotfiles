@@ -1,0 +1,7 @@
+(:name flycheck
+       :type github
+       :pkgname "flycheck/flycheck"
+       :description "Modern on the fly syntax checking for GNU Emacs"
+       :website "https://github.com/flycheck/flycheck"
+       :depends (f s)
+       :post-init (add-hook 'after-init-hook #'global-flycheck-mode))
