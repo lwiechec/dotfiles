@@ -60,4 +60,4 @@
 ;	     '("^\\(/[^:]+\\):\\([0-9]+\\):" 1 2))
 (add-to-list 'compilation-error-regexp-alist
 	     ;; surefire
-	     '("^\\sw+(\\(\\sw+\\.\\)+\\(\\sw+\\)).+<<< \\(FAILURE\\|ERROR\\)!$"2))
+	     '("^\\sw+(\\(\\sw+\\.\\)+\\(\\sw+\\)).+<<< \\(FAILURE\\|ERROR\\)!$" 2))
