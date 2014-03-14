@@ -541,8 +541,8 @@
 
 
 ;; set the color scheme - emacs 24 way!
-(load-theme 'dark-laptop t)
-;(load-theme 'solarized-dark t)
+;(load-theme 'dark-laptop t)
+(load-theme 'solarized-dark t)
 
 ;; generate UUID identifiers from Emacs
 ;; as seen as at http://nullprogram.com/blog/2010/05/11/
