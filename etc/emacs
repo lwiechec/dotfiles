@@ -767,3 +767,9 @@
 ; enable unique names for buffers. Helpful when having to work with multiple Ant/Maven/Buildr build files etc.
 (require 'uniquify)
 (toggle-uniquify-buffer-names)
+
+; StumpWM stuff
+(require 'stumpwm-mode)
+
+; I don't like toolbar, disable it
+(tool-bar-mode -1)
