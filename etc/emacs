@@ -770,6 +770,8 @@
 
 ; StumpWM stuff
 (require 'stumpwm-mode)
+; adapt Ediff mode *NOT* to spawn another frame
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 ; I don't like toolbar, disable it
 (tool-bar-mode -1)
