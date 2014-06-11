@@ -1,0 +1,148 @@
+#!/bin/bash
+#
+# Git-integration for ditz.
+#
+# The following git-variables can be set:
+#   ditz.branch - name of the branch where the ditz-issues are located
+#   ditz.executable - path to the ditz-executable to use
+#   ditz.post-hook - string that is eval'ed after running ditz with all 
+#                    commands
+#   ditz.post-<command>-hook - string that is evaled after running ditz
+#                              with command <command>
+#   ditz.auto-commit - if set, automatically commit changes
+#                      made to the ditz files by ditz
+#   ditz.auto-commit-message - if set, use this message for auto commits
+#   ditz.post-commit-hook - string that is eval'ed after automatically 
+#                    committing (needs to be enabled)
+#
+usage(){
+	 echo "Usage: $0 <ditz-command> <ditz-parameters>";
+};
+
+vercomp () {
+    if [[ $1 == $2 ]]
+    then
+        return 0
+    fi
+    local IFS=.
+    local i ver1=($1) ver2=($2)
+    # fill empty fields in ver1 with zeros
+    for ((i=${#ver1[@]}; i<${#ver2[@]}; i++))
+    do
+        ver1[i]=0
+    done
+    for ((i=0; i<${#ver1[@]}; i++))
+    do
+        if [[ -z ${ver2[i]} ]]
+        then
+            # fill empty fields in ver2 with zeros
+            ver2[i]=0
+        fi
+        if ((10#${ver1[i]} > 10#${ver2[i]}))
+        then
+            return 1
+        fi
+        if ((10#${ver1[i]} < 10#${ver2[i]}))
+        then
+            return 2
+        fi
+    done
+    return 0
+}
+
+if `test x"$GIT" = x""`; then
+	 GIT=git
+fi
+GITVERSION_REQUIRE=1.7.7
+GITVERSION=`$GIT --version | sed -e 's/git\ version //g'`
+
+vercomp $GITVERSION $GITVERSION_REQUIRE
+if [[ $? = 2 ]] ; then
+	 echo "Sorry, you need git >= $GITVERSION_REQUIRE, you got $GITVERSION"
+	 exit
+fi
+
+DITZ=ditz
+GITDITZ=`$GIT config --get ditz.executable`
+if `test x$GITDITZ != x""`; then
+	 DITZ=$GITDITZ
+fi
+echo ">> Using ditz-executable '$DITZ'"
+
+#DITZISSUES=`cat .ditz-config | grep issue_dir: | sed -e 's/issue_dir://g'`
+#echo ">> Using ditz issue-dir '$DITZISSUES'"
+
+COMMAND=$1
+if `test x$COMMAND = x""`; then
+	 COMMAND="todo"
+fi
+shift
+
+BRANCH=`$GIT config --get ditz.branch`
+POSTHOOK=`$GIT config --get ditz.post-hook`
+POSTCOMMITHOOK=`$GIT config --get ditz.post-commit-hook`
+COMMANDHOOK=`$GIT config --get ditz.post-$COMMAND-hook`
+AUTOCOMMIT=`$GIT config --get ditz.auto-commit`
+AUTOCOMMITMSG=`$GIT config --get ditz.auto-commit-message`
+if `test x"$AUTOCOMMITMSG" = x""`; then
+	 AUTOCOMMITMSG="some issues modified"
+fi
+
+STASHED=0
+if `test x$BRANCH = x""`; then
+	 echo ">> No ditz.branch set, just mapping 'git ditz <whatever>' to 'ditz <whatever>'"
+else
+	 echo ">> ditz.branch='$BRANCH', working there"
+	 GITCLEAN=`$GIT status -s --ignore-submodules | grep "M "`;
+	 if `test "x$GITCLEAN" != x""`; then
+		  echo ">> Dirty working dir, stashing"
+		  STASHED=1
+		  $GIT stash --include-untracked
+	 fi
+	 $GIT checkout $BRANCH
+fi
+
+echo ">> $DITZ $COMMAND $@"
+TMP=`mktemp`
+
+## this allows to simultaneously display text for input
+## and capture the output in a temporary file
+{
+	 $DITZ $COMMAND $@
+} | tee $TMP
+
+MODIFIED=`cat $TMP | grep yaml`
+
+if `test x"$AUTOCOMMIT" != x""`; then
+	 if `test x"$MODIFIED" != x""`; then 
+		  echo ">> automatically committing"	 
+		  for f in $MODIFIED; do
+				echo "  >> adding $f"
+				$GIT add $f
+		  done
+		  $GIT commit -a -m "$AUTOCOMMITMSG"
+		  if `test x"$POSTCOMMITHOOK" != x""`; then
+				echo ">> post-commit-hook: $POSTCOMMITHOOK"
+				sh -c "$POSTCOMMITHOOK"
+		  fi
+	 fi
+fi
+
+if `test "x$COMMANDHOOK" != x""`; then
+	 echo ">> post-${COMMAND}-hook: '$COMMANDHOOK'"
+	 sh -c "$COMMANDHOOK"
+fi
+
+if `test "x$POSTHOOK" != x""`; then
+	 echo ">> post-hook: '$POSTHOOK'"
+	 sh -c "$POSTHOOK"
+fi
+
+if `test x$BRANCH != x""`; then
+	 $GIT checkout -
+	 if `test $STASHED -eq 1`; then
+		  echo ">> Unstashing"
+		  $GIT stash pop --quiet
+	 fi
+fi
+ 
