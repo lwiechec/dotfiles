@@ -87,7 +87,7 @@
 	   ;shell-pop
 	   mu4e
 	   popwin emms dark-laptop-theme solarized-theme
-	   goto-last-change projectile helm helm-swoop ahg company
+	   goto-last-change projectile helm helm-swoop helm-ag ahg company
 	   ;eclim
 	   emacs-ditz slime
 	   browse-kill-ring-new skeleton-complete
