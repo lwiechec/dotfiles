@@ -1,0 +1,5 @@
+(:name git-timemachine
+       :description "View file's git revision in an easy an convenient way"
+       :type github
+       :pkgname "pidu/git-timemachine"
+       :features git-timemachine)
