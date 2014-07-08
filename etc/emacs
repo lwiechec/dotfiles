@@ -776,3 +776,13 @@
 
 ; I don't like toolbar, disable it
 (tool-bar-mode -1)
+
+; make fonts smaller
+(djcb-zoom -5)
+
+; for easier finding of the sources of function and libraries
+(define-key 'help-command (kbd "C-l") 'find-library)
+(define-key 'help-command (kbd "C-f") 'find-function)
+
+(provide 'emacs)
+;;; emacs ends here
