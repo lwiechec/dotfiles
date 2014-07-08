@@ -9,6 +9,12 @@
       mu4e-trash-folder   "/Trash"
       mu4e-refile-folder  "/Archive")
 
+;; setup some handy shortcuts
+(setq mu4e-maildir-shortcuts
+      '(("/INBOX"           . ?i)
+        ("/INBOX.Sent Mail" . ?s)
+        ("/Trash"           . ?t)))
+
 ; how to get mail
 (setq mu4e-get-mail-command "offlineimap"
       mu4e-update-interval  600)  ; every 10 minutes
