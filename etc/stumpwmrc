@@ -1,0 +1,89 @@
+;; -*- mode: lisp -*-
+
+;; stumpvm initialization file, based on http://www.xsteve.at/prg/stumpwm
+
+;; you can also try to enable stumpwm-mode (minor mode) for sending
+;; the contents to the running instance of StumpWM
+
+(in-package :stumpwm)
+
+;; to experiment with
+e!(setf *mode-line-background-color* "Black"
+      *mode-line-foreground-color* "red"
+      *mode-line-border-width* 0
+      ;;        *mode-line-border-color*     "white"
+      *mode-line-timeout*          1
+      *mode-line-position* :top)
+;; font
+(set-font "-adobe-helvetica-medium-r-normal--14*")
+
+;; width in pixels given to the borders of windows with maxsize or ratio
+;; hints
+(setf *maxsize-border-width* 1)
+
+;; width in pixels given to the borders of transient or pop-up windows
+(setf *transient-border-width* 1)
+
+;; width in pixels given to the borders of regular windows
+(setf *normal-border-width* 1)
+
+;; set the border color for focused windows
+(set-focus-color "orange")  ; `white' by default
+(set-unfocus-color "palegreen3")
+
+;; load modules
+(mapcar #'load-module '("cpu"
+                        "mem"
+                        "battery-portable"
+                        "net"
+                        "wifi"
+                        "disk"))
+
+(defconstant *day-names*
+  '("Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun"))
+
+(defun current-date ()
+  "Returns the date formatted as `2009-11-16 Mon 11:34:03'."
+  (multiple-value-bind
+      (second minute hour date month year day-of-week dst-p tz)
+      (get-decoded-time)
+    (format nil "~d-~2,'0d-~2,'0d ~a ^B~2,'0d:~2,'0d:~2,'0d^b"
+            year month date (nth day-of-week *day-names*)
+            hour minute second)))
+
+;; Turn on the modeline
+(if (not (head-mode-line (current-head)))
+     (toggle-mode-line (current-screen) (current-head))
+)
+;; Show time, cpu usage and network traffic in the modeline
+!e(setf *screen-mode-line-format*
+      (list
+       ;; date
+       "^6*" '(:eval (current-date))
+       " | %t | %c| %l | [^B%n^b] %W"));; Define the background window
+
+;; background images
+;(defvar *background-image-path* "/home/stefan/background-images/")
+;(defun select-random-background-image ()
+;  "Select a random image"
+;  (let ((file-list (directory (concatenate 'string *background-image-path* "*.jpg")))
+;        (*random-state* (make-random-state t)))
+;    (namestring (nth (random (length file-list)) file-list))))
+;
+;(run-shell-command (concatenate 'string "display -window root " (select-random-background-image)))
+
+;; command definitions
+
+(defcommand suspend()
+  "Suspend machine (using 'pm-suspend' utility. Make sure sudo is configured not to ask for password)"
+  (run-shell-command "sudo pm-suspend"))
+
+; unclutter will take care of hiding the X cursor so that it doesn't get in the way
+(run-shell-command "unclutter -idle 1 -jitter 2 -root")
+
+;;I use Xscreensaver as a screensaver. The first line makes sure any running Xscreensaver is killed.
+;;The second run regardless of the success of the first & starts a background Xscreensaver daemon
+(run-shell-command "xscreensaver-command -exit; killall xscreensaver 2>/dev/null; xscreensaver")
+
+;; start Dropox client
+(run-shell-command "dropbox start")
