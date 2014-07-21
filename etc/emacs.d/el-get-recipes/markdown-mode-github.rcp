@@ -1,0 +1,7 @@
+(:name markdown-mode-github
+       :description "Major mode to edit Markdown files in Emacs - cloned in github"
+       :website "http://jblevins.org/projects/markdown-mode/"
+       :type github
+       :pkgname "defunkt/markdown-mode"
+       :before (add-to-list 'auto-mode-alist
+                            '("\\.\\(md\\|mdown\\|markdown\\)\\'" . markdown-mode)))

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: mavendependency
+# key: mavendependency
+# --
+    <dependency>
+      <groupId>$1</groupId>
+      <artifactId>$2</artifactId>
+      <version>$3</version>
+      <scope>${4:compile}</scope>
+    </dependency>
+$0

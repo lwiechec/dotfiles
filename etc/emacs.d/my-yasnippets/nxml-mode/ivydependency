@@ -1,0 +1,6 @@
+# -*- snippet-mode -*-
+# key: ivydependency
+# name: ivydependency
+# --
+<dependency org="$1" name="$2" rev="$3" conf="${4:runtime->master,runtime}" />
+$0

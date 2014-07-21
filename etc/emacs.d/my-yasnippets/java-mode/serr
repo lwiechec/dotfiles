@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: prompt for System.out.println()
+# key: serr
+# --
+System.err.println("${1:stderr message...}");
