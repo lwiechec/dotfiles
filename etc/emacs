@@ -11,6 +11,7 @@
  '(ack-executable (executable-find "ack-grep"))
  '(bsh-jar "~/work/javautil/beanshell/bsh.jar")
  '(bsh-startup-timeout 2)
+ '(coffee-tab-width 2)
  '(compilation-scroll-output t)
  '(compilation-skip-threshold 2)
  '(ecb-options-version "2.40")
@@ -43,7 +44,8 @@
  '(tail-volatile nil)
  '(tramp-syntax (quote ftp))
  '(url-proxy-services (quote (("no_proxy" . "localhost") ("http" . "yellow.nc3a.nato.int:8088") ("https" . "yellow.nc3a.nato.int:8088"))))
- '(url-using-proxy "http://yellow.nc3a.nato.int:8088" t))
+ '(url-using-proxy "http://yellow.nc3a.nato.int:8088" t)
+)
 
 ;; setup ELPA
 (when (>= emacs-major-version 24)
