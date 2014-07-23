@@ -714,6 +714,7 @@
 (setq c-offsets-alist '((member-init-intro . ++)))
 
 ;; Create my personal style.
+;; deprecated for now, using google style
 (defconst my-c-style
   '((c-tab-always-indent        . t)
     (c-basic-offset             . 2)
@@ -747,10 +748,15 @@
   "My C Programming Style")
 (c-add-style "PERSONAL" my-c-style)
 
+;; load Google's C style (will be used for Java as well)
+(require 'google-c-style)
+
+
 ; Customizations for all modes in CC Mode.
 (defun my-c-mode-common-hook ()
   ; set my personal style for the current buffer
-  (c-set-style "PERSONAL")
+  ;(c-set-style "PERSONAL")
+  (c-set-style "Google")
   ; other customizations
   (setq tab-width 8
         ;; this will make sure spaces are used instead of tabs
