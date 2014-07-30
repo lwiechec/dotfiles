@@ -1,5 +1,5 @@
 (:name multiple-cursors
        :description "An experiment in adding multiple cursors to emacs"
        :type github
-       :pkgname "lwiechec/multiple-cursors.el"
+       :pkgname "magnars/multiple-cursors.el"
        :features multiple-cursors)

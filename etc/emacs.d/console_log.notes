@@ -1,0 +1,186 @@
+- /home/luke/
+  $ pwd
+- /home/luke/
+  $ ls
+- /home/luke/
+  $ ls/| a1.notes
+- /home/luke/
+  $ ls
+- /home/luke/
+  $ pwd
+- /tmp/
+  $ pwd
+- /home/luke/
+  $ curl -i http://google.com
+- /home/luke/
+  $ cd /home/luke/work/projects/MAJIIC/prjs/
+- /home/luke/
+  $ cd /home/luke/work/projects/MAJIIC/prjs/| $ls
+- /home/luke/
+  $ cd /home/luke/work/projects/MAJIIC/prjs/| $ ls
+- /home/luke/
+  $ pwd
+- /home/luke/
+  $ cd /home/luke/work/projects/MAJIIC/prjs
+- /home/luke/
+  $ cd /home/luke/work/projects/MAJIIC/prjs
+- /home/luke/
+  $ cd /home/luke/work/projects/MAJIIC/prjs/$ pwd|
+- /home/luke/
+  $ cd /home/luke/work/projects/MAJIIC/prjs/$ pwd
+- /home/luke/
+  $ cd /home/luke/work/projects/MAJIIC/prjs/pwd
+- /home/luke/
+  $ cd /home/luke/work/projects/MAJIIC/prjs
+- /home/luke/work/projects/MAJIIC/prjs/
+  $ node prjs.js
+- /home/luke/work/projects/MAJIIC/prjs/
+  % node prjs.js
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -H "Content-Type: application/xml" -d @testrun-example.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/
+  % node prjs.js
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -H "Content-Type: application/xml" -d @sample_port.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -H "Content-Type: application/xml" -d @sample_port.xml http://localhost:18000/service/test/| Warning: Couldn't read data from file "sample_port.xml", this makes an empty 
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -H "Content-Type: application/xml" -d @sample_post.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/
+  % node prjs.js
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -H "Content-Type: application/xml" -d @sample_post.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -H "Content-Type: application/xml" -d @sample_post.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -H "Content-Type: application/xml" -X DELETE http://ocalhost:18000/service/test/kihafidofemi
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -H "Content-Type: application/xml" -X DELETE http://localhost:18000/service/test/kihafidofemi
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -q -H "Content-Type: application/xml" -X DELETE http://localhost:18000/service/test/kihafidofemi
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -X DELETE http://localhost:18000/service/test/kihafidofemi
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -d @sample_post.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -X DELETE http://localhost:18000/service/test/pilocureminu
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -d @sample_post.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -d @sample_post.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -d @sample_post.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -d @sample_post.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -d @sample_post.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -X DELETE http://localhost:18000/service/test/sucunegidovu
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" http://localhost:18000/service/cancel
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -X DELETE http://localhost:18000/service/test/sucunegidovu
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" http://localhost:18000/service/cancel
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -d @sample_post.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" http://localhost:18000/service/cancel
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s http://localhost:18000/service/test
+- /usr/share/emacs/site-lisp/
+  $ ls
+- /usr/share/emacs/site-lisp/
+  $ ls/| autoconf
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a --eval 'db.test.find().forEach(printjson)'
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a --eval 'db.db1.find().forEach(printjson)'
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a --eval 'db.db1.count()'
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a --eval 'db.test.count()'
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a --eval 'db.db_8074_datas.count()'
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a --eval 'db._adminCommand("listConnections")'
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a --eval 'printjson(db._adminCommand("listConnections"))'
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a --eval 'printjson(db._adminCommand("listCollections"))'
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a --eval 'printjson(db._adminCommand("help"))'
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a --eval 'printjson(db.getCollectionNames())'
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a/db1 --eval 'printjson(db.getCollectionNames())'
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a/test --eval 'printjson(db.getCollectionNames())'
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a --eval 'use db1 printjson(db.getCollectionNames())'
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a --eval 'use db' --eval 'printjson(db.getCollectionNames())'
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a --eval 'printjson(db.getCollectionNames())'
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a/test --eval 'printjson(db._adminCommand("listDatabases"))'  
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a --eval 'printjson(db.getCollectionNames())'
+- /tmp/
+  $ mongo nunc3sv9161.nu.nc3a --eval 'printjson(db.getCollectionNames())'
+- /home/luke/tmp/xiki/
+  $ rgrep 'GET' *
+- /home/luke/tmp/xiki/
+  $ rgrep 'GET' .
+- /tmp/
+  $ ls 
+- /home/luke/work/projects/MAJIIC/prjs/
+  % node prjs.js
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -d @sample_post.xml http://localhost:18000/service/test    
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -X DELETE http://localhost:18000/service/test/xulacubanawe
+- /home/luke/work/projects/MAJIIC/prjs/
+  $ nodeunit test
+- /home/luke/work/projects/MAJIIC/prjs/
+  $ ls
+- /home/luke/work/projects/MAJIIC/prjs/
+  $ ls
+- /home/luke/work/projects/MAJIIC/prjs/
+  $ ls/| a.js
+- /home/luke/work/projects/MAJIIC/prjs/
+  $ coffee a.coffee
+- /home/luke/work/projects/MAJIIC/prjs/
+  $ coffee a.coffee
+- /home/luke/work/projects/MAJIIC/prjs/
+  $ coffee a.coffee/|
+- /home/luke/work/projects/MAJIIC/prjs/
+  $ coffee 
+- /home/luke/work/projects/MAJIIC/prjs/
+  $ ls
+- /home/luke/work/projects/MAJIIC/prjs/
+  $ ls/| a.coffee
+- /home/luke/work/projects/MAJIIC/prjs/
+  $ ls
+- /home/luke/work/projects/MAJIIC/prjs/
+  $ coffee a.coffee
+- /home/luke/work/projects/MAJIIC/prjs/
+  $ coffee a.coffee
+- /home/luke/work/projects/MAJIIC/prjs/
+  $ coffee a.coffee
+- /home/luke/work/projects/MAJIIC/prjs/
+  $ coffee a.coffee
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -d @sample_post.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -d @sample_post_incorrect_port.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -d @sample_post_incorrect_port.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -d @sample_post_incorrect_port.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/test/
+  $ curl -s -H "Content-Type: application/xml" -d @sample_post_incorrect_port.xml http://localhost:18000/service/test
+- /home/luke/work/projects/MAJIIC/prjs/
+  % node prjs.js

@@ -4,7 +4,7 @@
 (setq display-buffer-function 'popwin:display-buffer)
 
 ; prefix to popwin's keymap
-(global-set-key (kbd "C-z") popwin:keymap)
+(global-set-key (kbd "C-`") popwin:keymap)
 
 ; for example, I like popwin-term package: it works better than 'shell-pop'
 ; (ie. not changing the working directory to the one of the buffer I am editing)
