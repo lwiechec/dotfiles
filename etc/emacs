@@ -53,8 +53,8 @@
   (package-initialize)
   (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-)
+  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+  )
 
 ;; el-get setup
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
