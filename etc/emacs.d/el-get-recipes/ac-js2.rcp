@@ -1,0 +1,7 @@
+(:name ac-js2
+       :type github
+       :pkgname "ScottyB/ac-js2"
+       :depends (js2-mode skewer-mode)
+       :description "Javascript autocompletion using js2-mode parser and skewer-mode"
+       :website "https://github.com/ScottyB/ac-js2"
+       :post-init (add-hook 'js2-mode-hook 'ac-js2-mode))

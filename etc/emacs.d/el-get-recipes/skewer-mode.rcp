@@ -1,0 +1,1 @@
+(:name skewer-mode :type elpa :depends js2-mode)
