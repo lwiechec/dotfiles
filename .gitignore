@@ -3,6 +3,8 @@ etc/emacs.d/javadoc-cache
 # el-get is installed by the installer
 etc/emacs.d/el-get
 etc/emacs.d/elpa
+etc/emacs.d/bookmarks
+etc/emacs.d/.org-id-locations
 *~
 .yas-compiled-snippets.el
 projectile.cache
