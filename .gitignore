@@ -5,3 +5,5 @@ etc/emacs.d/el-get
 etc/emacs.d/elpa
 *~
 .yas-compiled-snippets.el
+projectile.cache
+session*
