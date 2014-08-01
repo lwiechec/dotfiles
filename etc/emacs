@@ -768,10 +768,8 @@
 ; enable unique names for buffers. Helpful when having to work with multiple Ant/Maven/Buildr build files etc.
 (require 'uniquify)
 (toggle-uniquify-buffer-names)
-  (google-set-c-style)
 ; StumpWM stuff
 (require 'stumpwm-mode)
-
 ; adapt Ediff mode *NOT* to spawn another frame
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 ; I don't like toolbar, disable it
