@@ -9,4 +9,4 @@
 ; i'm using sbcl for my lisp
 (setq inferior-lisp-program "sbcl")
 
-(slime-setup '(slime-js slime-repl))
+(slime-setup)
