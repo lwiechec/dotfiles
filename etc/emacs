@@ -744,11 +744,11 @@
 ;; load Google's C style (will be used for Java as well)
 (require 'google-c-style)
 
-
 ; Customizations for all modes in CC Mode.
 (defun my-c-mode-common-hook ()
   ; set my personal style for the current buffer
   ;(c-set-style "PERSONAL")
+  (google-set-c-style)
   (c-set-style "Google")
   ; other customizations
   (setq tab-width 8
@@ -760,20 +760,25 @@
 
 ; skeleton expansion took over M-g so goto-line got un-bound from M-g so...
 (global-set-key (kbd "C-M-g") 'goto-line)
+
 ; I tend to compile a lot from shell mode so I would like to enable compilation-minor-mode
 ; to be able to quickly jump to errors
 (defun my-shell-mode-hook ()
   (compilation-shell-minor-mode))
 (add-hook 'shell-mode-hook 'my-shell-mode-hook)
+
 ; disable auto-complete mode as it interfers with company-mode
 (global-auto-complete-mode -1)
+
 ; enable unique names for buffers. Helpful when having to work with multiple Ant/Maven/Buildr build files etc.
 (require 'uniquify)
 (toggle-uniquify-buffer-names)
+
 ; StumpWM stuff
 (require 'stumpwm-mode)
 ; adapt Ediff mode *NOT* to spawn another frame
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
 ; I don't like toolbar, disable it
 (tool-bar-mode -1)
 
