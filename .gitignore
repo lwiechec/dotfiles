@@ -9,3 +9,4 @@ etc/emacs.d/.org-id-locations
 .yas-compiled-snippets.el
 projectile.cache
 session*
+*.pyc
