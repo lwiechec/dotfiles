@@ -758,25 +758,21 @@
 
 ; skeleton expansion took over M-g so goto-line got un-bound from M-g so...
 (global-set-key (kbd "C-M-g") 'goto-line)
-
 ; I tend to compile a lot from shell mode so I would like to enable compilation-minor-mode
 ; to be able to quickly jump to errors
 (defun my-shell-mode-hook ()
   (compilation-shell-minor-mode))
 (add-hook 'shell-mode-hook 'my-shell-mode-hook)
-
 ; disable auto-complete mode as it interfers with company-mode
 (global-auto-complete-mode -1)
-
 ; enable unique names for buffers. Helpful when having to work with multiple Ant/Maven/Buildr build files etc.
 (require 'uniquify)
 (toggle-uniquify-buffer-names)
-
+  (google-set-c-style)
 ; StumpWM stuff
 (require 'stumpwm-mode)
 ; adapt Ediff mode *NOT* to spawn another frame
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-
 ; I don't like toolbar, disable it
 (tool-bar-mode -1)
 
