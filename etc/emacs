@@ -440,6 +440,8 @@
 	    (font-lock-add-keywords nil
 				    '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))))
 
+(require 'karma-run)
+
 ;; trying to fix the super-ugly indentation of js2-mode
 ;; see: http://mihai.bazon.net/projects/editing-javascript-with-emacs-js2-mode
 (autoload 'espresso-mode "espresso")
