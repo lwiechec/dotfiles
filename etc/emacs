@@ -339,6 +339,7 @@
 ; set default web browser to W3M
 (setq browse-url-browser-function '(
 				    ("twitter.com" . browse-url-chromium) ; Twitter doesn;t look good in W3M, use chromium
+				    ("accounts.google.com" . browse-url-firefox)
 				    ("." . w3m-browse-url) ; default
 				    ))
 (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show an URL." t)
