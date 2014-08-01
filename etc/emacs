@@ -337,7 +337,10 @@
                  '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))))
 
 ; set default web browser to W3M
-(setq browse-url-browser-function 'w3m-browse-url)
+(setq browse-url-browser-function '(
+				    ("twitter.com" . browse-url-chromium) ; Twitter doesn;t look good in W3M, use chromium
+				    ("." . w3m-browse-url) ; default
+				    ))
 (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show an URL." t)
 (global-set-key (kbd "C-c x") 'browse-url)
 
