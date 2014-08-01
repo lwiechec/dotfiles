@@ -44,14 +44,21 @@
  '(url-using-proxy "http://yellow.nc3a.nato.int:8088" t)
 )
 
-;; setup ELPA
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+;; setup environment variables for proxies
+(setq enable-proxy t) ; for now always yes
+(when enable-proxy
+  (setenv "http_proxy" "http://yellow.nc3a.nato.int:8088")
+  (setenv "https_proxy" "http://yellow.nc3a.nato.int:8088")
+  (setenv "no_proxy" "localhost")
   )
+
+;; setup ELPA
+(require 'package)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(package-initialize)
+
 
 ;; el-get setup
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
