@@ -79,11 +79,10 @@
   '(auto-complete ace-jump-mode ack anything
 	   auto-complete auto-complete-css auto-complete-emacs-lisp
 	   auto-complete-latex auto-complete-yasnippet breadcrumb chumpy-windows
-	   deft dired-single ecb
-	   ;egg
+	   deft dired-single
 	   ;git-commit-mode git-rebase-mode magit ;; Magit comes from (M)ELPA
 	   full-ack fuzzy iedit
-	   js2-mode
+  	   ;js2-mode
 	   ;js-comint
 	   logito multiple-cursors
 	   ;multi-web-mode
