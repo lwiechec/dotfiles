@@ -89,8 +89,7 @@
 	   nxhtml pcache popup smart-tab smex twittering-mode
 	   undo-tree workgroups yasnippet malabar-mode restclient
 	   flymake-shell auto-complete-ya-gtags
-	   ;clojure-mode
-	   cider
+	   ;clojure-mode cider
 	   paredit
 	   rainbow-delimiters
 	   ;shell-pop
