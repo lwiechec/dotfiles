@@ -841,5 +841,10 @@
                 ;; And the modes, which I don't really care for anyway
                 " " mode-line-modes mode-line-end-spaces))
 
+;; enable editing text areas in browser (Chrome, maybe Firefox) by using edit-server.el
+(require 'edit-server)
+(setq edit-server-new-frame t) ; want to have new frame opened
+
+
 (provide 'emacs)
 ;;; emacs ends here
