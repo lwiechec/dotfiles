@@ -845,6 +845,22 @@
 (require 'edit-server)
 (setq edit-server-new-frame t) ; want to have new frame opened
 
+;; handy view of available key sequences (https://github.com/kbkbkbkb1/guide-key)
+(require 'guide-key) ;; from MELPA
+(setq guide-key/idle-delay 0.5) ;; delay to wait for the tips to be displayed
+(setq guide-key/guide-key-sequence
+      '("C-x r" "C-x 4" ;; display key bindings for those first key bindings in all modes
+        (org-mode "C-c C-x") ;; then you can define per-mode
+        (outline-minor-mode "C-c @")))
+(setq guide-key/guide-key-sequence '("C-x r" "C-x 4"))
+(guide-key-mode 1)  ; Enable guide-key-mode
+
+;; google-translator from Emacs! :)
+(require 'google-translate)
+(require 'google-translate-smooth-ui)
+(global-set-key "\C-ct" 'google-translate-smooth-translate)
+(setq google-translate-translation-directions-alist
+      '(("de" . "en") ("en" . "de") ("en" . "pt") ("pt" . "en")))
 
 (provide 'emacs)
 ;;; emacs ends here
