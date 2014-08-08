@@ -52,13 +52,6 @@
   (setenv "no_proxy" "localhost")
   )
 
-;; setup ELPA
-(require 'package)
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(package-initialize)
-
 
 ;; el-get setup
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -74,22 +67,42 @@
     (goto-char (point-max))
     (eval-print-last-sexp)))
 
+;; setup ELPA
+(require 'package)
+(setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
+ ("gnu" . "http://elpa.gnu.org/packages/")
+ ("marmalade" . "http://marmalade-repo.org/packages/")
+ ("SC" . "http://joseito.republika.pl/sunrise-commander/")
+ ("org" . "http://orgmode.org/elpa/")
+ ("melpa" . "http://melpa.milkbox.net/packages/")))
+(package-initialize)
+
+(require 'el-get-elpa)
+;; Build the El-Get copy of the package.el packages if we have not
+;; built it before.  Will have to look into updating later ...
+(unless (file-directory-p el-get-recipe-path-elpa)
+  (el-get-elpa-build-local-recipes))
+
 ; list of el-get packages to use
 (setq my:el-get-packages
   '(auto-complete ace-jump-mode ack anything
 	   auto-complete auto-complete-css auto-complete-emacs-lisp
 	   auto-complete-latex auto-complete-yasnippet breadcrumb chumpy-windows
 	   deft dired-single
-	   ;git-commit-mode git-rebase-mode magit ;; Magit comes from (M)ELPA
+	   guide-key
+	   git-commit-mode git-rebase-mode
+	   magit-push-remote
 	   full-ack fuzzy iedit
   	   ;js2-mode
 	   ;js-comint
 	   logito multiple-cursors
 	   ;multi-web-mode
 	   nxhtml pcache popup smart-tab smex twittering-mode
-	   undo-tree workgroups yasnippet malabar-mode restclient
+	   undo-tree workgroups yasnippet
+	   malabar-mode ; from (M)ELPA
+	   restclient
 	   flymake-shell auto-complete-ya-gtags
-	   ;clojure-mode cider
+	   clojure-mode cider
 	   paredit
 	   rainbow-delimiters
 	   ;shell-pop
@@ -107,7 +120,8 @@
 	   git-timemachine
 	   emacs-groovy-mode
 	   json browse-kill-ring-new
-	   neotree))
+	   neotree
+	   google-translate))
 
 ; my version of el-get recipes
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")

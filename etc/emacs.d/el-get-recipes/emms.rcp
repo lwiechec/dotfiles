@@ -1,7 +1,7 @@
 (:name emms
        :description "The Emacs Multimedia System"
        :type github
-       :url "https://github.com/lwiechec/emms.git"
+       :url "https://github.com/emacsmirror/emms.git"
        :info "doc"
        :load-path ("./lisp")
        :features emms-setup
