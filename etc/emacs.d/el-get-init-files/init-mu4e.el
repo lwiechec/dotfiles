@@ -22,9 +22,13 @@
 ; how to send email
 ; we are using native emacs' SMTP mail handling
 ; authentication data can be found in ~/.authinfo (for details see Info page)
+(require 'smtpmail)
 (setq smtpmail-smtp-server "localhost")
 (setq smtpmail-smtp-service 1025)
 (setq message-send-mail-function 'smtpmail-send-it)
+; use authentication file (see https://gist.github.com/areina/3879626)
+(setq smtpmail-auth-credentials
+      (expand-file-name "~/.authinfo.gpg"))
 
 ;; something about ourselves
 (setq

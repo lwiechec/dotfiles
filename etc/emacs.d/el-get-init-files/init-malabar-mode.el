@@ -1,3 +1,5 @@
+(require 'malabar-mode)
+
 (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
 
 ; optional: simulate constant compile-after-save (as in Eclipse)

@@ -33,6 +33,8 @@
 	 (format "http://tinysong.com/s/%s?format=json&limit=%d&key=%s" search-query grooveshark-search-tinysong-maxhits grooveshark-search-tinysong-api-key))
       (goto-char (+ 1 url-http-end-of-headers))
       (json-read)))
+	  )
+      )
   )
 
 ;; will use helm to see the results of the query
