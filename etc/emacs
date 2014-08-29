@@ -883,5 +883,9 @@
 (setq google-translate-translation-directions-alist
       '(("de" . "en") ("en" . "de") ("en" . "pt") ("pt" . "en")))
 
+;; simple journalling with org-mode
+(require 'org-journal)
+(global-set-key (kbd "C-c j") 'org-journal-entry)
+
 (provide 'emacs)
 ;;; emacs ends here
