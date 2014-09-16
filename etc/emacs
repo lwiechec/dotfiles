@@ -40,16 +40,15 @@
  '(tail-max-size 20)
  '(tail-volatile nil)
  '(tramp-syntax (quote ftp))
- '(url-proxy-services (quote (("no_proxy" . "localhost") ("http" . "yellow.nc3a.nato.int:8088") ("https" . "yellow.nc3a.nato.int:8088"))))
- '(url-using-proxy "http://yellow.nc3a.nato.int:8088" t)
-)
+ '(url-proxy-services (quote (("no_proxy" . "localhost\\|127.0.0.1\\|^.*nu.nc3a") ("http" . "yellow.nc3a.nato.int:8088") ("https" . "yellow.nc3a.nato.int:8088"))))
+ '(url-using-proxy "http://yellow.nc3a.nato.int:8088" t))
 
 ;; setup environment variables for proxies
 (setq enable-proxy t) ; for now always yes
 (when enable-proxy
   (setenv "http_proxy" "http://yellow.nc3a.nato.int:8088")
   (setenv "https_proxy" "http://yellow.nc3a.nato.int:8088")
-  (setenv "no_proxy" "localhost")
+  (setenv "no_proxy" "localhost,127.0.0.1,.nu.nc3a")
   )
 
 
