@@ -5,7 +5,7 @@
 
 ;;; Code:
 
-(require 'org-mode)
+(require 'org)
 
 (defvar org-journal-file "~/Dropbox/org/journal.org"
   "Path to OrgMode journal file.")
