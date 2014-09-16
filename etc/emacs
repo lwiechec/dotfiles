@@ -857,8 +857,12 @@
 (setq guide-key/idle-delay 0.5) ;; delay to wait for the tips to be displayed
 (setq guide-key/guide-key-sequence
       '("C-x r" "C-x 4" ;; display key bindings for those first key bindings in all modes
-        (org-mode "C-c") ;; then you can define per-mode
-        (outline-minor-mode "C-c @")))
+	"C-c m" ; EMMS
+	"C-c h" ; helm
+        (org-mode "C-c" ) ;; then you can define per-mode
+        (outline-minor-mode "C-c @")
+	(malabar-mode "C-c C-v")
+	(projectile-mode "C-c p")))
 (setq guide-key/guide-key-sequence '("C-x r" "C-x 4"))
 (guide-key-mode 1)  ; Enable guide-key-mode
 
