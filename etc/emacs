@@ -877,5 +877,8 @@
 (require 'org-journal)
 (global-set-key (kbd "C-c j") 'org-journal-entry)
 
+;; shortcut to magit-status
+(global-set-key (kbd "<f7>") 'magit-status)
+
 (provide 'emacs)
 ;;; emacs ends here
