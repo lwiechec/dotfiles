@@ -87,11 +87,8 @@
   '(auto-complete ace-jump-mode ack anything
 	   auto-complete auto-complete-css auto-complete-emacs-lisp
 	   auto-complete-latex auto-complete-yasnippet breadcrumb chumpy-windows
-	   deft dired-single
-	   guide-key
-	   git-commit-mode git-rebase-mode
-	   magit-push-remote
-	   full-ack fuzzy iedit
+	   deft dired-single guide-key git-commit-mode git-rebase-mode
+	   magit-push-remote full-ack ack-and-a-half fuzzy iedit
   	   ;js2-mode
 	   ;js-comint
 	   logito multiple-cursors
@@ -99,30 +96,20 @@
 	   nxhtml pcache popup smart-tab smex twittering-mode
 	   undo-tree workgroups yasnippet
 	   malabar-mode ; from (M)ELPA
-	   restclient
-	   flymake-shell auto-complete-ya-gtags
+	   restclient flymake-shell auto-complete-ya-gtags
 	   clojure-mode cider ac-cider slamhound
-	   paredit
-	   rainbow-delimiters
+	   paredit rainbow-delimiters
 	   ;shell-pop
-	   mu4e
-	   popwin emms dark-laptop-theme solarized-theme
+	   mu4e popwin emms dark-laptop-theme solarized-theme
 	   goto-last-change projectile helm helm-swoop helm-ag helm-dash ahg company
 	   helm-gtags
 	   ;eclim
-	   emacs-ditz
-	   slime
+	   emacs-ditz slime
 	   ;swank-js ac-slime ;; too slow a bit
-	   skewer-mode
-	   skeleton-complete
-	   anzu-mode markdown-mode-github
-	   coffee-mode flycheck
-	   git-timemachine
-	   emacs-groovy-mode
-	   json browse-kill-ring-new
-	   neotree
-	   google-translate
-	   fsharp-mode))
+	   skewer-mode skeleton-complete anzu-mode markdown-mode-github
+	   coffee-mode flycheck git-timemachine emacs-groovy-mode
+	   json browse-kill-ring-new neotree google-translate
+	   fsharp-mode emacs-sos))
 
 ; my version of el-get recipes
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
