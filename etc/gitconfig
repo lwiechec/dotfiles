@@ -11,6 +11,7 @@
 	branch = auto
 [core]
 	editor = emacsclient
+	gitproxy = /home/luke/bin/git-proxy
 [user]
 	name = Łukasz Wiecheć
 	email = lwiechec@o2.pl
@@ -20,6 +21,9 @@
 [http]
 	sslVerify = false
 	proxy = http://yellow.nc3a.nato.int:8088
+
+[http "http://nunc3sv9161.nu.nc3a"]
+        proxy=
 
 [push]
 	default = simple
