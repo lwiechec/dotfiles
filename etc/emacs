@@ -545,6 +545,7 @@
 ; shortcut for complilation. Use C-u <f5> to specify the compilation command.
 (global-set-key (kbd "<f5>") (lambda ()
 			       (interactive)
+			       (set-buffer "*compilation*")
 			       (setq-local compilation-read-command nil)
 			       (call-interactively 'compile)))
 
