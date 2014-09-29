@@ -240,36 +240,24 @@
     ;;  tagfile already exists; update it
     (shell-command "global -uq &>/dev/null && echo 'updated tagfile'")))
 
-(add-hook 'gtags-mode-hook  (lambda()
-    (local-set-key (kbd "M-.") 'gtags-find-tag)   ; find a tag, also M-.
-    (local-set-key (kbd "M-,") 'gtags-find-rtag)))  ; reverse tag
-
 ;; add the global tags creation for the programming mode - C
 
 (add-hook 'c-mode-common-hook
   (lambda ()
-    (require 'gtags)
-    (gtags-mode t)
     (when (not (string-match "/usr/src/linux/" (expand-file-name default-directory)))
     (djcb-gtags-create-or-update))))
 
 ;; add the global tags creation for the programming mode - Java
 (add-hook 'java-mode-hook
   (lambda()
-    (require 'gtags)
-    (gtags-mode t)
     (djcb-gtags-create-or-update)))
 
 (add-hook 'malabar-mode-hook
   (lambda()
-    (require 'gtags)
-    (gtags-mode t)
     (djcb-gtags-create-or-update)))
-
 
 ;; iedit package
 ;; allows 'dynamic' replace/edit operation on multiple places in buffer at the same time
-;; (hard to define, you need to see for yourself! :)
 (require 'iedit)
 (define-key global-map (kbd "C-;") 'iedit-mode)
 
