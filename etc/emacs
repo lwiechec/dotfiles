@@ -611,7 +611,7 @@
    ; or should it be 'erc-tls ?...
    (autoload 'erc-ssl "erc")
    (erc-ssl :server "localhost" :port 7000
-        :nick "lwiechec" :password "OldFox123" :full-name "Lukasz Wiechec")
+        :nick "lwiechec" :full-name "Lukasz Wiechec")
    (setq erc-autojoin-channels-alist '(("localhost" . "#emacs"))))
 
 ;; iy-go-to-char - quick jump to the next character in the line
