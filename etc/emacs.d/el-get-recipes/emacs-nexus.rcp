@@ -1,0 +1,5 @@
+(:name emacs-nexus
+       :description "Emacs interface to Nexus Maven repos"
+       :type github
+       :pkgname "juergenhoetzel/emacs-nexus"
+       :provides nexus)
