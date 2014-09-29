@@ -337,6 +337,10 @@
 (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show an URL." t)
 (global-set-key (kbd "C-c x") 'browse-url)
 
+(setq browse-url-generic-program "google-chrome"
+      browse-url-generic-args '("--proxy-pac-url=file:///home/luke/pac.js"))
+
+
 ;; show nice window of recently killed lines in the kill ring
 (global-set-key "\C-cy" '(lambda ()
    (interactive)
