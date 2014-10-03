@@ -531,7 +531,7 @@
 
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
 
-; add regexp for compilation to recoginze node's error messages
+; add regexp for compilation to recognize node's error messages
 ; TODO: how to limit the regexp to shell buffers only?
 (add-to-list 'compilation-error-regexp-alist
 	     '("\\(/[^:]+\\):\\([0-9]+\\):\\([0-9]+\\)" 1 2 3))
