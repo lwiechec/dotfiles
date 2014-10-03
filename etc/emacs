@@ -603,7 +603,7 @@
 
 ; start proxy tunnel before ERC connects
 (add-hook 'erc-before-connect
-	(lambda (one two three) (setup-socks-proxy-connection "213.92.8.4" 7000 7000)))
+	(lambda (one two three) (setup-socks-proxy-connection "193.219.128.49" 7000 7000)))
 
 (defun start-irc ()
    "Connect to IRC server."
