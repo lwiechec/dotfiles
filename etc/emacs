@@ -857,7 +857,8 @@
         (org-mode "C-c" ) ;; then you can define per-mode
         (outline-minor-mode "C-c @")
 	(malabar-mode "C-c C-v")
-	(projectile-mode "C-c p")))
+	(projectile-mode "C-c p")
+	(workgroups-mode "C-c w")))
 (setq guide-key/guide-key-sequence '("C-x r" "C-x 4"))
 (guide-key-mode 1)  ; Enable guide-key-mode
 
