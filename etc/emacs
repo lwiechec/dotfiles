@@ -146,10 +146,11 @@
 	   nxhtml pcache popup smart-tab smex twittering-mode
 	   undo-tree workgroups yasnippet
 	   malabar-mode ; from (M)ELPA
-	   restclient flymake-shell auto-complete-ya-gtags
-	   clojure-mode cider ac-cider slamhound
+	   restclient flymake-shell
+	   clojure-mode cider slamhound
 	   paredit rainbow-delimiters
 	   ;shell-pop
+	   jdibug
 	   mu4e popwin emms dark-laptop-theme solarized-theme
 	   goto-last-change projectile helm helm-swoop helm-ag helm-dash ahg company
 	   helm-gtags
@@ -159,7 +160,8 @@
 	   skewer-mode skeleton-complete anzu-mode markdown-mode-github
 	   coffee-mode flycheck git-timemachine emacs-groovy-mode
 	   json browse-kill-ring-new neotree google-translate
-	   fsharp-mode emacs-sos))
+	   fsharp-mode emacs-sos
+	   haskell-mode))
 
 ; my version of el-get recipes
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
