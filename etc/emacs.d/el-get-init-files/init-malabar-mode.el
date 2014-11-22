@@ -46,8 +46,6 @@
    (format "exec:exec -Dexec.executable='java' -Dexec.args='-classpath %%classpath -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=1044' %s" main-class)))
 
 (add-hook 'malabar-mode-hook  (lambda()
-    (local-set-key [(f11)] 'javadoc-lookup)
-    (local-set-key [(shift f11)] 'javadoc-help)
     (local-set-key (kbd "C-c C-v C-n") 'malabar-visit-corresponding-test)
     (local-set-key (kbd "C-c C-v T") 'my-malabar-run-test)))
 
