@@ -28,29 +28,77 @@
  '(emms-track-initialize-functions (quote (emms-info-initialize-track)))
  '(emms-volume-change-amount 3)
  '(emms-volume-change-function (quote emms-volume-mpd-change))
+ '(foreground-color "#839496")
  '(gtags-path-style (quote relative))
+ '(helm-gtags-auto-update t)
+ '(helm-gtags-ignore-case t)
+ '(helm-gtags-path-style (quote helm))
+ '(jiralib-url "http://nunc3sv9161.nu.nc3a:8000")
  '(newsticker-html-renderer (quote w3m-region))
- '(org-agenda-files (quote ("~/Dropbox/org" "~/Dropbox/org/deft" "~/.org-mode/")))
+ '(org-agenda-files (quote ("/home/luke/Dropbox/org/agenda.org" "/home/luke/Dropbox/org/blackberry-comparison.org" "/home/luke/Dropbox/org/journal.org" "/home/luke/Dropbox/org/mobileorg.org" "/home/luke/Dropbox/org/notes.org" "/home/luke/Dropbox/org/todos.org" "/home/luke/Dropbox/org/deft/deft-0.org" "/home/luke/Dropbox/org/deft/deft-1.org" "/home/luke/Dropbox/org/deft/deft-10.org" "/home/luke/Dropbox/org/deft/deft-11.org" "/home/luke/Dropbox/org/deft/deft-12.org" "/home/luke/Dropbox/org/deft/deft-13.org" "/home/luke/Dropbox/org/deft/deft-14.org" "/home/luke/Dropbox/org/deft/deft-15.org" "/home/luke/Dropbox/org/deft/deft-16.org" "/home/luke/Dropbox/org/deft/deft-17.org" "/home/luke/Dropbox/org/deft/deft-18.org" "/home/luke/Dropbox/org/deft/deft-19.org" "/home/luke/Dropbox/org/deft/deft-2.org" "/home/luke/Dropbox/org/deft/deft-20.org" "/home/luke/Dropbox/org/deft/deft-21.org" "/home/luke/Dropbox/org/deft/deft-22.org" "/home/luke/Dropbox/org/deft/deft-23.org" "/home/luke/Dropbox/org/deft/deft-24.org" "/home/luke/Dropbox/org/deft/deft-25.org" "/home/luke/Dropbox/org/deft/deft-26.org" "/home/luke/Dropbox/org/deft/deft-27.org" "/home/luke/Dropbox/org/deft/deft-28 (luke-laptop's conflicted copy 2014-08-27).org" "/home/luke/Dropbox/org/deft/deft-28.org" "/home/luke/Dropbox/org/deft/deft-29.org" "/home/luke/Dropbox/org/deft/deft-3.org" "/home/luke/Dropbox/org/deft/deft-30.org" "/home/luke/Dropbox/org/deft/deft-31.org" "/home/luke/Dropbox/org/deft/deft-32.org" "/home/luke/Dropbox/org/deft/deft-33.org" "/home/luke/Dropbox/org/deft/deft-34.org" "/home/luke/Dropbox/org/deft/deft-35.org" "/home/luke/Dropbox/org/deft/deft-36.org" "/home/luke/Dropbox/org/deft/deft-37.org" "/home/luke/Dropbox/org/deft/deft-38.org" "/home/luke/Dropbox/org/deft/deft-39.org" "/home/luke/Dropbox/org/deft/deft-4.org" "/home/luke/Dropbox/org/deft/deft-40.org" "/home/luke/Dropbox/org/deft/deft-41.org" "/home/luke/Dropbox/org/deft/deft-5.org" "/home/luke/Dropbox/org/deft/deft-6.org" "/home/luke/Dropbox/org/deft/deft-7.org" "/home/luke/Dropbox/org/deft/deft-8.org" "/home/luke/Dropbox/org/deft/deft-9.org" "/home/luke/.org-jira/")))
  '(org-agenda-include-diary t)
  '(org-capture-templates (quote (("t" "Todo" entry (file+headline "~/Dropbox/org/agenda.org" "Tasks") (file "~/Dropbox/org/templates/todo.orgtmpl")))))
+ '(relative-gtags-ignore-case t)
  '(safe-local-variable-values (quote ((eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook" (add-hook (quote write-contents-functions) (lambda nil (delete-trailing-whitespace) nil)) (require (quote whitespace)) "Sometimes the mode needs to be toggled off and on." (whitespace-mode 0) (whitespace-mode 1)) (whitespace-line-column . 80) (whitespace-style face trailing lines-tail) (require-final-newline . t))))
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "localhost")
  '(smtpmail-smtp-service 1025)
  '(tail-max-size 20)
  '(tail-volatile nil)
- '(tramp-syntax (quote ftp))
- '(url-proxy-services (quote (("no_proxy" . "localhost\\|127.0.0.1\\|^.*nu.nc3a") ("http" . "yellow.nc3a.nato.int:8088") ("https" . "yellow.nc3a.nato.int:8088"))))
- '(url-using-proxy "http://yellow.nc3a.nato.int:8088" t))
+ '(tramp-syntax (quote ftp)))
 
-;; setup environment variables for proxies
-(setq enable-proxy t) ; for now always yes
-(when enable-proxy
-  (setenv "http_proxy" "http://yellow.nc3a.nato.int:8088")
-  (setenv "https_proxy" "http://yellow.nc3a.nato.int:8088")
-  (setenv "no_proxy" "localhost,127.0.0.1,.nu.nc3a")
+;; setup the proxy
+(defun proxy-set () "sets (probably) all the proxies"
+  (interactive)
+  (progn
+    (setenv "http_proxy" "http://yellow.nc3a.nato.int:8088")
+    (setenv "https_proxy" "http://yellow.nc3a.nato.int:8088")
+    (setenv "no_proxy" "localhost,127.0.0.1,.nu.nc3a")
+    (setq url-proxy-services (quote (("no_proxy" . "localhost\\|127.0.0.1\\|^.*nu.nc3a") ("http" . "yellow.nc3a.nato.int:8088") ("https" . "yellow.nc3a.nato.int:8088"))))
+    (setq url-using-proxy "http://yellow.nc3a.nato.int:8088")
+    (setq w3m-command-arguments-alist '(("^http://\\(?:[^/]*\\.\\)*nc3a\\.com\\(?:/\\|$\\)" "-no-proxy")
+ ("" "-o" "http_proxy=http://yellow.nc3a.nato.int:8088")))
+    (message "Proxy set"))
   )
 
+(defun proxy-unset () "cleans up the proxy settings for Emacs"
+  (interactive)
+  (progn
+    (setenv "http_proxy" nil)
+    (setenv "https_proxy" nil)
+    (setenv "no_proxy" nil)
+    (setq url-proxy-services nil)
+    (setq url-using-proxy nil)
+    (setq w3m-command-arguments-alist nil)
+    (message "Proxy un-set"))
+  )
+
+;; simple check if we are at home or at work
+;; depends on my wicd scripts that cat the ESSID and BSSID values for
+;; wireless access points
+(defun chomp (str)
+      "Chomp leading and tailing whitespace from STR."
+      (while (string-match "\\`\n+\\|^\\s-+\\|\\s-+$\\|\n+\\'"
+                           str)
+        (setq str (replace-match "" t t str)))
+      str)
+
+(defun file-string (file)
+    "Read the contents of a file and return as a string."
+    (with-current-buffer (find-file-noselect file)
+      (buffer-string)))
+
+(defconst essid-file "/etc/ESSID"
+  "file where Wicd has written the ESSID of the network")
+
+(defun set-proxy () "handle proxy setting."
+  (let ((essid (chomp (file-string essid-file))))
+    (cond
+     ((string= essid "Ziggo53726") (proxy-unset)) ; no proxy for home
+     ((string= essid "NC3A-84") (proxy-set))
+     (proxy-unset))))
+
+(set-proxy)
 
 ;; el-get setup
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
