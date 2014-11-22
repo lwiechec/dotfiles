@@ -5,13 +5,16 @@
 	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
 	lg = !"git lg1"/
         tagcommit = !sh -c 'git rev-list $0 | head -n 1'
+	# change commits in a repository
+	change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [ $`echo $VAR` = \\\"$OLD\\\" ]; then export $VAR=\\\"$NEW\\\"; fi\" $@; }; f"
+	# list blobs in the repo, sorted by size
+	fsize = git ls-tree -r -t -l --full-name HEAD | sort -rn -k 4 | less
 [color]
 	diff = auto
 	status = auto
 	branch = auto
 [core]
 	editor = emacsclient
-	gitproxy = /home/luke/bin/git-proxy
 [user]
 	name = Łukasz Wiecheć
 	email = lwiechec@o2.pl
@@ -20,10 +23,8 @@
 	oauth-token = 308862150f166f57d8ddb06650f24698d7854ef2
 [http]
 	sslVerify = false
-	proxy = http://yellow.nc3a.nato.int:8088
-
-[http "http://nunc3sv9161.nu.nc3a"]
-        proxy=
 
 [push]
 	default = simple
+[credential]
+	helper = cache --timeout=7200
