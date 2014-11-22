@@ -134,9 +134,8 @@
 
 ; list of el-get packages to use
 (setq my:el-get-packages
-  '(auto-complete ace-jump-mode ack anything
-	   auto-complete auto-complete-css auto-complete-emacs-lisp
-	   auto-complete-latex auto-complete-yasnippet breadcrumb chumpy-windows
+  '(ace-jump-mode ack anything
+	   breadcrumb chumpy-windows
 	   deft dired-single guide-key git-commit-mode git-rebase-mode
 	   magit-push-remote full-ack ack-and-a-half fuzzy iedit
   	   ;js2-mode
