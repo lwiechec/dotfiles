@@ -1,0 +1,5 @@
+(:name project-explorer
+       :description "A project explorer toolbar; integrates with projectile"
+       :website "https://github.com/sabof/project-explorer"
+       :type github
+       :pkgname "sabof/project-explorer")

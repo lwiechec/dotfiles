@@ -1,0 +1,6 @@
+(:name jdibug
+       :description "JDIBug is Java debugger for Emacs"
+       :type github
+       :pkgname "lwiechec/jdibug"
+       :build '(("make"))
+       :provides 'jdibug)

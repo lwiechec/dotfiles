@@ -1,0 +1,4 @@
+(:name gnuplot-mode2
+       :description "GNUplot mode - from github"
+       :type github
+       :pkgname "bruceravel/gnuplot-mode")
