@@ -12,3 +12,16 @@
 
 ;; global helm mode
 (helm-mode 1)
+
+;; this will make the list buffers window show the buffers sorted on 'last accessed' ones
+;; as seen in http://www.reddit.com/r/emacs/comments/2jzkz7/quickly_switch_to_previous_buffer
+(defun helm-buffers-list ()
+  "Preconfigured `helm' to list buffers."
+  (interactive)
+  (helm :sources '(helm-source-buffers-list
+                   helm-source-ido-virtual-buffers
+                   helm-source-buffer-not-found)
+        :buffer "*helm buffers*"
+        :keymap helm-buffer-map
+        :truncate-lines t
+        :preselect (buffer-name (other-buffer (current-buffer) 1))))
