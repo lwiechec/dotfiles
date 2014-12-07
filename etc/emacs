@@ -499,12 +499,6 @@
 ;; use js2-mode for editing JavaScript
 (add-to-list 'auto-mode-alist '("[.]js$" . js2-mode))
 
-
-; add source to auto complete from Semantic
-;; NOTE: commenting it out as it slows down emacs!!
-;(add-hook 'java-mode-hook (lambda () (add-to-list 'ac-sources 'ac-source-semantic)))
-
-
 ;; add folding minor mode to JavaScript mode
 (add-hook 'js2-mode-hook
           (lambda ()
@@ -954,6 +948,19 @@
 
 ;; shortcut to magit-status
 (global-set-key (kbd "<f7>") 'magit-status)
+
+;; semanticdb settings
+;; add all project directories to SemanticDB project roots var
+;; (as seen in http://stackoverflow.com/questions/221365/emacs-lisp-how-to-add-a-folder-and-all-its-first-level-sub-folders-to-the-load)
+(let ((basedir "~/work/projects"))
+  (dolist (f (directory-files basedir))
+    (let ((name (concat basedir "/" f)))
+      (when (and (file-directory-p name)
+		 (not (equal f ".."))
+		 (not (equal f ".")))
+	(add-to-list 'semanticdb-project-roots name)))))
+
+
 
 (provide 'emacs)
 ;;; emacs ends here
