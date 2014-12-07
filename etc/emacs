@@ -59,7 +59,7 @@
     (setq url-using-proxy "http://yellow.nc3a.nato.int:8088")
     (setq w3m-command-arguments-alist '(("^http://\\(?:[^/]*\\.\\)*nc3a\\.com\\(?:/\\|$\\)" "-no-proxy")
  ("" "-o" "http_proxy=http://yellow.nc3a.nato.int:8088")))
-    (message "Proxy set"))
+    (message "Proxy is set."))
   )
 
 (defun proxy-unset () "cleans up the proxy settings for Emacs"
@@ -71,7 +71,7 @@
     (setq url-proxy-services nil)
     (setq url-using-proxy nil)
     (setq w3m-command-arguments-alist nil)
-    (message "Proxy un-set"))
+    (message "Proxy is un-set."))
   )
 
 ;; simple check if we are at home or at work
@@ -92,14 +92,15 @@
 (defconst essid-file "/etc/ESSID"
   "file where Wicd has written the ESSID of the network")
 
-(defun set-proxy () "handle proxy setting."
+(defun autoset-proxy () "handle proxy setting."
   (let ((essid (chomp (file-string essid-file))))
     (cond
+     ;; list of conditions for all access points that we know about
      ((string= essid "Ziggo53726") (proxy-unset)) ; no proxy for home
      ((string= essid "NC3A-84") (proxy-set))
      (proxy-unset))))
 
-(set-proxy)
+(autoset-proxy)
 
 ;; el-get setup
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
