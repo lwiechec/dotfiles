@@ -279,34 +279,63 @@
 
 ;; GNU global tagging solution settings
 
-(defun djcb-gtags-create-or-update ()
-  "create or update the gnu global tag file"
+
+;; from http://www.emacswiki.org/emacs/GnuGlobal
+(defun gtags-root-dir ()
+  "Returns GTAGS root directory or nil if doesn't exist."
+  (with-temp-buffer
+    (if (zerop (call-process "global" nil t nil "-pr"))
+	(buffer-substring (point-min) (1- (point-max)))
+      nil)))
+
+(defun gtags-update-single (filename)
+  "Update Gtags database for changes in a single file"
   (interactive)
-  (if (not (= 0 (call-process "global" nil nil nil " -p"))) ; tagfile doesn't exist?
-    (let ((olddir default-directory)
-          (topdir (read-directory-name
-                    "gtags: top of source tree:" default-directory)))
-      (cd topdir)
-      (shell-command "gtags -q && echo 'created tagfile'")
-      (cd olddir)) ; restore
-    ;;  tagfile already exists; update it
-    (shell-command "global -uq &>/dev/null && echo 'updated tagfile'")))
+  (start-process "update-gtags" "update-gtags" "bash" "-c" (concat "cd " (gtags-root-dir) " ; gtags --single-update " filename )))
+
+(defun gtags-update-current-file()
+  (interactive)
+  (defvar filename)
+  (setq filename (replace-regexp-in-string (gtags-root-dir) "." (buffer-file-name (current-buffer))))
+  (gtags-update-single filename)
+  (message "Gtags updated for %s" filename))
+
+(defun gtags-update-hook()
+  "Update GTAGS file incrementally upon saving a file"
+  (when helm-gtags-mode
+    (when (gtags-root-dir)
+      (gtags-update-current-file))))
+
+(add-hook 'after-save-hook 'gtags-update-hook)
 
 ;; add the global tags creation for the programming mode - C
 
-(add-hook 'c-mode-common-hook
-  (lambda ()
-    (when (not (string-match "/usr/src/linux/" (expand-file-name default-directory)))
-    (djcb-gtags-create-or-update))))
+;; (defun djcb-gtags-create-or-update ()
+;;   "create or update the gnu global tag file"
+;;   (interactive)
+;;   (if (not (= 0 (call-process "global" nil nil nil " -p"))) ; tagfile doesn't exist?
+;;     (let ((olddir default-directory)
+;;           (topdir (read-directory-name
+;;                     "gtags: top of source tree:" default-directory)))
+;;       (cd topdir)
+;;       (shell-command "gtags -q && echo 'created tagfile'")
+;;       (cd olddir)) ; restore
+;;     ;;  tagfile already exists; update it
+;;     (shell-command "global -uq &>/dev/null && echo 'updated tagfile'")))
 
-;; add the global tags creation for the programming mode - Java
-(add-hook 'java-mode-hook
-  (lambda()
-    (djcb-gtags-create-or-update)))
+;; (add-hook 'c-mode-common-hook
+;;   (lambda ()
+;;     (when (not (string-match "/usr/src/linux/" (expand-file-name default-directory)))
+;;     (djcb-gtags-create-or-update))))
 
-(add-hook 'malabar-mode-hook
-  (lambda()
-    (djcb-gtags-create-or-update)))
+;; ;; add the global tags creation for the programming mode - Java
+;; (add-hook 'java-mode-hook
+;;   (lambda()
+;;     (djcb-gtags-create-or-update)))
+
+;; (add-hook 'malabar-mode-hook
+;;   (lambda()
+;;     (djcb-gtags-create-or-update)))
 
 ;; iedit package
 ;; allows 'dynamic' replace/edit operation on multiple places in buffer at the same time
