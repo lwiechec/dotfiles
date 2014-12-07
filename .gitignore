@@ -10,3 +10,4 @@ etc/emacs.d/.org-id-locations
 projectile.cache
 session*
 *.pyc
+etc/emacs.d/semanticdb/
