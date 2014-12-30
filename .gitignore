@@ -11,3 +11,4 @@ projectile.cache
 session*
 *.pyc
 etc/emacs.d/semanticdb/
+**/nohup.out

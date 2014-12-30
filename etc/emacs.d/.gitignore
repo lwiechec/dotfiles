@@ -20,3 +20,6 @@ el-get
 projectile-bookmarks.eld
 .emms-cache
 srecode-map.el
+oauth2.plstore
+org-clock-save.el
+abbrev_defs
