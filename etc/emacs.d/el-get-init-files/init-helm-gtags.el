@@ -19,3 +19,5 @@
      (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
      (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
      (define-key helm-gtags-mode-map (kbd "C-c M-,") 'helm-gtags-pop-stack)))
+
+(helm-gtags-mode t)
