@@ -56,7 +56,7 @@
 (jwintz/dash-install "Ruby_2")
 (jwintz/dash-install "RequireJS")
 
-(setq helm-dash-common-docsets '("C" "C++" "Qt"))
+(setq helm-dash-common-docsets '("Java_SE7" "Markdown" "Bash"))
 (setq helm-dash-min-length 2)
 
 (add-hook 'prog-mode-hook 'jwintz/dash-hook)
