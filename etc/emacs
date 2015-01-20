@@ -854,10 +854,25 @@
 (require 'uniquify)
 (toggle-uniquify-buffer-names)
 
-; StumpWM stuff
+;; StumpWM stuff
 (require 'stumpwm-mode)
-; adapt Ediff mode *NOT* to spawn another frame
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
+;; EDIFF
+;; some of the ediff settings come from http://oremacs.com/2015/01/17/setting-up-ediff/
+(defmacro csetq (variable value)
+  `(funcall (or (get ',variable 'custom-set)
+                'set-default)
+            ',variable ,value))
+
+;; adapt Ediff mode *NOT* to spawn another frame for control
+(csetq ediff-window-setup-function 'ediff-setup-windows-plain)
+
+;; split the windows horizontally, not vertically
+(csetq ediff-split-window-function 'split-window-horizontally)
+
+;; ignore whitespace
+(csetq ediff-diff-options "-w")
+
 
 ; I don't like toolbar, disable it
 (tool-bar-mode -1)
