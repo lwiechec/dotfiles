@@ -12,3 +12,4 @@ session*
 *.pyc
 etc/emacs.d/semanticdb/
 **/nohup.out
+flycheck_org-clock-save.el
