@@ -939,6 +939,8 @@
 		 (not (equal f ".")))
 	(add-to-list 'semanticdb-project-roots name)))))
 
+;; display time in in modeline
+(display-time-mode 1)
 
 
 (provide 'emacs)
