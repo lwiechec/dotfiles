@@ -8,12 +8,16 @@
 (require 'emms-streams)
 (require 'emms-mark)
 (require 'emms-volume)
+(require 'emms-mode-line)
+(require 'emms-history)
 
 ; mpd setup
 (setq emms-player-mpd-server-name "localhost")
 (setq emms-player-mpd-server-port "6600")
 (add-to-list 'emms-info-functions 'emms-info-mpd)
 
+;; my directory for music
+(setq emms-source-file-default-directory "~/Music/")
 
 (emms-standard)
 (setq emms-player-list '(emms-player-mplayer emms-player-mplayer-playlist))
@@ -29,3 +33,12 @@
 (global-set-key "\C-cms" 'emms-seek)
 (global-set-key "\C-cm-" 'emms-volume-mode-minus)
 (global-set-key "\C-cm+" 'emms-volume-mode-plus)
+
+;; enables mode line information
+(emms-mode-line 1)
+
+;; load the playlists
+(emms-history-load)
+
+(provide 'init-emms)
+;;; init-emms.el ends here

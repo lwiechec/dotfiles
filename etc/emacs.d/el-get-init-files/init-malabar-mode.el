@@ -1,10 +1,18 @@
-(require 'malabar-mode)
-
-(add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
+(add-hook 'after-init-hook
+	  (lambda ()
+	    (require 'flycheck)
+	    (message "activate-malabar-mode")
+	    ;;(add-hook 'malabar-java-mode-hook 'flycheck-mode)
+	    ;;(add-hook 'malabar-groovy-mode-hook 'flycheck-mode)
+	    (activate-malabar-mode)
+	    (require 'inf-groovy)
+	    (run-groovy (concat groovy-home "/bin/" groovy-program-name))
+	    (malabar-run-groovy)
+	    ))
 
 ; optional: simulate constant compile-after-save (as in Eclipse)
 ;(add-hook 'malabar-mode-hook
-;     (lambda ()
+					;     (lambda ()
 ;       (add-hook 'after-save-hook 'malabar-compile-file-silently
 ;                  nil t)))
 
@@ -34,12 +42,12 @@
   (setq compilation-finish-functions 'compile-autoclose))
 
 ; as the stock 'Run test via maven from malabar' does not work for me, here's a workaround
-(defun my-malabar-run-test ()
+(defun lw/malabar-run-test ()
   (interactive)
   "runs Maven test for current buffer. Does not perform check if the test is actually a test."
   (malabar-run-maven-command (concat "-Dtest=" (car (split-string (buffer-name (current-buffer)) ".java")) " test")))
 
-(defun my-malabar-debug (main-class)
+(defun lw/malabar-debug (main-class)
   (interactive "sMain class:")
   "Run (main) class in debug mode"
   (malabar-run-maven-command
@@ -47,17 +55,17 @@
 
 (add-hook 'malabar-mode-hook  (lambda()
     (local-set-key (kbd "C-c C-v C-n") 'malabar-visit-corresponding-test)
-    (local-set-key (kbd "C-c C-v T") 'my-malabar-run-test)))
+    (local-set-key (kbd "C-c C-v T") 'lw/malabar-run-test)))
 
 ;; some hints from http://ivvprivate.blog.com/emacs/emacs-java/
 ;; better regexp for compilation buffers - stock Malabar regexps are not working as they include
 ;; a space in front of the filename
-(add-to-list 'compilation-error-regexp-alist
+;(add-to-list 'compilation-error-regexp-alist
 	     ;; works for Maven 3.x
-	     '("^\\(\\[ERROR\\] \\)?\\(/[^:]+\\):\\[\\([0-9]+\\),\\([0-9]+\\)\\]" 2 3 4))
+	     ;;'("^\\(\\[ERROR\\] \\)?\\(/[^:]+\\):\\[\\([0-9]+\\),\\([0-9]+\\)\\]" 2 3 4))
 ;(add-to-list 'compilation-error-regexp-alist
 ;	     ;; works for maven jde javac server
 ;	     '("^\\(/[^:]+\\):\\([0-9]+\\):" 1 2))
-(add-to-list 'compilation-error-regexp-alist
+;(add-to-list 'compilation-error-regexp-alist
 	     ;; surefire
-	     '("^\\sw+(\\(\\sw+\\.\\)+\\(\\sw+\\)).+<<< \\(FAILURE\\|ERROR\\)!$" 2))
+	     ;;'("^\\sw+(\\(\\sw+\\.\\)+\\(\\sw+\\)).+<<< \\(FAILURE\\|ERROR\\)!$" 2))

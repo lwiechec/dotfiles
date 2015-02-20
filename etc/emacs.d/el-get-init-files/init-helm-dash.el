@@ -11,8 +11,8 @@
         (if (string= docset "Emacs_Lisp")
             (concat (concat helm-dash-docsets-path "/") "Emacs Lisp.docset")
           (concat
-            (concat
-             (concat
+	   (concat
+	    (concat
               (concat helm-dash-docsets-path "/")
               (nth 0 (split-string docset "_")))) ".docset"))))))
 
