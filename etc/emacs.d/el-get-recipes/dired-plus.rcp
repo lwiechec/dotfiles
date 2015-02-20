@@ -1,0 +1,4 @@
+(:name dired-plus
+       :description "Dired+ package (Github recipe)"
+       :type github
+       :pkgname "emacsmirror/dired-plus")

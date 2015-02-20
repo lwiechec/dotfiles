@@ -1,0 +1,22 @@
+(:name cedet
+       :website "http://github.com/alexott/cedet"
+       :type "github"
+       :pkgname "alexott/cedet"
+       :branch "devel"
+       :description "CEDET is a Collection of Emacs Development Environment Tools written with the end goal of creating an advanced development environment in Emacs."
+       :build
+       `(("sh" "-c" "touch `find . -name Makefile`")
+         ("make" ,(format "EMACS=%s" (shell-quote-argument el-get-emacs)) "clean-all")
+         ("make" ,(format "EMACS=%s" (shell-quote-argument el-get-emacs)) "all")
+         ("make" ,(format "EMACS=%s" (shell-quote-argument el-get-emacs)) "-C" "contrib"))
+       :lazy nil
+       ;; :load-path ("." "lisp/cedet" "lisp/eieio" "lisp/speedbar" "lisp/cedet/ede" "lisp/cedet/cogre"
+       ;; 		   "lisp/cedet/srecode" "lisp/cedet/semantic")
+       :post-init
+       (if (or (featurep 'cedet-devel-load)
+               (featurep 'eieio))
+           (message (concat "Emacs' built-in CEDET has already been loaded!  Restart"
+			    " Emacs to load CEDET from el-get instead."))
+         (load (expand-file-name "cedet-devel-load.el" pdir))
+ 	 )
+       )

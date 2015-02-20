@@ -1,0 +1,6 @@
+(:name maven-pom-mode
+       :type github
+       :pkgname "m0smith/maven-pom-mode"
+       :description "major mode for editing Maven's POM files"
+       :website "https://github.com/m0smith/maven-pom-mode"
+       :post-init (load "maven-pom-mode"))

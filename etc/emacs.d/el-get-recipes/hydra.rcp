@@ -1,0 +1,5 @@
+(:name hydra
+       :description "Make Emacs bindings that stick proud!"
+       :type github
+       :pkgname "abo-abo/hydra"
+       :features hydra)

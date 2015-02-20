@@ -1,0 +1,8 @@
+(:name malabar-mode-jar
+       :type github
+       :pkgname "m0smith/malabar-mode-jar"
+       :description "Java code for Malabar mode. "
+       :website "https://github.com/m0smith/malabar-mode-jar"
+       :build
+       `(("mvn" "-DskipTests" "-Pdevel" "install"))
+       )
