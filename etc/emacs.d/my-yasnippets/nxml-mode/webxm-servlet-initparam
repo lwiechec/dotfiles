@@ -1,0 +1,9 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: web.xml-init-param
+# key: init-param_
+# --
+<init-param>
+  <param-name>$1</param-name>
+  <param-value>$2</param-value>
+</init-param>
+$0
