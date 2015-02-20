@@ -31,7 +31,7 @@
     (setenv "https_proxy" nil)
     (setenv "no_proxy" nil)
     (setq url-proxy-services nil)
-    (setq url-using-proxy nil)
+    ;;(setq url-using-proxy nil)
     (setq w3m-command-arguments-alist nil)
     (message "Proxy is un-set."))
   )
