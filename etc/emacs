@@ -10,18 +10,19 @@
 (load custom-file 'noerror)
 
 ;; setup the proxy
+;; note that w3m will get the proxies from system environment variables
 (defun proxy-set () "sets (probably) all the proxies"
-  (interactive)
-  (progn
-    (setenv "http_proxy" "http://yellow.nc3a.nato.int:8088")
-    (setenv "https_proxy" "http://yellow.nc3a.nato.int:8088")
-    (setenv "no_proxy" "localhost,127.0.0.1,.nu.nc3a")
-    (setq url-proxy-services (quote (("no_proxy" . "localhost\\|127.0.0.1\\|^.*nu.nc3a") ("http" . "yellow.nc3a.nato.int:8088") ("https" . "yellow.nc3a.nato.int:8088"))))
-    (setq url-using-proxy "http://yellow.nc3a.nato.int:8088")
-    (setq w3m-command-arguments-alist '(("^http://\\(?:[^/]*\\.\\)*nc3a\\.com\\(?:/\\|$\\)" "-no-proxy")
- ("" "-o" "http_proxy=http://yellow.nc3a.nato.int:8088")))
-    (message "Proxy is set."))
-  )
+       (interactive)
+       (let ((_proxy "yellow.nc3a.nato.int:8088")
+	     (_no_proxy_env "localhost,127.0.0.1,nu.nc3a")
+	     (_no_proxy_regexp "localhost"))
+	 (progn
+	   (setenv "http_proxy" (concat "http://" _proxy))
+	   (setenv "https_proxy" (concat "http://" _proxy))
+	   (setenv "no_proxy" _no_proxy_env)
+	   (setq url-proxy-services (list (cons "no_proxy" _no_proxy_regexp) (cons "http" _proxy) (cons "https" _proxy)))
+	   (message "Proxy is set."))
+	 ))
 
 (defun proxy-unset () "cleans up the proxy settings for Emacs"
   (interactive)
