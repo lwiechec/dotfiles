@@ -943,7 +943,16 @@
 
 ;; display time in in modeline
 (display-time-mode 1)
+;; I would like to display the battery status as well
+;; TODO: (only when disconnected from power?)
+(display-battery-mode 1)
 
+;; from http://oremacs.com/2015/02/18/undo-nonsense/
+(global-set-key
+ (kbd "C-x C-r")
+ (lambda () (interactive) (progn
+			    (revert-buffer nil t)
+			    (message "buffer reverted"))))
 
 (provide 'emacs)
 ;;; emacs ends here
