@@ -109,24 +109,26 @@
 
 ; list of el-get packages to use
 (setq my:el-get-packages
-  '(ace-jump-mode ack anything
-	   breadcrumb chumpy-windows
-	   deft dired-single guide-key git-commit-mode git-rebase-mode
-	   magit-push-remote full-ack ack-and-a-half fuzzy iedit
+      '(use-package cedet groovy-mode rainbow-delimiters dash flycheck malabar-mode ; from (M)ELPA
+	      ace-jump-mode ack anything
+	      breadcrumb chumpy-windows
+	      deft dired-single dired-plus guide-key git-commit-mode git-rebase-mode
+	      magit-push-remote full-ack ack-and-a-half fuzzy iedit
   	   ;js2-mode
 	   ;js-comint
 	   logito multiple-cursors
 	   ;multi-web-mode
 	   nxhtml pcache popup smart-tab smex twittering-mode
 	   undo-tree workgroups yasnippet
-	   malabar-mode ; from (M)ELPA
 	   restclient flymake-shell
 	   clojure-mode cider slamhound
-	   paredit rainbow-delimiters
+	   paredit
 	   ;shell-pop
 	   jdibug
 	   mu4e popwin emms dark-laptop-theme solarized-theme
-	   goto-last-change projectile helm helm-swoop helm-ag helm-dash ahg company
+	   goto-last-change projectile helm helm-swoop helm-ag
+	   helm-dash
+           ahg company
 	   helm-gtags
 	   ;eclim
 	   emacs-ditz slime
