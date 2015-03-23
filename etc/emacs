@@ -13,16 +13,23 @@
 ;; note that w3m will get the proxies from system environment variables
 (defun proxy-set () "sets (probably) all the proxies"
        (interactive)
-       (let ((_proxy "yellow.nc3a.nato.int:8088")
-	     (_no_proxy_env "localhost,127.0.0.1,nu.nc3a")
-	     (_no_proxy_regexp "localhost"))
+       (let* ((_proxy_host "yellow.nc3a.nato.int")
+	      (_proxy_port "8088")
+	      (_proxy (concat _proxy_host ":" _proxy_port))
+	      (_no_proxy_env "localhost,127.0.0.1,nu.nc3a")
+	      (_no_proxy_regexp "localhost"))
 	 (progn
 	   (setenv "http_proxy" (concat "http://" _proxy))
 	   (setenv "https_proxy" (concat "http://" _proxy))
+	   (setenv "JAVA_OPTS" (mapconcat (lambda (a) (concat "-D" (car a) "=" (cdr a)))
+					  (list (cons "http.proxyHost" _proxy_host)
+						(cons "http.proxyPort" _proxy_port)) " "))
 	   (setenv "no_proxy" _no_proxy_env)
 	   (setq url-proxy-services (list (cons "no_proxy" _no_proxy_regexp) (cons "http" _proxy) (cons "https" _proxy)))
-	   (message "Proxy is set."))
-	 ))
+	   (setq malabar-groovy-proxy-host _proxy_host
+		 malabar-groovy-proxy-port _proxy_port)
+	   (message "Proxy is set.")
+	 )))
 
 (defun proxy-unset () "cleans up the proxy settings for Emacs"
   (interactive)
@@ -30,9 +37,12 @@
     (setenv "http_proxy" nil)
     (setenv "https_proxy" nil)
     (setenv "no_proxy" nil)
-    (setq url-proxy-services nil)
-    ;;(setq url-using-proxy nil)
-    (setq w3m-command-arguments-alist nil)
+    (setenv "JAVA_OPTS" nil)
+    (setq url-proxy-services nil
+    ;;url-using-proxy nil
+	  w3m-command-arguments-alist nil
+	  malabar-groovy-proxy-host ""
+	  malabar-groovy-proxy-port "")
     (message "Proxy is un-set."))
   )
 
