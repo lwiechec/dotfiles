@@ -596,6 +596,12 @@
 			       (get-buffer-create "*compilation*")
 			       (setq-local compilation-read-command nil)
 			       (call-interactively 'compile)))
+;; no asking before compiling
+(setq compilation-ask-about-save nil)
+;; Stop on the first error.
+(setq compilation-scroll-output 'next-error)
+;; Don't stop on info or warnings.
+(setq compilation-skip-threshold 2)
 
 ;; set the color scheme - emacs 24 way!
 ;(load-theme 'dark-laptop t)
