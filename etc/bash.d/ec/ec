@@ -3,4 +3,4 @@
 # very simple wrapper around emacsclient
 # (as seen in http://devblog.avdi.org/2011/10/27/running-emacs-as-a-server-emacs-reboot-15/)
 
-exec /usr/bin/env emacsclient -c -a "" $*
+exec /usr/bin/env emacsclient -n -c -a "" $*
