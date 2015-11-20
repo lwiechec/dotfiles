@@ -484,7 +484,10 @@
             (hs-minor-mode t)
 	    ;; add highlighting TODO etc keywords
 	    (font-lock-add-keywords nil
-				    '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))))
+				    '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))
+            ;; flycheck is useful!
+	    (flycheck-mode)
+	    ))
 
 (require 'karma-run)
 
