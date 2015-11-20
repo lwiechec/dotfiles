@@ -360,11 +360,6 @@
 ;; Trash can support
 (setq delete-by-moving-to-trash t)
 
-;; toggle visibility
-(global-set-key (kbd "<f6>")      'highlight-changes-visible-mode) ;; changes
-;; remove the change-highlight in region
-(global-set-key (kbd "S-<f6>")    'highlight-changes-remove-highlight)
-
 ;; alt-pgup/pgdown jump to the previous/next change
 
 ;; if you're not already using it for something else...
