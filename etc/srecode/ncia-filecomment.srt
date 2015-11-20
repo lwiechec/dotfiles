@@ -28,14 +28,13 @@ template copyright
 {{COPYRIGHT:srecode-comment-prefix}}
 ----
 
-template ncia-filecomment :file :user :time
+template ncia-filecomment :file :user :time :indent :blank
 ----
-{{comment_start}} {{FILENAME}} --- {{^}}
+{{comment_start}} {{FILENAME}} {{^}}
 {{comment_prefix}}
 {{comment_prefix}} Copyright (C) {{YEAR}} NCIA. All Rights Reserved.
 {{comment_prefix}}
-{{comment_prefix}} Author: {{AUTHOR}} <{{EMAIL}}>{{#RCS}}
-{{comment_prefix}} X-RCS: {{DOLLAR}}Id{{DOLLAR}}{{/RCS}}
+{{comment_prefix}} Author: {{AUTHOR}} <{{EMAIL}}>
 {{comment_prefix}}
 {{>:copyright}}
 {{comment_end}}
