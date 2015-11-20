@@ -694,6 +694,8 @@
 
 ;; automatic nxml-mode for XML schema files
 (setq auto-mode-alist (cons '("\\.xsd$" . nxml-mode) auto-mode-alist))
+;; let's autocomplete
+(setq nxml-slash-auto-complete-flag t)
 
 ;; TRAMP config
 (require 'tramp)
