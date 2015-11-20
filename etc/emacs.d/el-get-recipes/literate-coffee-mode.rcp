@@ -1,0 +1,6 @@
+(:name literate-coffee-mode
+       :description "Literate CoffeeScript mode for Emacs"
+       :type "github"
+       :pkgname "syohex/emacs-literate-coffee-mode"
+       :depends coffee-mode
+       :website "https://github.com/syohex/emacs-literate-coffee-mode")

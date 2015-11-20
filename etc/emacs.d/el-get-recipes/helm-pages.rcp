@@ -1,0 +1,6 @@
+(:name helm-pages
+       :description "Treat Emacs pages (^L) helm way"
+       :type github
+       :pkgname "david-christiansen/helm-pages"
+       :depends helm
+       :provides helm-pages)

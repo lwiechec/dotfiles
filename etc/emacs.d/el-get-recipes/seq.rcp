@@ -1,0 +1,4 @@
+(:name seq
+       :description "Sequence manipulation library for Emacs. Included in Emacs 25"
+       :type github
+       :pkgname "NicolasPetton/seq.el")

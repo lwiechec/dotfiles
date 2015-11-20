@@ -1,0 +1,5 @@
+(:name browse-at-remote
+       :type github
+       :pkgname "lwiechec/browse-at-remote"
+       :description "Browse target page on github/bitbucket from emacs buffers"
+       :website "http://github.com/lwiechec/browse-at-remote")
