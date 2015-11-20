@@ -1,14 +1,16 @@
-(add-hook 'after-init-hook
+;(add-hook 'after-init-hook
 	  (lambda ()
+	    (require 's)
 	    (require 'flycheck)
 	    (message "activate-malabar-mode")
 	    ;;(add-hook 'malabar-java-mode-hook 'flycheck-mode)
 	    ;;(add-hook 'malabar-groovy-mode-hook 'flycheck-mode)
 	    (activate-malabar-mode)
 	    (require 'inf-groovy)
-	    (run-groovy (concat groovy-home "/bin/" groovy-program-name))
+	    ;(run-groovy (concat groovy-home "/bin/" groovy-program-name))
 	    (malabar-run-groovy)
-	    ))
+	    )
+;)
 
 ; optional: simulate constant compile-after-save (as in Eclipse)
 ;(add-hook 'malabar-mode-hook

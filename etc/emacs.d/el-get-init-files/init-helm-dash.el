@@ -1,3 +1,5 @@
+(require 'helm-dash)
+
 (define-key global-map (kbd "<f12>") 'helm-dash-at-point)
 
 
@@ -61,3 +63,6 @@
 
 (add-hook 'prog-mode-hook 'jwintz/dash-hook)
 (add-hook 'java-mode-hook 'jwintz/dash-hook-java)
+
+;; set the browser for the Dash to eww
+(setq helm-dash-browser-func 'eww)

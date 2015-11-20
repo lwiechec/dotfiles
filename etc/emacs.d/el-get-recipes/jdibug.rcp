@@ -2,5 +2,6 @@
        :description "JDIBug is Java debugger for Emacs"
        :type github
        :pkgname "lwiechec/jdibug"
-       :build '(("make"))
+       :branch "upstream/0.6"
+       :build '(("make" "CEDET_DIR=~/.emacs.d/el-get/cedet/lisp/cedet" "dist"))
        :provides 'jdibug)

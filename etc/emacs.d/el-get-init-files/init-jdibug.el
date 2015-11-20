@@ -1,5 +1,5 @@
 (require 'jdibug)
-(setq jdibug-connect-hosts '("localhost:4000"))
+(setq jdibug-connect-hosts '("localhost:4000" "localhost:5005"))
 
 ;; set the key bindings for my Java modes
 ;(define-key malabar-mode-map (kbd "C-c d b") 'jdibug-breakpoints-toggle)

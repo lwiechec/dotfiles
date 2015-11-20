@@ -4,7 +4,7 @@
 (require 'emms-browser)
 (require 'emms-playing-time)
 (require 'emms-playlist-mode)
-(require 'emms-player-mpd)
+;(require 'emms-player-mpd)
 (require 'emms-streams)
 (require 'emms-mark)
 (require 'emms-volume)
@@ -12,9 +12,9 @@
 (require 'emms-history)
 
 ; mpd setup
-(setq emms-player-mpd-server-name "localhost")
-(setq emms-player-mpd-server-port "6600")
-(add-to-list 'emms-info-functions 'emms-info-mpd)
+;(setq emms-player-mpd-server-name "localhost")
+;(setq emms-player-mpd-server-port "6600")
+;(add-to-list 'emms-info-functions 'emms-info-mpd)
 
 ;; my directory for music
 (setq emms-source-file-default-directory "~/Music/")
@@ -22,9 +22,7 @@
 (emms-standard)
 (setq emms-player-list '(emms-player-mplayer emms-player-mplayer-playlist))
 ; we need to add http proxy for mplayer to be able to listen to streams online
-(defun setup-http-proxy ()
-  (setenv "http_proxy" "http://yellow.nc3a.nato.int:8088"))
-(add-hook 'emms-player-started-hook #'setup-http-proxy)
+(add-hook 'emms-player-started-hook #'proxy-set)
 
 (global-set-key "\C-cm" nil)
 (global-set-key "\C-cm " 'emms-pause)

@@ -13,8 +13,8 @@
  '(company-backends
    (quote
     (company-elisp company-semantic company-bbdb company-nxml company-css company-clang company-ropemacs company-cmake company-capf
-		   (company-dabbrev-code company-gtags company-etags company-keywords)
-		   company-files company-dabbrev)))
+                   (company-dabbrev-code company-gtags company-etags company-keywords)
+                   company-files company-dabbrev)))
  '(company-dabbrev-code-modes
    (quote
     (prog-mode batch-file-mode csharp-mode css-mode erlang-mode haskell-mode jde-mode lua-mode python-mode java-mode malabar-mode js2-mode)))
@@ -30,6 +30,12 @@
      absoft ada aix ant bash borland python-tracebacks-and-caml comma cucumber msft edg-1 edg-2 epc ftnchek iar ibm irix java jikes-file jikes-line gcc-include ruby-Test::Unit gnu lcc makepp mips-1 mips-2 msft omake oracle perl php rxp sparc-pascal-file sparc-pascal-line sparc-pascal-example sun sun-ada watcom 4bsd gcov-file gcov-header gcov-nomark gcov-called-line gcov-never-called perl--Pod::Checker perl--Test perl--Test2 perl--Test::Harness weblint)))
  '(compilation-scroll-output t)
  '(compilation-skip-threshold 2)
+ '(compilation-window-height 25)
+ '(custom-safe-themes
+   (quote
+    ("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
+ '(diary-file "~/.emacs.d/diary")
+ '(ede-project-directories (quote ("/home/luke/work/projects/moskito-jmx")))
  '(el-get-user-package-directory "~/.emacs.d/el-get-init-files")
  '(emms-cache-file "~/.emacs.d/.emms-cache")
  '(emms-info-asynchronously nil)
@@ -49,37 +55,60 @@
  '(helm-gtags-auto-update t)
  '(helm-gtags-ignore-case t)
  '(helm-gtags-path-style (quote helm))
+ '(jdibug-source-paths (quote ("~/work/projects/nsili/src/java")))
  '(jiralib-url "http://nunc3sv9161.nu.nc3a:8000")
+ '(ldap-host-parameters-alist
+   (quote
+    (("nuncidc001.nu.nc3a" base "ou=nc3a" binddn "DC=nu,DC=nc3a"))))
+ '(malabar-groovy-grooysh "~/.gvm/groovy/current/bin/groovysh")
+ '(malabar-groovy-proxy-port "" t)
+ '(malabar-jdk-extra-locations (quote ("~/work/jdk/default_7")))
  '(newsticker-html-renderer (quote w3m-region))
  '(org-agenda-files
    (quote
-    ("~/Dropbox/org/timesheet.2015.org" "/home/luke/Dropbox/org/agenda.org" "/home/luke/Dropbox/org/blackberry-comparison.org" "/home/luke/Dropbox/org/journal.org" "/home/luke/Dropbox/org/mobileorg.org" "/home/luke/Dropbox/org/notes.org" "/home/luke/Dropbox/org/todos.org" "/home/luke/Dropbox/org/deft/deft-0.org" "/home/luke/Dropbox/org/deft/deft-1.org" "/home/luke/Dropbox/org/deft/deft-10.org" "/home/luke/Dropbox/org/deft/deft-11.org" "/home/luke/Dropbox/org/deft/deft-12.org" "/home/luke/Dropbox/org/deft/deft-13.org" "/home/luke/Dropbox/org/deft/deft-14.org" "/home/luke/Dropbox/org/deft/deft-15.org" "/home/luke/Dropbox/org/deft/deft-16.org" "/home/luke/Dropbox/org/deft/deft-17.org" "/home/luke/Dropbox/org/deft/deft-18.org" "/home/luke/Dropbox/org/deft/deft-19.org" "/home/luke/Dropbox/org/deft/deft-2.org" "/home/luke/Dropbox/org/deft/deft-20.org" "/home/luke/Dropbox/org/deft/deft-21.org" "/home/luke/Dropbox/org/deft/deft-22.org" "/home/luke/Dropbox/org/deft/deft-23.org" "/home/luke/Dropbox/org/deft/deft-24.org" "/home/luke/Dropbox/org/deft/deft-25.org" "/home/luke/Dropbox/org/deft/deft-26.org" "/home/luke/Dropbox/org/deft/deft-27.org" "/home/luke/Dropbox/org/deft/deft-28 (luke-laptop's conflicted copy 2014-08-27).org" "/home/luke/Dropbox/org/deft/deft-28.org" "/home/luke/Dropbox/org/deft/deft-29.org" "/home/luke/Dropbox/org/deft/deft-3.org" "/home/luke/Dropbox/org/deft/deft-30.org" "/home/luke/Dropbox/org/deft/deft-31.org" "/home/luke/Dropbox/org/deft/deft-32.org" "/home/luke/Dropbox/org/deft/deft-33.org" "/home/luke/Dropbox/org/deft/deft-34.org" "/home/luke/Dropbox/org/deft/deft-35.org" "/home/luke/Dropbox/org/deft/deft-36.org" "/home/luke/Dropbox/org/deft/deft-37.org" "/home/luke/Dropbox/org/deft/deft-38.org" "/home/luke/Dropbox/org/deft/deft-39.org" "/home/luke/Dropbox/org/deft/deft-4.org" "/home/luke/Dropbox/org/deft/deft-40.org" "/home/luke/Dropbox/org/deft/deft-41.org" "/home/luke/Dropbox/org/deft/deft-5.org" "/home/luke/Dropbox/org/deft/deft-6.org" "/home/luke/Dropbox/org/deft/deft-7.org" "/home/luke/Dropbox/org/deft/deft-8.org" "/home/luke/Dropbox/org/deft/deft-9.org" "/home/luke/.org-jira/CCIF.org" "/home/luke/.org-jira/CSD.org")))
+    ("~/Dropbox/org/timesheet.2015.org" "/home/luke/Dropbox/org/agenda.org" "/home/luke/Dropbox/org/blackberry-comparison.org" "/home/luke/Dropbox/org/journal.org" "/home/luke/Dropbox/org/mobileorg.org" "/home/luke/Dropbox/org/notes.org" "/home/luke/Dropbox/org/todos.org" "/home/luke/Dropbox/org/deft/deft-0.org" "/home/luke/Dropbox/org/deft/deft-1.org" "/home/luke/Dropbox/org/deft/deft-10.org" "/home/luke/Dropbox/org/deft/deft-11.org" "/home/luke/Dropbox/org/deft/deft-12.org" "/home/luke/Dropbox/org/deft/deft-13.org" "/home/luke/Dropbox/org/deft/deft-14.org" "/home/luke/Dropbox/org/deft/deft-15.org" "/home/luke/Dropbox/org/deft/deft-16.org" "/home/luke/Dropbox/org/deft/deft-17.org" "/home/luke/Dropbox/org/deft/deft-18.org" "/home/luke/Dropbox/org/deft/deft-19.org" "/home/luke/Dropbox/org/deft/deft-2.org" "/home/luke/Dropbox/org/deft/deft-20.org" "/home/luke/Dropbox/org/deft/deft-21.org" "/home/luke/Dropbox/org/deft/deft-22.org" "/home/luke/Dropbox/org/deft/deft-23.org" "/home/luke/Dropbox/org/deft/deft-24.org" "/home/luke/Dropbox/org/deft/deft-25.org" "/home/luke/Dropbox/org/deft/deft-26.org" "/home/luke/Dropbox/org/deft/deft-27.org" "/home/luke/Dropbox/org/deft/deft-28 (luke-laptop's conflicted copy 2014-08-27).org" "/home/luke/Dropbox/org/deft/deft-28.org" "/home/luke/Dropbox/org/deft/deft-29.org" "/home/luke/Dropbox/org/deft/deft-3.org" "/home/luke/Dropbox/org/deft/deft-30.org" "/home/luke/Dropbox/org/deft/deft-31.org" "/home/luke/Dropbox/org/deft/deft-32.org" "/home/luke/Dropbox/org/deft/deft-33.org" "/home/luke/Dropbox/org/deft/deft-34.org" "/home/luke/Dropbox/org/deft/deft-35.org" "/home/luke/Dropbox/org/deft/deft-36.org" "/home/luke/Dropbox/org/deft/deft-37.org" "/home/luke/Dropbox/org/deft/deft-38.org" "/home/luke/Dropbox/org/deft/deft-39.org" "/home/luke/Dropbox/org/deft/deft-4.org" "/home/luke/Dropbox/org/deft/deft-40.org" "/home/luke/Dropbox/org/deft/deft-41.org" "/home/luke/Dropbox/org/deft/deft-5.org" "/home/luke/Dropbox/org/deft/deft-6.org" "/home/luke/Dropbox/org/deft/deft-7.org" "/home/luke/Dropbox/org/deft/deft-8.org" "/home/luke/Dropbox/org/deft/deft-9.org")))
  '(org-agenda-include-diary t)
  '(org-capture-templates
    (quote
     (("t" "Todo" entry
       (file+headline "~/Dropbox/org/agenda.org" "Tasks")
       (file "~/Dropbox/org/templates/todo.orgtmpl")))))
+ '(projectile-globally-ignored-files (quote ("TAGS" "GPATH" "GRTAGS" "GTAGS" "GSYMS")))
  '(relative-gtags-ignore-case t)
  '(safe-local-variable-values
    (quote
     ((eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
-	   (add-hook
-	    (quote write-contents-functions)
-	    (lambda nil
-	      (delete-trailing-whitespace)
-	      nil))
-	   (require
-	    (quote whitespace))
-	   "Sometimes the mode needs to be toggled off and on."
-	   (whitespace-mode 0)
-	   (whitespace-mode 1))
+           (add-hook
+            (quote write-contents-functions)
+            (lambda nil
+              (delete-trailing-whitespace)
+              nil))
+           (require
+            (quote whitespace))
+           "Sometimes the mode needs to be toggled off and on."
+           (whitespace-mode 0)
+           (whitespace-mode 1))
      (whitespace-line-column . 80)
      (whitespace-style face trailing lines-tail)
      (require-final-newline . t))))
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "localhost")
  '(smtpmail-smtp-service 1025)
+ '(srecode-map-load-path
+   (quote
+    ("/usr/local/share/emacs/24.5/etc/srecode" "~/.srecode")))
  '(tail-max-size 20)
  '(tail-volatile nil)
- '(tramp-syntax (quote ftp)))
+ '(tramp-syntax (quote ftp))
+ '(user-full-name "Lukasz Wiechec")
+ '(user-mail-address "Lukasz.Wiechec@ncia.nato.int")
+ '(web-mode-code-indent-offset 2)
+ '(web-mode-css-indent-offset 2)
+ '(web-mode-enable-auto-indentation t)
+ '(web-mode-markup-indent-offset 2))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
