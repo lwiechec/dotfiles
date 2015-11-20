@@ -13,3 +13,10 @@ session*
 etc/emacs.d/semanticdb/
 **/nohup.out
 flycheck_org-clock-save.el
+# cache dirs
+etc/emacs.d/persp-confs/
+etc/emacs.d/image-dired/
+etc/emacs.d/recentf
+etc/emacs.d/.sx/
+etc/emacs.d/tutorial/
+etc/emacs.d/emms/
