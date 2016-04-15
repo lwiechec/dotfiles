@@ -1,5 +1,0 @@
-(:name emacs-groovy-mode
-       :description "Emacs major mode for the Groovy programming language"
-       :type github
-       :pkgname "russel/Emacs-Groovy-Mode"
-       :provides groovy-emacs-mode)
