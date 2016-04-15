@@ -7,6 +7,9 @@
 
 (setq mu4e-maildir "~/Maildir")
 
+;; fixning duplicate UID errors when using mbsync
+(setq mu4e-change-filenames-when-moving t)
+
 ;; note that the the ID of the account needs to match the directory under the ~/Maildir
 (setq my-mu4e-account-alist
   '(("Mail-NU"
@@ -18,6 +21,10 @@
      (message-send-mail-function smtpmail-send-it)
      (user-mail-address "Lukasz.Wiechec@nu.nc3a.nato.int")
      (mu4e-compose-reply-to-address "Lukasz.Wiechec@nc3a.nato.int")
+     (smtpmail-starttls-credentials nil)
+     (smtpmail-auth-credentials
+      '(("localhost" 1025 "nc3a\\wiechec" nil)))
+     (smtpmail-stream-type nil)
      (user-full-name "Łukasz Wiecheć")
      (message-signature "Łukasz Wiecheć\nNCIA\n")
      )
@@ -62,6 +69,29 @@
       (error "No email account found"))))
 
 (add-hook 'mu4e-compose-pre-hook 'my-mu4e-set-account)
+
+
+;; make possible fetching mail from multiple addresses
+(setq my-mu4e-get-mail-commands-alist
+      '(("wiechec.eu"
+         "mbsync -C -V personal-wiechec.eu")
+        ("work"
+         "mbsync -C -V work")))
+
+(defun my-mu4e-set-get-mail-command ()
+  "Set the command for getting the mail."
+  (let* ((account
+          (completing-read (format "Get mail for account: (%s) "
+                                   (mapconcat #'(lambda (var) (car var))
+                                               my-mu4e-get-mail-commands-alist "/"))
+                           (mapcar #'(lambda (var) (car var)) my-mu4e-get-mail-commands-alist)
+                           nil t nil nil (caar my-mu4e-get-mail-commands-alist)))
+         (my-get-mail-command (cdr (assoc account my-mu4e-get-mail-commands-alist))))
+    (if my-get-mail-command
+        (setq mu4e-get-mail-command (car my-get-mail-command))
+      (error "No email account found."))))
+
+(add-hook 'mu4e-update-pre-hook 'my-mu4e-set-get-mail-command)
 
 ;; setup some handy shortcuts
 (setq mu4e-maildir-shortcuts
@@ -127,11 +157,11 @@
 (setq mu4e-time-format "%T") ; not sure about that one
 
 ;; use mu-cite
-(require 'mu-cite)
-(setq message-cite-function 'mu-cite-original)
-(setq mu-cite-top-format
-     '("On " date ", " from " wrote:\n\n"))
-(setq mu-cite-prefix-format '(" > "))
+;; (require 'mu-cite)
+;; (setq message-cite-function 'mu-cite-original)
+;; (setq mu-cite-top-format
+;;      '("On " date ", " from " wrote:\n\n"))
+;; (setq mu-cite-prefix-format '(" > "))
 
 ;; sample biff for Maildir mailbox.
 (make-face 'my-mail-face)
@@ -162,7 +192,6 @@
     (run-at-time "60 sec" nil 'my-check-mail-timer)))
 
 (my-check-mail-timer)
-
 (add-to-list 'global-mode-string
 	     '(:eval (propertize (if my-have-mail-p " ^| " "")
 				 'face 'my-mail-face 'display my-mail-icon)))
@@ -181,7 +210,14 @@
 ;; this is a requirement for mu4e
 (setenv "GPG_AGENT_INFO" "/usr/bin/gpg-agent")
 
-
 ;; add action for retagging a message
 (add-to-list 'mu4e-view-actions
-	    '("retag message" . mu4e-action-retag-message) t)
+             '("retag message" . mu4e-action-retag-message) t)
+(add-to-list 'mu4e-headers-actions
+             '("retag message" . mu4e-action-retag-message) t)
+(add-to-list 'mu4e-view-actions
+             '("ViewInBrowser" . mu4e-action-view-in-browser) t)
+
+
+;; I don't want auto-check for mail; will do it by hand
+(setq mu4e-update-interval nil)
