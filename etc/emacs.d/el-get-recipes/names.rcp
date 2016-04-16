@@ -1,0 +1,7 @@
+;; my version, as the one in the El-Get is outdated
+(:name names
+       :description "A Namespace implementation for Emacs-Lisp"
+       :website "https://github.com/Malabarba/names"
+       :type github
+       :depends cl-lib
+       :pkgname "Malabarba/names")
