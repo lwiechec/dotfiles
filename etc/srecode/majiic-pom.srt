@@ -1,0 +1,154 @@
+;; attempt to create template for creating POMs that uses our repo
+;; Author: Lukasz Wiechec
+
+set mode "maven-pom-mode"
+set escape_start "{{"
+set escape_end "}}"
+
+context file
+
+set comment_start  "<!--"
+set comment_end    "  -->"
+set comment_prefix "  *"
+
+prompt GROUPID "GroupId: " default "int_.nato.ncia."
+prompt PACKAGING "Packaging: (jar) " default "jar" read y-or-n-p
+prompt DESCRIPTION "Descripton: " default "New project"
+prompt URL "Project's URL: " default "http:/github.nu.nc3a/"
+
+template empty-majiic-pom :file :user :time :indent :blank
+"Fill out an empty pom.xml file."
+----
+<?xml version="1.0" encoding="UTF-8"?>
+
+{{>:ncia-filecomment}}
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>{{?GROUPID}}</groupId>
+  <artifactId>{{?ARTIFACTID}}</artifactId>
+  <packaging>{{?PACKAGING}}</packaging>
+  <version>{{?VERSION}}</version>
+  <description>{{?DESCRIPTION}}</description>
+  <url>{{?URL}}</url>
+
+  <properties>
+  </properties>
+
+  <dependencies>
+  </dependencies>
+
+  <build>
+  </build>
+
+    <distributionManagement>
+    <repository>
+      <id>majiic-nexus</id>
+      <name>MAJIIC Nexus repository - releases</name>
+      <url>http://nunc3sv9161.nu.nc3a:8082/nexus/content/repositories/majiic-releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>majiic-nexus</id>
+      <name>MAJIIC Nexus repository - snapshots</name>
+      <url>http://nunc3sv9161.nu.nc3a:8082/nexus/content/repositories/majiic-snapshots</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <repositories>
+    <!-- use MAJIIC Nexus repository as a 'proxy repository' for Maven central etc. -->
+    <repository>
+      <id>public-proxy</id>
+      <url>http://nunc3sv9161.nu.nc3a:8082/nexus/content/groups/public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <layout>default</layout>
+    </repository>
+
+    <repository>
+      <id>majiic-nexus-releases</id>
+      <url>http://nunc3sv9161.nu.nc3a:8082/nexus/content/repositories/majiic-releases</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <layout>default</layout>
+    </repository>
+
+    <repository>
+      <id>majiic-nexus-snapshots</id>
+      <url>http://nunc3sv9161.nu.nc3a:8082/nexus/content/repositories/majiic-snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <layout>default</layout>
+    </repository>
+
+    <repository>
+      <id>3rd-party</id>
+      <url>http://nunc3sv9161.nu.nc3a:8082/nexus/content/repositories/third-party</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <layout>default</layout>
+    </repository>
+
+    <repository>
+      <id>public</id>
+      <url>http://nunc3sv9161.nu.nc3a:8082/nexus/content/groups/public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <layout>default</layout>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>3rd-party</id>
+      <url>http://nunc3sv9161.nu.nc3a:8082/nexus/content/repositories/thirdparty/</url>
+    </pluginRepository>
+
+    <pluginRepository>
+      <id>public</id>
+      <url>http://nunc3sv9161.nu.nc3a:8082/nexus/content/groups/public/</url>
+    </pluginRepository>
+
+    <pluginRepository>
+      <id>smartbear-soap-plugin-proxy</id>
+      <url>http://nunc3sv9161.nu.nc3a:8082/nexus/content/repositories/soapui/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+</project>
+----
+
+context declaration
+
+template parent-pom :indent :blank
+"Declaration for pom's parent."
+----
+<parent>
+    <groupId>parent.group</groupId>
+    <artifactId>parentArtifact</artifactId>
+    <version>{{?VERSION}}</version>
+    <relativePath>..</relativePath>
+</parent>
+----
