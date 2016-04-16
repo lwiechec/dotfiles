@@ -1,7 +1,5 @@
 (require 'helm-dash)
 
-(define-key global-map (kbd "<f12>") 'helm-dash-at-point)
-
 (defun jwintz/dash-path (docset)
   (if (string= docset "OpenGL_2")
       (concat (concat helm-dash-docsets-path "/") "OpenGL2.docset")
@@ -14,8 +12,8 @@
           (concat
 	   (concat
 	    (concat
-              (concat helm-dash-docsets-path "/")
-              (nth 0 (split-string docset "_")))) ".docset"))))))
+             (concat helm-dash-docsets-path "/")
+             (nth 0 (split-string docset "_")))) ".docset"))))))
 
 (defun jwintz/dash-install (docset)
   (unless (file-exists-p (jwintz/dash-path docset))
@@ -45,18 +43,18 @@
 (jwintz/dash-install "Groovy")
 (jwintz/dash-install "Haskell")
 (jwintz/dash-install "HTML")
-;(jwintz/dash-install "LaTex") ; some problems there...
+                                        ;(jwintz/dash-install "LaTex") ; some problems there...
 (jwintz/dash-install "Markdown")
 (jwintz/dash-install "MongoDB")
 (jwintz/dash-install "Redis")
 (jwintz/dash-install "Emacs_Lisp")
-;;(jwintz/dash-install "Java_SE7")
+;;(jwintz/dash-install "Java_SE8")
 (jwintz/dash-install "JavaScript")
 (jwintz/dash-install "Perl")
 (jwintz/dash-install "Ruby_2")
 (jwintz/dash-install "RequireJS")
 
-(setq helm-dash-common-docsets '("Markdown" "Bash" "JavaScript" "Java"))
+(setq helm-dash-common-docsets '("Markdown" "JavaScript" "Java_SE8" "Common Lisp"))
 (setq helm-dash-min-length 2)
 
 (add-hook 'prog-mode-hook 'jwintz/dash-hook)
