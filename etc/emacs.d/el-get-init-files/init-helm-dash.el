@@ -2,7 +2,6 @@
 
 (define-key global-map (kbd "<f12>") 'helm-dash-at-point)
 
-
 (defun jwintz/dash-path (docset)
   (if (string= docset "OpenGL_2")
       (concat (concat helm-dash-docsets-path "/") "OpenGL2.docset")
@@ -37,7 +36,6 @@
 
 (setq helm-dash-docsets-path (format "%s/.docsets" (getenv "HOME")))
 
-(jwintz/dash-install "Android")
 (jwintz/dash-install "Bash")
 (jwintz/dash-install "C")
 (jwintz/dash-install "C++")
@@ -52,13 +50,13 @@
 (jwintz/dash-install "MongoDB")
 (jwintz/dash-install "Redis")
 (jwintz/dash-install "Emacs_Lisp")
-(jwintz/dash-install "Java_SE7")
+;;(jwintz/dash-install "Java_SE7")
 (jwintz/dash-install "JavaScript")
 (jwintz/dash-install "Perl")
 (jwintz/dash-install "Ruby_2")
 (jwintz/dash-install "RequireJS")
 
-(setq helm-dash-common-docsets '("Java_SE7" "Markdown" "Bash"))
+(setq helm-dash-common-docsets '("Markdown" "Bash" "JavaScript" "Java"))
 (setq helm-dash-min-length 2)
 
 (add-hook 'prog-mode-hook 'jwintz/dash-hook)
