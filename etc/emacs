@@ -48,6 +48,31 @@
 	      (_proxy_port "8088")
 	      (_proxy (concat _proxy_host ":" _proxy_port))
 	      (_no_proxy_env "localhost,127.0.0.1,nu.nc3a")
+	      (_no_proxy_regexp "localhost|127\.0\.0\.1|*.nu.nc3a"))
+	 (progn
+	   (setenv "http_proxy" (concat "http://" _proxy))
+	   (setenv "https_proxy" (concat "http://" _proxy))
+	   (setenv "JAVA_OPTS" (mapconcat (lambda (a) (concat "-D" (car a) "=" (cdr a)))
+					  (list (cons "http.proxyHost" _proxy_host)
+						(cons "http.proxyPort" _proxy_port)) " "))
+	   (setenv "no_proxy" _no_proxy_env)
+	   (setq url-proxy-services (list (cons "no_proxy" _no_proxy_regexp) (cons "http" _proxy) (cons "https" _proxy)))
+	   (setq malabar-groovy-proxy-host _proxy_host
+		 malabar-groovy-proxy-port _proxy_port)
+	   ;; set up hooks for ERC
+	   (setq irc-server-host "localhost")
+	   (setq irc-server-port 7000)
+	   (add-hook 'erc-before-connect (lambda (host port nick)
+                                           (setup-socks-proxy-connection "193.219.128.49" 7000 7000)))
+	   (message "Proxy (NCIA) is set.")
+	 )))
+
+(defun proxy-cdte-set () "sets (probably) all the proxies"
+       (interactive)
+       (let* ((_proxy_host "yellow.nc3a.nato.int")
+	      (_proxy_port "8088")
+	      (_proxy (concat _proxy_host ":" _proxy_port))
+	      (_no_proxy_env "localhost,127.0.0.1,192.168.113.*,192.168.74.*")
 	      (_no_proxy_regexp "localhost"))
 	 (progn
 	   (setenv "http_proxy" (concat "http://" _proxy))
@@ -59,7 +84,12 @@
 	   (setq url-proxy-services (list (cons "no_proxy" _no_proxy_regexp) (cons "http" _proxy) (cons "https" _proxy)))
 	   (setq malabar-groovy-proxy-host _proxy_host
 		 malabar-groovy-proxy-port _proxy_port)
-	   (message "Proxy is set.")
+	   ;; set up hooks for ERC
+	   (setq irc-server-host "localhost")
+	   (setq irc-server-port 7000)
+	   (add-hook 'erc-before-connect (lambda (host port nick)
+					   (setup-socks-proxy-connection "193.219.128.49" 7000 7000)))
+	   (message "Proxy (CDTE) is set.")
 	 )))
 
 (defun proxy-unset () "cleans up the proxy settings for Emacs"
@@ -68,14 +98,45 @@
     (setenv "http_proxy" nil)
     (setenv "https_proxy" nil)
     (setenv "no_proxy" nil)
+    (setenv "HTTP_PROXY" nil)
+    (setenv "HTTPS_PROXY" nil)
+    (setenv "NO_PROXY" nil)
     (setenv "JAVA_OPTS" nil)
     (setq url-proxy-services nil
     ;;url-using-proxy nil
 	  w3m-command-arguments-alist nil
 	  malabar-groovy-proxy-host ""
 	  malabar-groovy-proxy-port "")
+    ;; ERC setup
+    (setq irc-server-host "irc.freenode.org")
+    (setq irc-server-port 7000)
+
+    (remove-hook 'erc-before-connect
+                 (lambda (host port nick)
+                   (setup-socks-proxy-connection "193.219.128.49" 7000 7000)))
     (message "Proxy is un-set."))
   )
+
+(defvar proxy-configs-alist
+      '(("NCiA - normal"
+         proxy-set)
+        ("NCiA - CDTE"
+         proxy-cdte-set)
+        ("No proxy"
+         proxy-unset)))
+
+(defun select-proxy ()
+  "choose proxy interactively."
+  (interactive)
+  (let* ((proxy-type
+          (completing-read (format "choose proxy (%s) "
+                                   (mapconcat #'(lambda (var) (car var))
+                                              proxy-configs-alist " / "))
+                           (mapcar #'(lambda (var) (car var)) proxy-configs-alist)
+                           nil t nil nil (caar proxy-configs-alist)))
+         (init-func (cdr (assoc proxy-type proxy-configs-alist))))
+    (apply init-func)
+    ))
 
 ;; simple check if we are at home or at work
 ;; depends on my wicd scripts that cat the ESSID and BSSID values for
@@ -95,15 +156,20 @@
 (defconst essid-file "/etc/ESSID"
   "file where Wicd has written the ESSID of the network")
 
-(defun autoset-proxy () "handle proxy setting."
-  (let ((essid (chomp (file-string essid-file))))
-    (cond
-     ;; list of conditions for all access points that we know about
-     ((string= essid "Ziggo53726") (proxy-unset)) ; no proxy for home
-     ((string= essid "NC3A-84") (proxy-set))
-     (proxy-unset))))
+(defun autoset-proxy (essid-file)
+  "auto-sets the proxy. ESSID-FILE is the name of the text file with ."
+  (if (file-exists-p essid-file)
+      (let ((essid (chomp (file-string essid-file))))
+        (cond
+         ;; list of conditions for all access points that we know about
+         ((or (string= essid "Ziggo53726") (string= essid "CasaPopos")) (proxy-unset)) ; no proxy for home
+         ((string= essid "NC3A-84") (proxy-set))
+         (proxy-unset)))
+    (progn
+      (message (format "File with ESSID %s not there, cannot autoset proxy" essid-file)))))
 
-(autoset-proxy)
+;; we would like to autoset the proxy, if possible...
+(autoset-proxy essid-file)
 
 ;; el-get setup
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -120,94 +186,183 @@
     (eval-print-last-sexp)))
 
 ;; setup ELPA
-(require 'package)
-(setq package-archives
-      '(
-	("org" . "http://orgmode.org/elpa/")
-	;;("ELPA" . "http://tromey.com/elpa/")
-	("gnu" . "http://elpa.gnu.org/packages/")
-	("marmalade" . "http://marmalade-repo.org/packages/")
-	;;("SC" . "http://joseito.republika.pl/sunrise-commander/")
-	("melpa" . "http://melpa.org/packages/")))
-(package-initialize)
+;; (require 'package)
+;; (setq package-archives
+;;       '(
+;; 	("org" . "http://orgmode.org/elpa/")
+;; 	;;("ELPA" . "http://tromey.com/elpa/")
+;; 	("gnu" . "http://elpa.gnu.org/packages/")
+;; 	("marmalade" . "http://marmalade-repo.org/packages/")
+;; 	;;("SC" . "http://joseito.republika.pl/sunrise-commander/")
+;; 	("melpa" . "http://melpa.org/packages/")))
+;; (package-initialize)
 
-
-(require 'el-get-elpa)
+;;(require 'el-get-elpa)
 ;; Build the El-Get copy of the package.el packages if we have not
 ;; built it before.  Will have to look into updating later ...
-(unless (file-directory-p el-get-recipe-path-elpa)
-  (el-get-elpa-build-local-recipes))
+;; (unless (file-directory-p el-get-recipe-path-elpa)
+;;   (el-get-elpa-build-local-recipes))
 
+
 ; list of el-get packages to use
 (setq my:el-get-packages
-      '(use-package cedet groovy-mode rainbow-delimiters dash flycheck malabar-mode ; from (M)ELPA
-	      ace-jump-mode ack anything
-	      breadcrumb chumpy-windows
-	      deft dired-single dired-plus guide-key git-commit-mode git-rebase-mode
-	      magit-push-remote full-ack ack-and-a-half fuzzy iedit
-  	   ;js2-mode
-	   ;js-comint
-	   logito multiple-cursors
-	   ;multi-web-mode
-	   nxhtml pcache popup smart-tab smex twittering-mode
-	   undo-tree workgroups yasnippet
-	   restclient flymake-shell
-	   clojure-mode cider slamhound
-	   paredit
-	   ;shell-pop
-	   jdibug
-	   mu4e popwin emms dark-laptop-theme solarized-theme
-	   goto-last-change projectile helm helm-swoop helm-ag
-	   helm-dash
-           ahg company
-	   helm-gtags
-	   ;eclim
-	   emacs-ditz slime
-	   ;swank-js ac-slime ;; too slow a bit
-	   skewer-mode skeleton-complete anzu-mode markdown-mode-github
-	   coffee-mode flycheck git-timemachine emacs-groovy-mode
-	   json browse-kill-ring-new neotree google-translate
-	   fsharp-mode emacs-sos
-	   haskell-mode
-	   expand-region
-	   prodigy hydra boxquote web-mode
-	   calfw calfw-gcal
-	   smart-mode-line
-	   ))
+      '(flycheck names seq
+        ace-jump-mode
+        breadcrumb chumpy-windows
+        dired-single dired-plus
+        fuzzy
+        org-mode logito multiple-cursors
+        nxhtml pcache popup smart-tab smex twittering-mode
+        undo-tree yasnippet
+        restclient jdibug clojure-mode
+        slamhound flim mu4e popwin emms dark-laptop-theme solarized-theme
+        ahg
+        helm helm-swoop helm-dash helm-gtags
+        slime flycheck git-timemachine
+        groovy-emacs-mode fsharp-mode emacs-sos
+        json browse-kill-ring-new neotree
+        haskell-mode expand-region prodigy hydra boxquote web-mode
+        smart-mode-line ag
+        dockerfile-mode helm-pages page-break-lines
+        persp-projectile browse-at-remote beacon
+        maven-pom-mode yaml-mode js2-mode))
 
-; my version of el-get recipes
+        ;; it is also possible to provide in-line recipies, like that
+        ;; no need to repeat the names of the packages in the my:el-get-packages, as we use Elisp magic below
+(setq el-get-sources
+      '((:name magit
+               :depends (dash)
+               :after (progn
+                        (global-set-key (kbd "<f7>") 'magit-status)))
+        (:name cedet
+               :after (progn
+                        (add-hook
+                         'semantic-idle-completions-mode-hook
+                         (lambda ()
+                           (local-set-key (kbd "C-c s \t") 'senator-completion-menu-popup)))))
+        (:name cider
+               :depends (eval-sexp-fu spinner)
+               :after (progn
+                        (setq nrepl-buffer-name-show-port t
+                              cider-prompt-save-file-on-load 'always-save
+                              cider-test-show-report-on-success t)))
+        (:name guide-key
+               :after (progn
+                        (setq guide-key/guide-key-sequence '("C-x r" "C-x 4"))
+                        (guide-key-mode 1)))
+        (:name perspective
+               :after (progn
+                        (persp-mode 1)))
+        (:name projectile
+               :depends (helm perspective))
+        (:name flycheck
+               :after (progn
+                        (global-flycheck-mode 1)))
+        (:name iedit
+               :after (progn
+                        (global-set-key (kbd "C-;") 'iedit-mode)))
+        (:name slime
+               :features (slime-autoloads)
+               :after (progn
+                        (slime-setup '(slime-banner slime-fancy))
+                        (setq slime-complete-symbol*-fancy t)
+                        (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
+                        ; i'm using sbcl for my lisp
+                        (setq inferior-lisp-program "sbcl")
+                        (slime-setup)
+                        ))
+        (:name rainbow-delimiters
+               :after (progn
+                        (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
+        (:name delight
+               :after (progn
+                        (delight '((helm-mode nil)
+                                   (beacon-mode nil) ; does not work yet
+                                   (yas-minor-mode ""))))) ; does not work yet
+        (:name anzu
+               :after (progn
+                        (global-anzu-mode 1)
+                        (setq anzu-mode-lighter "")
+                        ;; I like the replace functions from anzu
+                        (global-set-key [remap query-replace] 'anzu-query-replace)
+                        (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)))
+        (:name beacon
+               :after (progn
+                        (beacon-mode 1)
+                        (setq beacon-mode-lighter "")))
+        (:name google-this
+               :after (progn
+                        (global-set-key (kbd "C-x g") 'google-this-mode-submap)))
+        (:name google-translate
+               :feature google-translate-smooth-ui
+               :after (progn
+                        (global-set-key "\C-ct" 'google-translate-smooth-translate)
+                        (setq google-translate-translation-directions-alist
+                              '(("de" . "en") ("en" . "de") ("en" . "pt") ("pt" . "en")))))
+        (:name goto-last-change
+               :after (progn
+                        (global-set-key (kbd "C-x C-/") 'goto-last-change)))
+        (:name helm-ag
+               :depends (helm)
+               :after (progn
+                        (custom-set-variables
+                         '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
+                         '(helm-ag-command-option "--all-text")
+                         '(helm-ag-insert-at-point 'symbol))))
+        (:name deft
+               :type github
+               :url "https://github.com/jrblevin/deft.git"
+               :after (progn
+                           (setq
+                            deft-extension "org"
+                            deft-directory "~/Dropbox/org/deft/"
+                            deft-text-mode 'org-mode
+                            deft-auto-save-interval 5.0)
+                           (global-set-key (kbd "<f9>") 'deft)))
+        (:name markdown-mode-github
+               :depends (org-mode)
+               :feature org-table
+               :after (progn
+                        (defun cleanup-org-tables ()
+                          (save-excursion
+                            (goto-char (point-min))
+                            (while (search-forward "-+-" nil t) (replace-match "-|-"))
+                            ))
+
+                        (add-hook 'markdown-mode-hook 'orgtbl-mode)
+                        (add-hook 'markdown-mode-hook
+                                  (lambda()
+                                    (add-hook 'after-save-hook 'cleanup-org-tables  nil 'make-it-local)))))
+        (:name coffee-mode
+               :after (progn
+                        (custom-set-variables '(coffee-tab-width 2))))
+        (:name company-mode
+               :depends (ropemacs)
+               :after (progn (global-company-mode 1)
+                             (setq company-idle-delay nil)
+                             (global-set-key (kbd "<C-tab>") 'company-complete)))))
+
+        ;; append the names above the the list of all el-get packages for syncing
+(setq my:all-el-get-packages
+      (append my:el-get-packages
+              (mapcar 'el-get-source-name el-get-sources)))
+
+                                        ; my version of el-get recipes
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
-; sync!
-(el-get 'sync my:el-get-packages)
-
-;; my various elisp code
-(add-to-list 'load-path "~/.emacs.d/various")
-
-;; Beginning of the el4r block:
-;; RCtool generated this block automatically. DO NOT MODIFY this block!
-;;(add-to-list 'load-path "/usr/share/emacs/site-lisp")
-;;(require 'el4r)
-;;(el4r-boot)
-;; End of the el4r block.
-
-; Load el4r, which loads Xiki
-;(add-to-list 'load-path "/var/lib/gems/1.9.1/gems/trogdoro-el4r-1.0.10/data/emacs/site-lisp/")
-;(require 'el4r)
-;(el4r-boot)
-;(el4r-troubleshooting-keys)
-
-;; User-setting area is below this line.
+                                        ; sync!
+;; sync all el-get packages
+(el-get 'sync my:all-el-get-packages)
 
 ;; custom settings for Org mode
 
 ;; using custom version of Org mode (default one from the Ubuntu distro is too old)
-(require 'org-latex)
+;;(require 'org-latex)
 (setq org-log-mode 'time)
 (setq org-default-notes-file "~/Dropbox/org/notes.org")
 (define-key global-map "\C-cc" 'org-capture)
-
+(define-key global-map "\C-c'" 'org-time-stamp)
 ; settings to use org-babel to render DITAA diagrams in the buffer (C-c C-c on the image)
-(setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
+(setq org-ditaa-jar-path "~/.emacs.d/el-get/org-mode/contrib/scripts/ditaa.jar")
 ;(setq org-plantuml-jar-path "~/java/plantuml.jar")
 
 (add-hook 'org-babel-after-execute-hook 'bh/display-inline-images 'append)
@@ -244,7 +399,6 @@
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
 
-
 ;; turn on Interactively Do Things thingie
 (require 'ido)
 (ido-mode t)
@@ -279,7 +433,7 @@
 
 ;; smart-tab - lets test it
 
-(require 'smart-tab)
+;;(require 'smart-tab)
 ;;(global-set-key [(tab)] 'smart-tab)
 
 ;; my settings & bindings
@@ -314,51 +468,11 @@
 
 (defun gtags-update-hook()
   "Update GTAGS file incrementally upon saving a file"
-  (when helm-gtags-mode
+  (when (boundp 'helm-gtags-mode)
     (when (gtags-root-dir)
       (gtags-update-current-file))))
 
 (add-hook 'after-save-hook 'gtags-update-hook)
-
-;; add the global tags creation for the programming mode - C
-
-;; (defun djcb-gtags-create-or-update ()
-;;   "create or update the gnu global tag file"
-;;   (interactive)
-;;   (if (not (= 0 (call-process "global" nil nil nil " -p"))) ; tagfile doesn't exist?
-;;     (let ((olddir default-directory)
-;;           (topdir (read-directory-name
-;;                     "gtags: top of source tree:" default-directory)))
-;;       (cd topdir)
-;;       (shell-command "gtags -q && echo 'created tagfile'")
-;;       (cd olddir)) ; restore
-;;     ;;  tagfile already exists; update it
-;;     (shell-command "global -uq &>/dev/null && echo 'updated tagfile'")))
-
-;; (add-hook 'c-mode-common-hook
-;;   (lambda ()
-;;     (when (not (string-match "/usr/src/linux/" (expand-file-name default-directory)))
-;;     (djcb-gtags-create-or-update))))
-
-;; ;; add the global tags creation for the programming mode - Java
-;; (add-hook 'java-mode-hook
-;;   (lambda()
-;;     (djcb-gtags-create-or-update)))
-
-;; (add-hook 'malabar-mode-hook
-;;   (lambda()
-;;     (djcb-gtags-create-or-update)))
-
-;; iedit package
-;; allows 'dynamic' replace/edit operation on multiple places in buffer at the same time
-(require 'iedit)
-(define-key global-map (kbd "C-;") 'iedit-mode)
-
-;; tracking changes - highlight changes mode
-;; higlight changes in documents
-;; TODO: does not load
-;;(global-highlight-changes t)
-;;(setq highlight-changes-visibility-initial-state nil); initially hide
 
 ;; map M-g to goto-line
 (global-set-key (kbd "M-g") 'goto-line)
@@ -393,21 +507,11 @@
 
 ;; alt-pgup/pgdown jump to the previous/next change
 
-;; if you're not already using it for something else...
-(global-set-key (kbd "<M-prior>") 'highlight-changes-next-change)
-(global-set-key (kbd "<M-next>")  'highlight-changes-previous-change)
-
-;;(set-face-foreground 'highlight-changes nil)
-;;(set-face-background 'highlight-changes "#F870068")
-;;(set-face-foreground 'highlight-changes-delete nil)
-;;(set-face-background 'highlight-changes-delete "#B80029")
-
 ;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
 ;(autoload 'groovy-mode "groovy-mode" "Groovy editing mode." t)
 ;(add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
 ;(add-to-list 'auto-mode-alist '("\.story$" . groovy-mode)) ;;; easyb stories
 ;(add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
-
 
 (add-hook 'c-mode-common-hook
 	  (lambda ()
@@ -416,73 +520,32 @@
 
 ; set default web browser to W3M
 (setq browse-url-browser-function '(
-				    ("twitter.com" . browse-url-chromium) ; Twitter doesn;t look good in W3M, use chromium
+				    ("twitter.com" . browse-url-firefox) ; Twitter doesn;t look good in W3M, use chromium
 				    ("accounts.google.com" . browse-url-firefox)
-				    ("." . w3m-browse-url) ; default
+                                    ("github.com" . browse-url-firefox)
+                                    ("github.nu.nc3a" . browse-url-firefox)
+                                    ("economist.com" .  browse-url-firefox)
+                                    ;;("google.com" . eww-browse-url)
+                                        ;("." . w3m-goto-url-new-session) ; default
+                                    ;; at work, eww does not work correctly with HTTPS
+                                    ("https://." . browse-url-firefox)
+                                    ("." . eww-browse-url)
 				    ))
 (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show an URL." t)
 (global-set-key (kbd "C-c x") 'browse-url)
 
-(setq browse-url-generic-program "google-chrome"
-      browse-url-generic-args '("--proxy-pac-url=file:///home/luke/pac.js"))
-
+(setq browse-url-generic-program "firefox")
+;;      browse-url-generic-args '("--proxy-pac-url=file:///home/luke/pac.js"))
 
 ;; show nice window of recently killed lines in the kill ring
 (global-set-key "\C-cy" '(lambda ()
    (interactive)
    (popup-menu 'yank-menu)))
 
-;; 'djcb-org-article' for export org documents to the LaTex 'article', using
-;; XeTeX and some fancy fonts; requires XeTeX (see org-latex-to-pdf-process)
-;;(require 'org-latex)
-;;(unless (boundp 'org-export-latex-classes)
-;;  (setq org-export-latex-classes nil))
-;; (add-to-list 'org-export-latex-classes
-;;   '("article-djcb"
-;; "\\documentclass[11pt,a4paper]{article}
-;; \\usepackage[T1]{fontenc}
-;; \\usepackage{fontspec}
-;; \\usepackage{graphicx}
-;; \\defaultfontfeatures{Mapping=tex-text}
-;; \\setromanfont{Gentium}
-;; \\setromanfont [BoldFont={Gentium Basic Bold},
-;;                 ItalicFont={Gentium Basic Italic}]{Gentium Basic}
-;; \\setsansfont{Charis SIL}
-;; \\setmonofont[Scale=0.8]{DejaVu Sans Mono}
-;; \\usepackage{geometry}
-;; \\geometry{a4paper, textwidth=6.5in, textheight=10in,
-;;             marginparsep=7pt, marginparwidth=.6in}
-;; \\pagestyle{empty}
-;; \\title{}
-;; [NO-DEFAULT-PACKAGES]
-;; [NO-PACKAGES]"
-;;      ("\\section{%s}" . "\\section*{%s}")
-;;      ("\\subsection{%s}" . "\\subsection*{%s}")
-;;      ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-;;      ("\\paragraph{%s}" . "\\paragraph*{%s}")
-;;      ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
-;; (setq org-latex-to-pdf-process
-;;   '("xelatex -interaction nonstopmode %f"
-;;      "xelatex -interaction nonstopmode %f")) ;; for multiple passes
 
 ;; mode for editing BAT files (sometimes it happens)
 (autoload 'bat-mode "bat-mode" "DOS and WIndows BAT files" t)
 (add-to-list 'auto-mode-alist '("[.]bat$" . bat-mode))
-
-;; set up w3m rendering for newsticker
-(autoload 'w3m-region "w3m"
-  "Render region in current buffer and replace with result." t)
-
-(autoload 'w3m-toggle-inline-image "w3m"
-  "Toggle the visibility of an image under point." t)
-
-; display images in w3m
-(autoload 'w3m-default-display-inline-images "w3m"
-  "By default display images in w3m" t)
-
-;; newsticker
-(add-hook 'newsticker-mode-hook 'imenu-add-menubar-index)
 
 ;; WindMove - smarter window switching
 ;; switch between windows with 'super'-up/down/left/right
@@ -503,119 +566,9 @@
 (require 'epa-file)
 (epa-file-enable)
 
-;; use js2-mode for editing JavaScript
-(add-to-list 'auto-mode-alist '("[.]js$" . js2-mode))
-
-;; add folding minor mode to JavaScript mode
-(add-hook 'js2-mode-hook
-          (lambda ()
-            ;; Scan the file for nested code blocks
-            (imenu-add-menubar-index)
-            ;; Activate the folding mode
-            (hs-minor-mode t)
-	    ;; add highlighting TODO etc keywords
-	    (font-lock-add-keywords nil
-				    '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))
-            ;; flycheck is useful!
-	    (flycheck-mode)
-	    ))
-
-(require 'karma-run)
-
-;; trying to fix the super-ugly indentation of js2-mode
-;; see: http://mihai.bazon.net/projects/editing-javascript-with-emacs-js2-mode
-(autoload 'espresso-mode "espresso")
-(require 'espresso)
-
-(defun my-js2-indent-function ()
-  (interactive)
-  (save-restriction
-    (widen)
-    (let* ((inhibit-point-motion-hooks t)
-           (parse-status (save-excursion (syntax-ppss (point-at-bol))))
-           (offset (- (current-column) (current-indentation)))
-           (indentation (espresso--proper-indentation parse-status))
-           node)
-
-      (save-excursion
-
-        ;; I like to indent case and labels to half of the tab width
-        (back-to-indentation)
-        (if (looking-at "case\\s-")
-            (setq indentation (+ indentation (/ espresso-indent-level 2))))
-
-        ;; consecutive declarations in a var statement are nice if
-        ;; properly aligned, i.e:
-        ;;
-        ;; var foo = "bar",
-        ;;     bar = "foo";
-        (setq node (js2-node-at-point))
-        (when (and node
-                   (= js2-NAME (js2-node-type node))
-                   (= js2-VAR (js2-node-type (js2-node-parent node))))
-          (setq indentation (+ 4 indentation))))
-
-      (indent-line-to indentation)
-      (when (> offset 0) (forward-char offset)))))
-
-(defun my-indent-sexp ()
-  (interactive)
-  (save-restriction
-    (save-excursion
-      (widen)
-      (let* ((inhibit-point-motion-hooks t)
-             (parse-status (syntax-ppss (point)))
-             (beg (nth 1 parse-status))
-             (end-marker (make-marker))
-             (end (progn (goto-char beg) (forward-list) (point)))
-             (ovl (make-overlay beg end)))
-        (set-marker end-marker end)
-        (overlay-put ovl 'face 'highlight)
-        (goto-char beg)
-        (while (< (point) (marker-position end-marker))
-          ;; don't reindent blank lines so we don't set the "buffer
-          ;; modified" property for nothing
-          (beginning-of-line)
-          (unless (looking-at "\\s-*$")
-            (indent-according-to-mode))
-          (forward-line))
-        (run-with-timer 0.5 nil '(lambda(ovl)
-                                   (delete-overlay ovl)) ovl)))))
-
-(defun my-js2-mode-hook ()
-  (require 'espresso)
-  (setq espresso-indent-level 4
-        indent-tabs-mode nil
-        c-basic-offset 4)
-  (c-toggle-auto-state 0)
-  (c-toggle-hungry-state 1)
-  (set (make-local-variable 'indent-line-function) 'my-js2-indent-function)
-  (define-key js2-mode-map [(meta control |)] 'cperl-lineup)
-  (define-key js2-mode-map [(meta control \;)]
-    '(lambda()
-       (interactive)
-       (insert "/* -----[ ")
-       (save-excursion
-         (insert " ]----- */"))
-       ))
-  (define-key js2-mode-map [(return)] 'newline-and-indent)
-  (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
-  (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
-  (define-key js2-mode-map [(control meta q)] 'my-indent-sexp)
-  (if (featurep 'js2-highlight-vars)
-    (js2-highlight-vars-mode))
-  ;; fix bug with my-indent-sexp
-  (setq c-current-comment-prefix
-	(if (listp c-comment-prefix-regexp)
-	    (cdr-safe (or (assoc major-mode c-comment-prefix-regexp)
-			  (assoc 'other c-comment-prefix-regexp)))
-	  c-comment-prefix-regexp))
-  (message "My JS2 hook"))
-
-(add-hook 'js2-mode-hook 'my-js2-mode-hook)
-
-; add regexp for compilation to recognize node's error messages
-; TODO: how to limit the regexp to shell buffers only?
+;; ---- compilation settings
+;; add regexp for compilation to recognize node's error messages
+;; TODO: how to limit the regexp to shell buffers only?
 (add-to-list 'compilation-error-regexp-alist
 	     '("\\(/[^:]+\\):\\([0-9]+\\):\\([0-9]+\\)" 1 2 3))
 
@@ -631,6 +584,10 @@
 (setq compilation-scroll-output 'next-error)
 ;; Don't stop on info or warnings.
 (setq compilation-skip-threshold 2)
+
+;; making the compilation shell interactive so that it will read the aliases etc
+(setq shell-file-name "bash"
+      shell-command-switch "-ic")
 
 ;; set the color scheme - emacs 24 way!
 ;(load-theme 'dark-laptop t)
@@ -723,6 +680,7 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'scroll-left 'disabled nil)
 (put 'erase-buffer 'disabled nil)
+(put 'upcase-region 'disabled nil)
 
 ; easier way to join lines
 ; taken from http://emacsredux.com/blog/2013/05/30/joining-lines
@@ -742,7 +700,7 @@
    ((eq op 'get-file-buffer)
     (let ((file (car args)))
       (with-current-buffer (create-file-buffer file)
-        (call-process "javap" nil (current-buffer) nil "-verbose"
+        (call-process "~/work/jdk/default/bin/javap" nil (current-buffer) nil "-verbose"
                       "-classpath" (file-name-directory file)
                       (file-name-sans-extension (file-name-nondirectory file)))
         (setq buffer-file-name file)
@@ -767,13 +725,6 @@
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-
-; add smart function that creates shell buffer, asking for a name
-(defun create-shell ()
-  "creates a shell with a given name. The name will contains surrounding asterisks '*' so you don't need to provide them."
-  (interactive);; "Prompt\n shell name:")
-  (let ((shell-name (read-string "shell name: " nil)))
-    (shell (concat "*" shell-name "*"))))
 
 ;; define my style for CC-mode and descendants (c++, java etc)
 ;; based on the info page on CC-mode
@@ -833,7 +784,7 @@
   (google-set-c-style)
   (c-set-style "Google")
   ; other customizations
-  (setq tab-width 8
+  (setq tab-width 4
         ;; this will make sure spaces are used instead of tabs
         indent-tabs-mode nil)
   ; we like auto-newline, but not hungry-delete
@@ -848,9 +799,6 @@
 (defun my-shell-mode-hook ()
   (compilation-shell-minor-mode))
 (add-hook 'shell-mode-hook 'my-shell-mode-hook)
-
-; disable auto-complete mode as it interfers with company-mode
-(global-auto-complete-mode -1)
 
 ; enable unique names for buffers. Helpful when having to work with multiple Ant/Maven/Buildr build files etc.
 (require 'uniquify)
@@ -875,14 +823,11 @@
 ;; ignore whitespace
 (csetq ediff-diff-options "-w")
 
-
-; I don't like toolbar, disable it
+;; I don't like toolbar, disable it
 (tool-bar-mode -1)
 
-; make fonts smaller
-(djcb-zoom -5)
 
-; for easier finding of the sources of function and libraries
+;; for easier finding of the sources of function and libraries
 (define-key 'help-command (kbd "C-l") 'find-library)
 (define-key 'help-command (kbd "C-f") 'find-function)
 
@@ -890,7 +835,8 @@
 ; position information (line / column)
 (column-number-mode t) ;; first turn on the column number mode
 
-; formatting of the 'position' of the cursor
+;; ----------- modeline
+;; formatting of the 'position' of the cursor
 (setq-default mode-line-position
               '((-3 "%p") (size-indication-mode ("/" (-4 "%I")))
                 " "
@@ -924,9 +870,9 @@
                 mode-line-frame-identification
                 mode-line-buffer-identification ;;" " mode-line-position
                 ;; Some specific information about the current buffer:
-		(wg-mode-line-on
-		 (:eval
-		  (wg-mode-line-string)))
+		;; (wg-mode-line-on
+		;;  (:eval
+		;;   (wg-mode-line-string)))
                 ;;lunaryorn-projectile-mode-line ; Project information
                 (vc-mode lunaryorn-vc-mode-line) ; VC information
                 (flycheck-mode flycheck-mode-line) ; Flycheck status
@@ -937,49 +883,10 @@
                 ;; And the modes, which I don't really care for anyway
                 " " mode-line-modes mode-line-end-spaces))
 
-;; enable editing text areas in browser (Chrome, maybe Firefox) by using edit-server.el
-(require 'edit-server)
-(setq edit-server-new-frame t) ; want to have new frame opened
-
-;; handy view of available key sequences (https://github.com/kbkbkbkb1/guide-key)
-(require 'guide-key) ;; from MELPA
-(setq guide-key/idle-delay 0.5) ;; delay to wait for the tips to be displayed
-(setq guide-key/guide-key-sequence
-      '("C-x r" "C-x 4" ;; display key bindings for those first key bindings in all modes
-	"C-c m" ; EMMS
-	"C-c h" ; helm
-        (org-mode "C-c" ) ;; then you can define per-mode
-        (outline-minor-mode "C-c @")
-	(malabar-mode "C-c C-v")
-	(projectile-mode "C-c p")
-	(workgroups-mode "C-c w")))
-(setq guide-key/guide-key-sequence '("C-x r" "C-x 4"))
-(guide-key-mode 1)  ; Enable guide-key-mode
-
-;; google-translator from Emacs! :)
-(require 'google-translate)
-(require 'google-translate-smooth-ui)
-(global-set-key "\C-ct" 'google-translate-smooth-translate)
-(setq google-translate-translation-directions-alist
-      '(("de" . "en") ("en" . "de") ("en" . "pt") ("pt" . "en")))
-
 ;; simple journalling with org-mode
 (require 'org-journal)
 (global-set-key (kbd "C-c j") 'org-journal-entry)
 
-;; shortcut to magit-status
-(global-set-key (kbd "<f7>") 'magit-status)
-
-;; semanticdb settings
-;; add all project directories to SemanticDB project roots var
-;; (as seen in http://stackoverflow.com/questions/221365/emacs-lisp-how-to-add-a-folder-and-all-its-first-level-sub-folders-to-the-load)
-(let ((basedir "~/work/projects"))
-  (dolist (f (directory-files basedir))
-    (let ((name (concat basedir "/" f)))
-      (when (and (file-directory-p name)
-		 (not (equal f ".."))
-		 (not (equal f ".")))
-	(add-to-list 'semanticdb-project-roots name)))))
 
 ;; display time in in modeline
 (display-time-mode 1)
@@ -994,5 +901,192 @@
 			    (revert-buffer nil t)
 			    (message "buffer reverted"))))
 
-(provide 'emacs)
+;; utilities to start EShell in the directory if current buffer
+(defun eshell-here ()
+  "Opens up a new shell in the directory associated with the
+current buffer's file. The eshell is renamed to match that
+directory to make multiple eshell windows easier."
+  (interactive)
+  (let* ((parent (if (buffer-file-name)
+                     (file-name-directory (buffer-file-name))
+                   default-directory))
+         (height (/ (window-total-height) 3))
+         (name   (car (last (split-string parent "/" t)))))
+    (split-window-vertically (- height))
+    (other-window 1)
+    (eshell "new")
+    (rename-buffer (concat "*eshell: " name "*"))
+
+    (insert (concat "ls"))
+    (eshell-send-input)))
+
+(global-set-key (kbd "C-!") 'eshell-here)
+
+(defun eshell/x ()
+  (insert "exit")
+  (eshell-send-input)
+  (delete-window))
+
+;; dired configurations
+(setq dired-guess-shell-alist-user
+      '(("\\.pdf\\'" "evince")
+	("\\.tex\\'" "pdflatex")
+	("\\.ods\\'\\|\\.xlsx?\\'\\|\\.docx?\\'\\|\\.csv\\'" "libreoffice")))
+
+;; remove '.' and '..'
+(setq dired-listing-switches "-Al --si --time-style long-iso")
+
+(defun xah-dired-sort ()
+  "Sort dired dir listing in different ways.
+Prompt for a choice.
+URL `http://ergoemacs.org/emacs/dired_sort.html'
+Version 2015-07-30"
+  (interactive)
+  (let (ξsort-by ξarg)
+    (setq ξsort-by (ido-completing-read "Sort by:" '( "date" "size" "name" "dir")))
+    (cond
+     ((equal ξsort-by "name") (setq ξarg "-Al --si --time-style long-iso "))
+     ((equal ξsort-by "date") (setq ξarg "-Al --si --time-style long-iso -t"))
+     ((equal ξsort-by "size") (setq ξarg "-Al --si --time-style long-iso -S"))
+     ((equal ξsort-by "dir") (setq ξarg "-Al --si --time-style long-iso --group-directories-first"))
+     (t (error "logic error 09535" )))
+    (dired-sort-other ξarg )))
+
+
+;; ------------ LDAP setup
+(require 'ldap)
+(require 'eudc)
+
+(setq eudc-default-return-attributes nil
+      eudc-strict-return-matches nil)
+
+(setq ldap-ldapsearch-args (quote ("-tt" "-LLL" "-x")))
+(setq eudc-inline-query-format '((name)
+                                 (firstname)
+                                 (firstname name)
+                                 (email)
+                                 ))
+
+(setq ldap-host-parameters-alist
+      (quote (("nuncidc0001.nu.nc3a" base "dc=nu,dc=nc3a"
+               binddn "wiechec@nu.nc3a"
+               passwd "OldFox123"))))
+
+(eudc-set-server "nuncidc0001.nu.nc3a" 'ldap t)
+(setq eudc-server-hotlist '(("nuncidc0001.nu.nc3a" . ldap)))
+(setq eudc-inline-expansion-servers 'hotlist)
+
+(defun enz-eudc-expand-inline()
+  (interactive)
+  (move-end-of-line 1)
+  (insert "*")
+  (unless (condition-case nil
+              (eudc-expand-inline)
+            (error nil))
+    (backward-delete-char-untabify 1))
+  )
+
+;; bindings in message mode. As I have TAB to provide the addresses from the mu
+;; database, I want to have "shift tab" (<backtab>) for the addresses from the
+;; LDAP
+(eval-after-load "message"
+  '(define-key message-mode-map (kbd "<backtab>") 'enz-eudc-expand-inline))
+(eval-after-load "sendmail"
+  '(define-key mail-mode-map (kbd "<backtab>") 'enz-eudc-expand-inline))
+(eval-after-load "post"
+  '(define-key post-mode-map (kbd "<backtab>") 'enz-eudc-expand-inline))
+
+;; we don't want to indent with tabs
+(setq-default indent-tabs-mode nil)
+
+(global-set-key (kbd "<Scroll_Lock>") 'resize-windows)
+
+;; load my org timesheet utilities
+(require 'timesheet-utils)
+
+;; set up my holidays
+;; first, clean up the ones that I don't care about
+(setq holiday-hebrew-holidays nil
+      holiday-islamic-holidays nil
+      holiday-bahai-holidays nil
+      holiday-oriental-holidays nil)
+
+;; from https://github.com/sri/dotfiles/blob/master/emacs/emacs.d/my-fns.el#L236
+(defun my-find-file-as-sudo ()
+  (interactive)
+  (let ((file-name (buffer-file-name)))
+    (when file-name
+      (find-alternate-file (concat "/sudo::" file-name)))))
+
+;; from http://echosa.github.io/blog/2012/06/06/improving-ansi-term/
+
+;; kill the ansi-term buffer when terminal exits. No more useless buffers hanging around
+(defadvice term-sentinel (around my-advice-term-sentinel (proc msg))
+  (if (memq (process-status proc) '(signal exit))
+      (let ((buffer (process-buffer proc)))
+        ad-do-it
+        (kill-buffer buffer))
+    ad-do-it))
+(ad-activate 'term-sentinel)
+
+;; -------------- term settings
+;; we are always using bash as well
+(defvar my-term-shell "/bin/bash")
+(defadvice ansi-term (before force-bash)
+  (interactive (list my-term-shell)))
+(ad-activate 'ansi-term)
+
+;; making pasting in the terminal good with C-y
+(defun my-term-paste (& string)
+ (interactive)
+ (process-send-string
+  (get-buffer-process (current-buffer))
+  (if string string (current-kill 0))))
+
+;; custom hooks
+(defun my-term-hook ()
+  (goto-address-mode)
+  (define-key term-raw-map "\C-y" 'my-term-paste))
+(add-hook 'term-mode-hook 'my-term-hook)
+
+
+; add smart function that creates shell buffer, asking for a name
+(defun create-shell-ansi-term ()
+  "creates a shell with a given name. The name will contains surrounding asterisks '*' so you don't need to provide them."
+  (interactive);; "Prompt\n shell name:")
+  (let ((shell-name (read-string "shell name: " nil)))
+    (ansi-term my-term-shell (concat "*" shell-name "*"))))
+
+(defun create-shell ()
+  "creates a shell with a given name. The name will contains surrounding asterisks '*' so you don't need to provide them."
+  (interactive);; "Prompt\n shell name:")
+  (let ((shell-name (read-string "shell name: " nil)))
+    (shell (concat "*" shell-name "*"))))
+
+;; when C-return is pressed during the isearch session, it will jump to the beginning of the highlighted
+;; word, not to the end (as it is by  default)
+(define-key isearch-mode-map [(control return)]
+  #'isearch-exit-other-end)
+(defun isearch-exit-other-end ()
+  "Exit isearch, at the opposite end of the string."
+  (interactive)
+  (isearch-exit)
+  (goto-char isearch-other-end))
+
+;; do the same as C-s but instead takes symbol-at-point
+;; so, do C-u C-s with cursos on a symbol and it will find occurences
+;; of it
+(defun endless/isearch-symbol-with-prefix (p)
+  "Like isearch, unless prefix argument is provided.
+With a prefix argument P, isearch for the symbol at point."
+  (interactive "P")
+  (let ((current-prefix-arg nil))
+    (call-interactively
+     (if p #'isearch-forward-symbol-at-point
+       #'isearch-forward))))
+
+(global-set-key [remap isearch-forward]
+                #'endless/isearch-symbol-with-prefix)
+
+
 ;;; emacs ends here
