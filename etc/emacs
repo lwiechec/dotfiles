@@ -230,7 +230,13 @@
         ;; it is also possible to provide in-line recipies, like that
         ;; no need to repeat the names of the packages in the my:el-get-packages, as we use Elisp magic below
 (setq el-get-sources
-      '((:name magit
+      '((:name ace-jump-mode
+               :features ace-jump-mode
+               :after (progn
+                        (ace-jump-mode-enable-mark-sync)
+                        (define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)))
+
+        (:name magit
                :depends (dash)
                :after (progn
                         (global-set-key (kbd "<f7>") 'magit-status)))
