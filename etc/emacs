@@ -9,6 +9,37 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
+;; my various elisp code
+(add-to-list 'load-path "~/.emacs.d/various")
+
+;; set up SOCKS proxy tunnel when starting ERC (from work)
+(defvar connect-proxy "/usr/bin/connect-proxy"
+  "location of SOCKS connect-proxy utility that will be used to create the SOCKS proxy tunnel")
+
+(defvar socks-proxy "yellow.nc3a.nato.int:1080"
+  "definition of SOCKS proxy, in 'host:port' format")
+
+(defun setup-socks-proxy-connection (irc-server-ip-address irc-server-port irc-server-local-port)
+  "start external 'connect-proxy' process setting up tunnel to proxy server. After that it will be possible to
+  connect to IRC via 'erc-ssl' call that points to the localhost:local-port.
+  'irc-server-ip-address' should be the IP address of the IRC server that supports SSL,
+  'irc-server-port' should be the (remote) port where IRC server runs on,
+  'irc-server-local-port' port on local machine."
+  (let ((name  (format "%s@%s:%s->%s:%s" "socks-proxy-tunnel" "localhost" irc-server-local-port irc-server-ip-address irc-server-port)))
+    (message name)
+    (start-process name name
+		   connect-proxy "-d" "-S" socks-proxy "-p" (number-to-string irc-server-local-port)
+		   irc-server-ip-address (number-to-string irc-server-port))
+	(message (concat "SOCKS tunnel to " irc-server-ip-address ":" (number-to-string irc-server-port)
+			 " on local port " (number-to-string irc-server-local-port) " started."))
+	)
+  )
+
+; start proxy tunnel before ERC connects
+(defun setup-socks-proxy-connection-from-work ()
+  "setups socks proxy connection when I am at work."
+  (setup-socks-proxy-connection "193.219.128.49" 7000 7000))
+
 ;; setup the proxy
 ;; note that w3m will get the proxies from system environment variables
 (defun proxy-set () "sets (probably) all the proxies"
@@ -635,42 +666,30 @@
 ; optional
 ;(global-set-key "\C-x!" 'uuid-insert)
 
-
-;; set up SOCKS proxy tunnel when starting ERC (from work)
-(defvar connect-proxy "/usr/bin/connect-proxy"
-  "location of SOCKS connect-proxy utility that will be used to create the SOCKS proxy tunnel")
-
-(defvar socks-proxy "yellow.nc3a.nato.int:1080"
-  "definition of SOCKS proxy, in 'host:port' format")
-
-(defun setup-socks-proxy-connection (irc-server-ip-address irc-server-port local-port)
-  "start external 'connect-proxy' process setting up tunnel to proxy server. After that it will be possible to
-  connect to IRC via 'erc-ssl' call that points to the localhost:local-port.
-  'irc-server-ip-address' should be the IP address of the IRC server that supports SSL,
-  'irc-server-port' should be the (remote) port where IRC server runs on,
-  'local-port' port on local machine."
-  (let ((name  (format "%s@%s:%s->%s:%s" "socks-proxy-tunnel" "localhost" local-port irc-server-ip-address irc-server-port)))
-    (start-process name name
-		   connect-proxy "-d" "-S" socks-proxy "-P" (number-to-string local-port)
-		   irc-server-ip-address (number-to-string irc-server-port))
-	(message (concat "SOCKS tunnel to " irc-server-ip-address ":" (number-to-string irc-server-port)
-			 " on local port " (number-to-string local-port) " started."))
-	)
-  )
-
-
-; start proxy tunnel before ERC connects
-(add-hook 'erc-before-connect
-	(lambda (one two three) (setup-socks-proxy-connection "193.219.128.49" 7000 7000)))
-
 (defun start-irc ()
-   "Connect to IRC server."
+   "Connect to IRC server using my default IRC settings."
    (interactive)
-   ; or should it be 'erc-tls ?...
    (autoload 'erc-ssl "erc")
-   (erc-ssl :server "localhost" :port 7000
+   (erc-ssl :server irc-server-host :port irc-server-port
         :nick "lwiechec" :full-name "Lukasz Wiechec")
    (setq erc-autojoin-channels-alist '(("localhost" . "#emacs"))))
+
+
+(defun start-irc-slack()
+   "Connect to IRC server using my default IRC settings."
+   (interactive)
+   (autoload 'erc-ssl "erc")
+   ;; TODO need to remove all the hooks here
+   (setq erc-before-connect nil)
+   (add-hook 'erc-before-connect
+             (lambda (host port nick)
+               (setup-socks-proxy-connection "52.6.30.134" 8000 8000)))
+   (erc-ssl :server "localhost" :port 8000 :password "majeec.XnrWOqJJd9i4tmy9bvKN"
+        :nick "lwiechec" :full-name "Lukasz Wiechec")
+   (setq erc-autojoin-channels-alist '(("localhost" . "#general")
+                                       ("localhost" . "#jenkins")
+                                       ("localhost" . "#nagios")
+                                       ("localhost" . "#jira"))))
 
 ;; iy-go-to-char - quick jump to the next character in the line
 (require 'iy-go-to-char)
