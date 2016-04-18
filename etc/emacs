@@ -168,10 +168,10 @@
 (defconst essid-file "/etc/ESSID"
   "file where Wicd has written the ESSID of the network")
 
-(defun autoset-proxy (essid-file)
+(defun autoset-proxy (_essid-file)
   "auto-sets the proxy. ESSID-FILE is the name of the text file with ."
   (if (file-exists-p essid-file)
-      (let ((essid (chomp (file-string essid-file))))
+      (let ((essid (chomp (file-string _essid-file))))
         (cond
          ;; list of conditions for all access points that we know about
          ((or (string= essid "Ziggo53726") (string= essid "CasaPopos")) (proxy-unset)) ; no proxy for home
@@ -237,7 +237,7 @@
         smart-mode-line ag
         dockerfile-mode helm-pages page-break-lines
         persp-projectile browse-at-remote beacon
-        maven-pom-mode yaml-mode js2-mode))
+        maven-pom-mode yaml-mode js2-mode gist))
 
         ;; it is also possible to provide in-line recipies, like that
         ;; no need to repeat the names of the packages in the my:el-get-packages, as we use Elisp magic below
