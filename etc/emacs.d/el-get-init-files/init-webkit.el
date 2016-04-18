@@ -1,2 +1,3 @@
+;; I have setup the needed packages that work with Python3 so...
 (setenv "PYTHON" "/usr/bin/python3")
 (require 'webkit)
