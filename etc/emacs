@@ -12,6 +12,11 @@
 ;; my various elisp code
 (add-to-list 'load-path "~/.emacs.d/various")
 
+;; make sure we are using cedet from the el-get package, if available
+(if (file-exists-p "~/.emacs.d/el-get/cedet/cedet-devel-load.el")
+    (load-file "~/.emacs.d/el-get/cedet/cedet-devel-load.el"))
+(require 'cedet-devel-load)
+
 ;; set up SOCKS proxy tunnel when starting ERC (from work)
 (defvar connect-proxy "/usr/bin/connect-proxy"
   "location of SOCKS connect-proxy utility that will be used to create the SOCKS proxy tunnel")
