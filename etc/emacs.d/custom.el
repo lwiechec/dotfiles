@@ -51,11 +51,17 @@
  '(emms-volume-change-amount 3)
  '(emms-volume-change-function (quote emms-volume-mpd-change))
  '(foreground-color "#839496")
+ '(gh-profile-alist
+   (quote
+    (("github.nu.nc3a" :remote-regexp "^\\(?:git@github\\.nu\\.nc3a:\\|\\(?:git\\|https?\\|ssh\\)://.*@?github\\.nu\\.nc3a/\\)\\(.*\\)/\\(.*\\)\\(?:\\.git\\)?" :url "http://github.nu.nc3a/api/v3")
+     ("github" :url "https://api.github.com" :remote-regexp "^\\(?:git@github\\.com:\\|\\(?:git\\|https?\\|ssh\\)://.*@?github\\.com/\\)\\(.*\\)/\\(.*\\)\\(?:\\.git\\)?"))))
  '(gtags-path-style (quote relative))
  '(helm-gtags-auto-update t)
  '(helm-gtags-ignore-case t)
  '(helm-gtags-path-style (quote helm))
- '(jdibug-source-paths (quote ("~/work/projects/nsili/src/java")))
+ '(jdibug-source-paths
+   (quote
+    ("~/work/projects/nsili/src/java" "~/work/projects/csd-cmdline/src/main/java")))
  '(jiralib-url "http://nunc3sv9161.nu.nc3a:8000")
  '(ldap-host-parameters-alist
    (quote
