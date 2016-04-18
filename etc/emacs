@@ -69,6 +69,8 @@
 	   (setq irc-server-port 7000)
 	   (add-hook 'erc-before-connect (lambda (host port nick)
                                            (setup-socks-proxy-connection "193.219.128.49" 7000 7000)))
+           (if (fboundp 'lwiechec/ede-maven2-online)
+               (lwiechec/ede-maven2-online))
 	   (message "Proxy (NCIA) is set.")
 	 )))
 
@@ -94,6 +96,8 @@
 	   (setq irc-server-port 7000)
 	   (add-hook 'erc-before-connect (lambda (host port nick)
 					   (setup-socks-proxy-connection "193.219.128.49" 7000 7000)))
+           (if (fboundp 'lwiechec/ede-maven2-online)
+               (lwiechec/ede-maven2-online))
 	   (message "Proxy (CDTE) is set.")
 	 )))
 
@@ -119,6 +123,9 @@
     (remove-hook 'erc-before-connect
                  (lambda (host port nick)
                    (setup-socks-proxy-connection "193.219.128.49" 7000 7000)))
+
+    (if (fboundp 'lwiechec/ede-maven2-offline)
+        (lwiechec/ede-maven2-offline))
     (message "Proxy is un-set."))
   )
 
