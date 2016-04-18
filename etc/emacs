@@ -249,15 +249,10 @@
                         (define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)))
 
         (:name magit
-               :depends (dash)
-               :after (progn
-                        (global-set-key (kbd "<f7>") 'magit-status)))
+               :depends (dash))
+
         (:name cedet
-               :after (progn
-                        (add-hook
-                         'semantic-idle-completions-mode-hook
-                         (lambda ()
-                           (local-set-key (kbd "C-c s \t") 'senator-completion-menu-popup)))))
+               :features (cedet-devel-load cedet-java))
         (:name cider
                :depends (eval-sexp-fu spinner)
                :after (progn
@@ -354,6 +349,10 @@
         (:name coffee-mode
                :after (progn
                         (custom-set-variables '(coffee-tab-width 2))))
+        (:name webkit
+               :depends epc
+               :type github
+               :pkgname "lwiechec/emacs-webkit")
         (:name company-mode
                :depends (ropemacs)
                :after (progn (global-company-mode 1)
