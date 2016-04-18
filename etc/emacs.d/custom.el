@@ -70,9 +70,7 @@
  '(malabar-groovy-proxy-port "" t)
  '(malabar-jdk-extra-locations (quote ("~/work/jdk/default_7")))
  '(newsticker-html-renderer (quote w3m-region))
- '(org-agenda-files
-   (quote
-    ("~/Dropbox/org/" "~/Dropbox/org/deft/")))
+ '(org-agenda-files (quote ("~/Dropbox/org/" "~/Dropbox/org/deft/")))
  '(org-agenda-include-diary t)
  '(org-capture-templates
    (quote
